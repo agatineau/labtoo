@@ -74,7 +74,8 @@
     "cocorico/listing-search-bundle": "^0.2",
     "cocorico/report-bundle": "^0.1",
     "cocorico/mangopay-bundle": "^0.6",
-    "cocorico/elasticsearch-bundle": "^0.1.21"
+    "cocorico/elasticsearch-bundle": "^0.1.21",
+    "mongodb/mongodb": "^1.1"
   },
   "repositories": [
     {
