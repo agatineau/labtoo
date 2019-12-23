@@ -128,4 +128,4 @@ parameters:
     #Elasticsearch
     cocorico_elasticsearch.host: localhost
     cocorico_elasticsearch.port: 9200
-    cocorico_elasticsearch.index_name: cocorico_dev
+    cocorico_elasticsearch.index_name: labtoo
