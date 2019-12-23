@@ -11,15 +11,15 @@ Dev minimum
     
     .. code:: ApacheConf
 
-        <VirtualHost 127.0.0.1:80>
-            ServerName cocorico.dev
+        <VirtualHost 127.0.0.1:8888>
+            ServerName localhost
             ServerAlias cocorico.dev
 
             #For multiple images uploads
             LimitRequestBody 240000000
 
-            DocumentRoot /var/www/cocorico.dev/Symfony/web
-            <Directory /var/www/cocorico/web>
+            DocumentRoot /Applications/MAMP/htdocs/dev-labtoo
+            <Directory //Applications/MAMP/htdocs/dev-labtoo>
                 #For performance and security reasons we should not use htaccess in prod
                 AllowOverride Indexes FileInfo AuthConfig
                 Order Allow,Deny
@@ -56,10 +56,10 @@ Dev minimum
     
     .. code:: ApacheConf
 
-        <VirtualHost 127.0.0.1:80>
-            ServerName cocorico.dev
+        <VirtualHost 127.0.0.1:8888>
+            ServerName localhost
             ServerAlias cocorico.dev
-            Redirect permanent / https://cocorico.dev/
+            Redirect permanent / https://localhost/dev-labtoo/
         </VirtualHost>
 
         <VirtualHost 127.0.0.1:443>
