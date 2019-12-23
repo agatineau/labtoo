@@ -1,0 +1,10 @@
+services:
+    cocorico_dispute.booking_dispute.manager:
+        class: Cocorico\DisputeBundle\Manager\BookingDisputeManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@cocorico_dispute.mailer.twig_swift"
+            - "@event_dispatcher"
+            - parameters:
+                defer_limit: "%cocorico_dispute.defer_limit%"
+                defer_duration: "%cocorico_dispute.defer_duration%"

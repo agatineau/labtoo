@@ -1,0 +1,6 @@
+<div id="experiment-selector">
+    {% if form.experiment.vars.value is not null %}
+        {{ form_errors(form.experiment) }}
+        {{ form_widget(form.experiment) }}
+    {% endif %}
+</div>

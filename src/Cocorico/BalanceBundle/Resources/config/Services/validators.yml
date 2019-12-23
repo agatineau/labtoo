@@ -1,0 +1,13 @@
+services:
+    cocorico_balance.validator.credit:
+        class: Cocorico\BalanceBundle\Validator\CreditValidator
+        tags:
+            - { name: validator.constraint_validator, alias: credit }
+
+    cocorico_balance.validator.recover_check:
+        class: Cocorico\BalanceBundle\Validator\RecoverCheckValidator
+        arguments:
+            - "@security.encoder_factory"
+            - "@security.token_storage"
+        tags:
+            - { name: validator.constraint_validator, alias: recover_check }

@@ -1,0 +1,262 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme %}home-page{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block header %}
+            {% embed "@CocoricoCore/Frontend/Common/_header.html.twig" with {
+            'header_class': 'header-fixed'} %}
+            {% endembed %}
+        {% endblock %}
+
+        {% block main %}
+            <div class="intro" style="background-image: url({{asset('images/intro-bg.jpg')}});">
+                <div class="intro-caption">
+                    <div class="container">
+                        <h1>
+                            {{ 'home.title.main'|trans }}
+                            <small>{{ 'home.title.sub'|trans }}</small>
+                        </h1>
+                        {# <div class="searchsticky" id="search_sticky"> #}
+                            {% include '@CocoricoExperiment/Frontend/Home/form_search.html.twig' %}
+
+                        <a id="search-button" href="{{ path('cocorico_listing_search_new') }}" class="btn btn-red hidden">{{ 'form.search.button.text'|trans }}</a>
+                        {# </div> #}
+                    </div><!-- /.container -->
+                </div><!-- /.intro-caption -->
+            </div><!-- /.intro -->
+            <div class="infoarea container">
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
+                <h4 class="infoarea-title">{{ 'home.infoarea.main.title'|trans }}</h4><!-- /.infoarea-title -->
+
+                <h5 class="infoarea-subtitle">{{ 'home.infoarea.sub.title'|trans }}</h5><!-- /.infoarea-subtitle -->
+
+                <div class="row">
+                    <!-- info-box -->
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <img src="{{asset('images/infoarea-ico-1.png')}}" alt="icon description" class="icon">
+
+                        <div class="textbox">
+                            <h5>
+                                {{ 'home.subinfo.title1'|trans|raw }}
+                            </h5>
+
+                            <p>{{ 'home.subinfo.desc1'|trans|raw }}</p>
+                        </div>
+                    </div>
+
+                    <!-- info-box -->
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <img src="{{asset('images/infoarea-ico-2.png')}}" alt="icon description" class="icon">
+
+                        <div class="textbox">
+                            <h5>
+                                {{ 'home.subinfo.title2'|trans|raw }}
+                            </h5>
+
+                            <p>{{ 'home.subinfo.desc2'|trans|raw }}</p>
+                        </div>
+                    </div>
+
+                    <!-- info-box -->
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <img src="{{asset('images/infoarea-ico-3.png')}}" alt="icon description" class="icon">
+
+                        <div class="textbox">
+                            <h5>
+                                {{ 'home.subinfo.title3'|trans|raw }}
+                            </h5>
+
+                            <p>{{ 'home.subinfo.desc3'|trans|raw }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="section" style="background-image: url({{asset('images/section-bg-1.jpg')}});">
+                <div class="container">
+                    <header class="section-head">
+                        <h4 class="section-title">{{ 'infoarea.section.title'|trans }}</h4><!-- /.section-title -->
+
+                        <h5 class="section-subtitle">{{ 'infoarea.section.sub.title'|trans }}</h5><!-- /.section-subtitle -->
+                    </header><!-- /.section-head -->
+
+                    <div class="section-body">
+                        <div class="boxes-holder row">
+                            <div class="box col-md-6 col-sm-6">
+                                <div class="box-inner">
+                                    <div class="box-image">
+                                        <img src="{{asset('images/cuvette.png')}}" alt="" />
+                                    </div><!-- /.box-image -->
+
+                                    <div class="box-content">
+                                        <h6 class="box-title">{{ 'infoarea.section.title1'|trans }}</h6><!-- /.box-title -->
+
+                                        <p>{{ 'infoarea.section.desc1'|trans }}</p>
+                                    </div><!-- /.box-content -->
+
+                                    <a href="{{ path('cocorico_listing_new') }}" class="btn btn-blue box-btn btn-ico">
+                                        {{ 'home.infoarea.section.new.listing.text'|trans }}
+
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a>
+                                </div><!-- /.box-inner -->
+                            </div><!-- /.box -->
+
+                            <div class="box col-md-6 col-sm-6">
+                                <div class="box-inner">
+                                    <div class="box-image">
+                                        <img src="{{asset('images/zoom.png')}}" alt="" />
+                                    </div><!-- /.box-image -->
+
+                                    <div class="box-content">
+                                        <h6 class="box-title">{{ 'infoarea.section.title2'|trans }}</h6><!-- /.box-title -->
+
+                                        <p>{{ 'infoarea.section.desc2'|trans }}</p>
+                                    </div><!-- /.box-content -->
+
+                                    <a href="{{ path('cocorico_listing_search_new') }}" class="btn btn-red box-btn btn-ico">
+                                        {{ 'home.infoarea.section.search.text'|trans }}
+
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a>
+                                </div><!-- /.box-inner -->
+                            </div><!-- /.box -->
+                        </div><!-- /.boxes-holder -->
+                    </div><!-- /.section-body -->
+                </div><!-- /.container -->
+            </section><!-- /.section -->
+
+            <section class="section section-dark">
+                <div class="container">
+                    <header class="section-head">
+                        <h4 class="section-title">{{ 'home.testimonial.main.title'|trans }}</h4><!-- /.section-title -->
+
+                        <h5 class="section-subtitle">{{ 'home.testimonial.sub.title'|trans }}</h5><!-- /.section-subtitle -->
+                    </header><!-- /.section-head -->
+
+                    <div class="section-body">
+                        <div class="slider">
+                            <div class="slider-clip">
+                                <div class="slides">
+                                    <div class="slide">
+                                        <div class="testimonial slide-testimonial">
+                                            <div class="testimonial-image">
+                                                <img src="{{asset('images/Patricia_opt.jpg')}}" alt="" />
+                                            </div><!-- /.testimonial-image -->
+
+                                            <div class="testimonial-content">
+                                                <h5 class="testimonial-title">
+                                                    {{ 'home.testimonial.title1'|trans }}
+                                                </h5><!-- /.testimonial-title -->
+
+                                                <p>{{ 'home.testimonial.desc1'|trans }}</p>
+                                            </div><!-- /.testimonial-content -->
+                                        </div><!-- /.testimonial -->
+                                    </div><!-- /.slide -->
+
+                                    <div class="slide">
+                                        <div class="testimonial slide-testimonial">
+                                            <div class="testimonial-image">
+                                                <img src="{{asset('images/Aurelien_opt.jpg')}}" alt="" />
+                                            </div><!-- /.testimonial-image -->
+
+                                            <div class="testimonial-content">
+                                                <h5 class="testimonial-title">{{ 'home.testimonial.title2'|trans }}</h5><!-- /.testimonial-title -->
+
+                                                <p>{{ 'home.testimonial.desc2'|trans }}</p>
+                                            </div><!-- /.testimonial-content -->
+                                        </div><!-- /.testimonial -->
+                                    </div><!-- /.slide -->
+
+                                    <div class="slide">
+                                        <div class="testimonial slide-testimonial">
+                                            <div class="testimonial-image">
+                                                <img src="{{asset('images/Michael_opt.jpg')}}" alt="" />
+                                            </div><!-- /.testimonial-image -->
+
+                                            <div class="testimonial-content">
+                                                <h5 class="testimonial-title">{{ 'home.testimonial.title3'|trans }}</h5><!-- /.testimonial-title -->
+
+                                                <p>{{ 'home.testimonial.desc3'|trans }}</p>
+                                            </div><!-- /.testimonial-content -->
+                                        </div><!-- /.testimonial -->
+                                    </div><!-- /.slide -->
+                                </div><!-- /.slides -->
+                            </div><!-- /.slider-clip -->
+                        </div><!-- /.slider -->
+                    </div><!-- /.section-body -->
+                </div><!-- /.container -->
+            </section><!-- /.section section-dark -->
+
+        {% endblock %}
+
+        {% block modal %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Typehead #}
+    {% include '@CocoricoExperiment/Frontend/Home/js/_typeahead_js.html.twig' %}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
+    'map_elt': '',
+    'auto_complete_elt': '#location'
+    } only %}
+
+    <script>
+        // Categories
+        $(function () {
+
+            // Set default favourites in the listing
+            setDefaultFavourites();
+
+            initMultiSelect(
+                    '#categories',
+                    '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
+            );
+        });
+
+        /*jQuery(document).ready(function () {
+            window.onscroll = function() {myFunction()};
+            var search = document.getElementById("search_sticky");
+            var sticky = search.offsetTop;
+
+            function myFunction() {
+              if (window.pageYOffset > sticky) {
+                search.classList.add("sticky");
+              } else {
+                search.classList.remove("sticky");
+              }
+            }
+        });*/
+    </script>
+{% endblock %}
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {% include 'CocoricoSeoBundle:Frontend:Home/_index_markup.jsonld.twig' ignore missing with {
+    'listings': listings
+    } only %}
+{% endblock %}

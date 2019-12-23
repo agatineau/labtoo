@@ -1,0 +1,49 @@
+{% extends '@CocoricoBalance/Dashboard/Balance/layout.html.twig' %}
+{% trans_default_domain 'cocorico_balance' %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'balance_recover' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    <fieldset>
+        <legend class="hidden">legend</legend>
+        <div class="tab-content credit-table">
+            <h6>{{ 'recover_check.head.title'|trans }}</h6>
+            <div class="tab-pane active" role="tabpanel">
+                {{ form_start(form, {'attr': {'class': 'form-recover-check'}}) }}
+                <div style="margin-bottom: 16px" class="columns-holder alt">
+                    <div class="balance-header">
+                        {{ 'recover.label'|trans }} {{ app.user.amountBalanceDecimal|format_price(app.request.locale) }}
+                    </div>
+                </div>
+                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                <div class="field-row">
+                    {{ form_errors(form.password) }}
+                    <span class="label-holder">{{ form_label(form.password) }}</span>
+                    <div class="field-holder">
+                        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="field-tac">
+                        {{ form_errors(form.tac) }}
+                        {{ form_widget(form.tac) }}
+                        <span class="label">
+                            {{ form_label(form.tac, null, {'required': false} ) }}
+                            <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans({}, 'cocorico_booking') }) }}" target="_blank">
+                                {{ 'recover_check.tac.link'|trans }}
+                            </a>*
+                        </span>
+                    </div>
+                    <button type="submit" class="btn btn-blue form-btn">
+                        {{ 'recover_check.submit.btn'|trans }}
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </fieldset>
+{%- endblock %}
+

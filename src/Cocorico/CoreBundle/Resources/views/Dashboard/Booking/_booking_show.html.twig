@@ -1,0 +1,150 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set user_image = other_user.images|length ? other_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+{% set listing = booking.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+
+{% set amount_total = amount_total | format_price(app.request.locale, 2) %}
+
+<!-- post -->
+<article class="post">
+    <span class="hidden">{{ listing_translation.title }}</span>
+
+    <div class="post-area">
+
+        <div class="img-holder">
+            {% set image_exp = listing.experiment is not null ? listing.experiment.image : ''  %}
+            <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                {% if image_exp != '' %}
+                    <img src="{{ asset(listing.experiment.image | imagine_filter('experiment_xmedium')) }}" alt="{{ listing_translation.title }}">
+                 {% else %}
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('experiment_xmedium') }}" alt="{{ listing_translation.title }}"/>
+                 {% endif %}
+            </a>
+        </div>
+
+        <div class="area">
+            <header class="head">
+                <div class="area">
+                    <h2>
+                        <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                            {{ listing_translation.title }}
+                        </a>
+                    </h2>
+                </div>
+
+                <div class="booking-detail">
+                    <ul class="list-inline" id="booking-asker-date">
+                        <li class="meta pull-left">
+                            <span class="booking-info">
+                                {{ 'booking.show.number.title'|trans }} :
+                                <strong>
+                                    {{ booking.id }}
+                                </strong>
+                            </span>
+                        {% if booking.start %}
+                        <li>
+                            {{ 'booking.show.start:'|trans }}
+                            <time>
+                                {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                            </time>
+                        </li>
+                        {% endif %}
+                        {% if booking.end %}
+                        <li>
+                            {{ 'booking.show.end:'|trans }}
+                            <time>
+                                {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                            </time>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </header>
+
+            <div class="post-content">
+                <div class="author-img">
+                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
+                         alt="{{ other_user.name }}">
+                </div>
+                <div class="textbox">
+                    <span class="author-info">
+                        <strong>
+                            {{ 'booking.show.expert.label'|trans }}
+                        </strong>
+                        <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}"><strong>{{ other_user.name }}</strong></a>
+                    </span>
+
+                    {% if other_user_rating %}
+                        {{ other_user_rating | cocorico_star_rating }}
+                    {% endif %}
+                </div>
+
+                {% if bundleExist('CocoricoDeliveryBundle') %}
+                    {% include 'CocoricoDeliveryBundle:Dashboard:Booking/_show_delivery.html.twig' with {
+                    'booking': booking
+                    } only %}
+                {% elseif bundleExist('CocoricoCarrierBundle') %}
+                    {% include 'CocoricoCarrierBundle:Dashboard:Booking/_show_carrier.html.twig' with {
+                    'booking': booking
+                    } only %}
+                {% endif %}
+            </div>
+
+            {% if bundleExist('CocoricoListingOptionBundle') %}
+                {% include 'CocoricoListingOptionBundle:Dashboard:Booking/_booking_show_options.html.twig' with {
+                'booking': booking
+                } only %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <strong class="price">
+            <span data-id="booking-total">
+                {{ amount_total }}
+                <sup>
+                    <small>{{ vat_inclusion_text }}</small>
+                </sup>
+            </span>
+            <button title="{{ 'booking.amount_total.help'|trans }}" data-placement="right" data-toggle="tooltip"
+                    class="tooltip-button" type="button">
+                ?
+            </button>
+        </strong>
+
+        {% if bundleExist('CocoricoListingDepositBundle') %}
+            {% include 'CocoricoListingDepositBundle:Dashboard:Booking/_show_amount_deposit.html.twig' with {
+            'booking': booking
+            } only %}
+        {% endif %}
+
+        {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+        {% if booking_duration %}
+            <strong class="booking-duration">
+                {{ 'booking.duration:'|trans }}
+                <span class="normal-text">
+                    {{ booking_duration|add_time_unit_text }}
+                </span>
+            </strong>
+        {% endif %}
+
+        {% set status_class = bookingStatusClass[booking.status] %}
+        <span class="btn {{ status_class }}">
+            {{ 'booking.show.status.title'|trans }} {{ booking.statusText|trans }}
+        </span>
+
+        {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
+        {% if expiration > 0 %}
+            <strong class="expiry">
+                {{ 'booking.expire_in:'|trans }} {{ expiration|format_seconds }}
+            </strong>
+        {% endif %}
+    </footer>
+
+    {% include '@CocoricoExperiment/Dashboard/Booking/_booking_show_details.html.twig' %}
+
+    {% include '@CocoricoExperiment/Dashboard/Booking/_booking_show_answers.html.twig' %}
+
+</article>

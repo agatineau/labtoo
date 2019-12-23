@@ -1,0 +1,123 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set balanceBundleEnabled = bundleExist('CocoricoBalanceBundle') %}
+{% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
+
+{% set listing = booking.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+{% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+{% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+
+{% set amount = booking.amountDecimal | format_price(app.request.locale, 2, false) %}
+{% set amount_excl_vat = booking.amountExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set amount_total = booking.amountToPayByAskerDecimal | format_price(app.request.locale, 2, false) %}
+{# {% set amount_total_excl_vat = booking.amountTotalExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %} #}
+{% set amount_total_vat = booking.amountTotalVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set fee_as_asker = booking.amountFeeAsAskerDecimal | format_price(app.request.locale, 2, false) %}
+{% set fee_as_offerer = booking.AmountFeeAsOffererDecimal | format_price(app.request.locale, 2, false) %}
+
+{# this is for temporery change #}
+{% set amount_of_booking = (booking.amountToPayByAskerDecimal - booking.amountFeeAsAskerDecimal) | format_price(app.request.locale, 2, false) %}
+
+{%- block meta_title -%}
+    {{ 'booking.payment.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'booking.payment.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+{%- endblock -%}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+{%- endblock -%}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_booking' %}
+
+        {% block header %}
+            {% embed "@CocoricoCore/Frontend/Common/_header.html.twig" with {
+            'header_class': 'header-fixed'} %}
+            {% endembed %}
+        {% endblock %}
+        {#{% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %}#}
+
+        {% block main %}
+
+            <div class="intro intro-medium" style="background-image: url({{asset('images/intro-bg.jpg')}});">
+                <div class="intro-caption">
+                    <div class="container">
+                        <h1>
+                            <span class="alt">{{ 'booking.new.payment.header'|trans }}</span>
+                            <small>{{ booking.listing.experiment.title }}</small>
+                        </h1>
+                    </div><!-- /.container -->
+                </div><!-- /.intro-caption -->
+            </div><!-- /.intro -->
+
+            <!-- two-columns -->
+            <div class="container">
+                <div class="twocolumns row alt">
+                    <!-- contain the main content of the page -->
+                    <div id="content" class="listing-area col-xs-12 col-md-8 col-lg-9">
+                        <div class="content-holder content-holder-alt">
+
+                            <!-- alert -->
+                            <div role="alert" class="alert alert-success">
+                                <span class="ico">
+                                    <i class="sprite-ico-lock"></i>
+                                </span>
+
+                                <p>{{ 'booking.secured_message'|trans }}</p>
+                            </div>
+
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+                            {% if balanceBundleEnabled %}
+
+                                {% include 'CocoricoBalanceBundle:Frontend:BookingPayment/_form.html.twig' with {
+                                'booking' : booking
+                                } only %}
+
+                            {% elseif mangopayBundleEnabled %}
+
+                                {% include 'CocoricoMangoPayBundle:Frontend/BookingPayment:_card.html.twig' with {
+                                'booking' : booking
+                                } only %}
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                    {% include 'CocoricoCoreBundle:Frontend:Booking/_side.html.twig' with {
+                    'booking' : booking
+                    } only %}
+
+                </div>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if balanceBundleEnabled %}
+        {% include 'CocoricoBalanceBundle:Frontend:BookingPayment/js/_form_js.html.twig' only %}
+    {% endif %}
+
+    {% if mangopayBundleEnabled %}
+        {% include 'CocoricoMangoPayBundle:Frontend:BookingPayment/js/_card_js.html.twig' only %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,4 @@
+imports:
+    - { resource: "Services/forms_handlers.yml" }
+    - { resource: "Services/mailer.yml" }
+    - { resource: "Services/managers.yml" }

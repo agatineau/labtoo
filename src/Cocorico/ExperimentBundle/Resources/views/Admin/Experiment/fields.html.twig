@@ -1,0 +1,188 @@
+{% trans_default_domain 'SonataAdminBundle' %}
+
+{% block admin_experiment_formula_widget %}
+    <div class="well well-sm">
+        <div class="experiment-formula-keyboard">
+            <div class="row">
+                <div class="col-md-8">
+                    {{ block('form_widget') }}
+                    <hr>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">{{ 'admin.experiment.formula_question_variable'|trans }}</div>
+                        <div class="panel-body">
+                            <input class="experiment-formula-question-uid-selector form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">{{ 'admin.experiment.formula_numerics'|trans }}</div>
+                        <div class="panel-body">
+                            {% for i in range(0, 9) %}
+                                <kbd data-type="numeric">{{ i }}</kbd>
+                            {% endfor %}
+                            <kbd data-type="numeric">.</kbd>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">{{ 'admin.experiment.formula_operators'|trans }}</div>
+                        <div class="panel-body">
+                            <kbd data-type="operator">-</kbd>
+                            <kbd data-type="operator">+</kbd>
+                            <kbd data-type="operator">*</kbd>
+                            <kbd data-type="operator">/</kbd>
+                            <kbd data-type="operator">(</kbd>
+                            <kbd data-type="operator">)</kbd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block admin_question_collection_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set child = prototype %}
+            {% set attr = attr|merge({'data-prototype': block('admin_question_collection_widget_item'), 'data-prototype-name': prototype.vars.name, 'class': attr.class|default('') }) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ form_errors(form) }}
+            {% for child in form %}
+                {{ block('admin_question_collection_widget_item') }}
+            {% endfor %}
+            {{ form_rest(form) }}
+            {% if allow_add %}
+                <div class="text-center">
+                    <a href="#" class="btn btn-primary sonata-collection-add">
+                        <i class="fa fa-plus fa-fw"></i>
+                        <span>{{ 'admin.experiment.question_add.button'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block admin_question_collection_widget_item %}
+    {% spaceless %}
+        <div class="sonata-collection-row">
+            {% if allow_delete %}
+                <a href="#" class="btn btn-warning btn-xs sonata-collection-delete pull-right margin">
+                    <i class="fa fa-minus fa-fw"></i>
+                    <span>{{ 'admin.experiment.remove_question.button'|trans }}</span>
+                </a>
+            {% endif %}
+            {{ form_row(child) }}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block admin_question_label %}{% endblock %}
+
+{% block admin_question_widget %}
+    <div class="question panel panel-primary">
+        <div class="panel-heading">
+            <span>{{ 'admin.experiment.uid'|trans }}</span>
+            <strong class="question-uid-title"></strong>
+        </div>
+        <div class="panel-body">{{ block('form_widget') }}</div>
+    </div>
+{% endblock %}
+
+{% block admin_question_choice_collection_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set child = prototype %}
+            {% set attr = attr|merge({'data-prototype': block('admin_question_choice_collection_widget_item'), 'data-prototype-name': prototype.vars.name, 'class': attr.class|default('') }) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ form_errors(form) }}
+            {% for child in form %}
+                {{ block('admin_question_choice_collection_widget_item') }}
+            {% endfor %}
+            {{ form_rest(form) }}
+            {% if allow_add %}
+                <div class="text-center">
+                    <a href="#" class="btn btn-info sonata-collection-add">
+                        <i class="fa fa-plus fa-fw"></i>
+                        <span>{{ 'admin.experiment.question_choice_add.button'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block admin_question_choice_collection_widget_item %}
+    {% spaceless %}
+        <div class="sonata-collection-row">
+            {% if allow_delete %}
+                <a href="#" class="btn btn-warning btn-xs sonata-collection-delete pull-right margin">
+                    <i class="fa fa-minus fa-fw"></i>
+                    <span>{{ 'admin.experiment.question_choice_remove.button'|trans }}</span>
+                </a>
+            {% endif %}
+            {{ form_row(child) }}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block admin_question_choice_label %}{% endblock %}
+
+{% block admin_question_choice_widget %}
+    <div class="question-choice panel panel-info">
+        <div class="panel-heading">
+            <span>{{ 'admin.experiment.uid'|trans }}</span>
+            <strong class="question-choice-uid-title"></strong>
+        </div>
+        <div class="panel-body">{{ block('form_widget') }}</div>
+    </div>
+{% endblock %}
+
+{% block admin_questionnaire_entry_collection_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set child = prototype %}
+            {% set attr = attr|merge({'data-prototype': block('admin_questionnaire_entry_collection_widget_item'), 'data-prototype-name': prototype.vars.name, 'class': attr.class|default('') }) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ form_errors(form) }}
+            {% for child in form %}
+                {{ block('admin_questionnaire_entry_collection_widget_item') }}
+            {% endfor %}
+            {{ form_rest(form) }}
+            {% if allow_add %}
+                <div class="text-center">
+                    <a href="#" class="btn btn-info sonata-collection-add">
+                        <i class="fa fa-plus fa-fw"></i>
+                        <span>{{ 'admin.experiment.question_add.button'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block admin_questionnaire_entry_collection_widget_item %}
+    {% spaceless %}
+        <div class="sonata-collection-row">
+            {% if allow_delete %}
+                <a href="#" class="btn btn-warning btn-xs sonata-collection-delete pull-right margin">
+                    <i class="fa fa-minus fa-fw"></i>
+                    <span>{{ 'admin.experiment.remove_question.button'|trans }}</span>
+                </a>
+            {% endif %}
+            {{ form_row(child) }}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block admin_questionnaire_entry_label %}{% endblock %}
+
+{% block admin_questionnaire_entry_widget %}
+    <div class="question-entry panel panel-default">
+        <div class="panel-body">{{ block('form_widget') }}</div>
+    </div>
+{% endblock %}

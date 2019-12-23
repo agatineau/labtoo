@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2019-11-26T06:01:03Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="de1c464ef00b50c4f32e08f65c56767610706ca3" resname="experiment.new.error.dependency">
+        <source>experiment.new.error.dependency</source>
+        <target>Problème de dépendance dans le questionnaire</target>
+      </trans-unit>
+      <trans-unit id="094959ce0c84819e39dcce70695827c082206517" resname="experiment.new.error.recursion">
+        <source>experiment.new.error.recursion</source>
+        <target>Problème de récursion dans le questionnaire</target>
+      </trans-unit>
+      <trans-unit id="fd455e32710629482f323b4b8e18ac29e306f163" resname="form.search.empty_result">
+        <source>form.search.empty_result</source>
+        <target>Voir toutes les catégories</target>
+        <jms:reference-file line="84">ExperimentBundle/ApiController/ExperimentController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="35bc599df1344e58e1e5868f8a135f3eb8bf654f" resname="form.search.label">
+        <source>form.search.label</source>
+        <target>Quelle type de prestation recherchez-vous ?</target>
+        <jms:reference-file line="4">Frontend/Home/form_search.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4b936cd9886dbdcd8f345af1aff7cbccd33231a4" resname="listing_answer.error.must_answer_question">
+        <source>listing_answer.error.must_answer_question</source>
+        <target>Vous devez répondre à cette question.</target>
+      </trans-unit>
+      <trans-unit id="fb7680e4cc3901072fbdb9b925bbfe6329d8e63a" resname="listing_answer.error.must_answer_sub_question">
+        <source>listing_answer.error.must_answer_sub_question</source>
+        <target>Vous devez répondre à cette sous-question.</target>
+      </trans-unit>
+      <trans-unit id="caf91590c77b53c800b68a6e1289ce28f4a7b128" resname="listing_answer.error.parent_must_answer_sub_question">
+        <source>listing_answer.error.parent_must_answer_sub_question</source>
+        <target>Selon le choix précédent, vous devez répondre à cette sous-question.</target>
+      </trans-unit>
+      <trans-unit id="85964189398f8f526d269e590dd627925c78651e" resname="listing_answer.error.parent_must_not_answer_sub_question">
+        <source>listing_answer.error.parent_must_not_answer_sub_question</source>
+        <target>Selon le choix précédent, vous ne devez pas répondre à cette sous-question.</target>
+      </trans-unit>
+      <trans-unit id="50d1d4af167765ec900622a48b6206bff1ebd383" resname="placeholder_text">
+        <source>placeholder_text</source>
+        <target>séquençage, histologie, expertise thérapeutique, tests in vitro...</target>
+        <jms:reference-file line="7">Frontend/Home/form_search.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

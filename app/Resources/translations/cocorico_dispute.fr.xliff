@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2019-11-26T06:01:03Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="c751713865bb579d3fb30b0ca8c90b7c1ef0ba96" resname="booking.show_asker.defer">
+        <source>booking.show_asker.defer</source>
+        <target>Reporter la libération des fonds</target>
+        <jms:reference-file line="7">Dashboard/Booking/_booking_show_actions_dispute.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1443d2fc3acccfedf1ed692682fd9c2a843e8b93" resname="booking.show_asker.dispute">
+        <source>booking.show_asker.dispute</source>
+        <target>Annuler la libération des fonds</target>
+        <jms:reference-file line="13">Dashboard/Booking/_booking_show_actions_dispute.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6c8343e85b9cd34efdf58ba4a5be4811fb545207" resname="booking_dispute.modal.action.defer">
+        <source>booking_dispute.modal.action.defer</source>
+        <target>Reporter la date de fin d'une semaine</target>
+        <jms:reference-file line="5">Dashboard/Booking/edit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0aef1f0af12524f0d38038d7a7aa517d7062cc1e" resname="booking_dispute.modal.action.dispute">
+        <source>booking_dispute.modal.action.dispute</source>
+        <target>Déclarer un litige</target>
+        <jms:reference-file line="10">Dashboard/Booking/edit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2e4687ef8e5a561fc0a24cc60c873a05354851bd" resname="booking_dispute.modal.defer.title">
+        <source>booking_dispute.modal.defer.title</source>
+        <target>Report de la libération des fonds</target>
+        <jms:reference-file line="4">Dashboard/Booking/edit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d45f06b0b231260418a3a8a7bb6e38e2caea31e6" resname="booking_dispute.modal.dispute.title">
+        <source>booking_dispute.modal.dispute.title</source>
+        <target>Annulation de la libération des fonds</target>
+        <jms:reference-file line="9">Dashboard/Booking/edit.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,19 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'balance' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block main_dashboard %}
+    <div role="tabpanel" class="tab-pane active clearfix" id="properties">
+        <div role="tabpanel">
+            {% block nav_side_dashboard -%}
+                {% include '@CocoricoBalance/Dashboard/Balance/_nav_side.html.twig' with {
+                'nav_side_dashboard_current': nav_side_dashboard_current
+                } only %}
+            {%- endblock %}
+            {% block content_dashboard %}{%- endblock %}
+        </div>
+    </div>
+{% endblock %}

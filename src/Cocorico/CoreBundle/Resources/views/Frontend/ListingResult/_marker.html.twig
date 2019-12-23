@@ -1,0 +1,100 @@
+{% spaceless %}
+    {% trans_default_domain 'cocorico_listing' %}
+    {% autoescape 'html' %}
+
+    {# <div class="infobox-wrapper hidden">
+        <div class="popup" id="popup1"> #}
+            {# <a class="close" href="#">
+                <span class="hidden">Close</span>
+                <i class="fa fa-close"></i>
+            </a> #}
+        <div class="info-box-tpl hidden">
+            <div class="popup">
+                <ul>
+                    <li class="listing-post small" data-id="info-box">
+                <!-- <div class="popup">
+                    <div class="listing-post listing-post-small" data-id="info-box"> -->
+                        <div class="listing-box">
+                            <div class="frame">
+                                <div class="post-info">
+                                    <div class="box">
+                                        <div class="box-holder">
+                                            <div class="head">
+                                                <figure class="head-image">
+                                                    <img src="/images/img.png" alt="image description" data-src="%data-src%">
+
+                                                    <div class="head-image-badge tooltip-holder">
+                                                        <i class="%certified%"></i>
+
+                                                        <div class="tooltip-alt">{{ 'lisitng.search.certificate.tooltip'|trans }}</div><!-- /.tooltip-alt -->
+                                                    </div><!-- /.head-image-badge -->
+                                                </figure><!-- /.head-image -->
+
+                                                <h5 class="box-title">%userFirstName%</h5><!-- /.box-title -->
+
+                                                <div class="rating">
+                                                    <ul class="rating list-inline">
+                                                        <i class="fa %rating1%"></i>
+                                                        <i class="fa %rating2%"></i>
+                                                        <i class="fa %rating3%"></i>
+                                                        <i class="fa %rating4%"></i>
+                                                        <i class="fa %rating5%"></i>
+
+                                                    </ul>
+                                                    {# <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i> #}
+                                                </div><!-- /.rating -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="post-content">
+                                    <div class="textbox">
+                                        <h5>{{'listing.offerer.experience.text'|trans}} :</h5>
+                                        <p>%informativeDescription%</p>
+                                    </div>
+
+                                    <a href="%url%" class="btn btn-blue btn-block btn-small">{{ 'listing.search.select.btn.link.text'|trans }}</a>
+                                </div>
+                            </div>
+                        </div><!-- /.listing-box -->
+                    <!-- </div>
+                </div> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {# </div>
+    </div> #}
+    {#
+    HTML template used to create infobox content on map when a marker is clicked
+    Variable %var% are replaced by the listing data
+    @see Cocorico/GeoBundle/Resources/views/Common/js/_geocoding_js.html.twig
+    #}
+
+    {#Above content are injected in %infoBoxContent% below#}
+    <div class="infobox-wrapper hidden">
+        <div>
+            <a class="close" href="javascript:void(0)">
+                <span class="hidden">Close</span>
+                <i class="icon-cancel"></i>
+            </a>
+
+            <div class="popup">
+                <ul>
+                    %info_box_content%
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% endautoescape %}
+{% endspaceless %}
+
+{# Data Markers used to displayed markers on map#}
+<span id="data-markers"
+      data-markers="{{ markers|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_APOS') )|e('html') }}"></span>

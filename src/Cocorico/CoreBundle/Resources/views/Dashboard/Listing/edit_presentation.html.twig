@@ -1,0 +1,109 @@
+{% extends '@CocoricoCore/Dashboard/Listing/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+ {% block nav_side_dashboard -%}
+     {% set nav_side_dashboard_current = 'presentation' %}
+     {{ parent() }}
+ {%- endblock %}
+
+{% block content_dashboard -%}
+
+    {{ form_start(form, {'attr': {'id': 'edit-presentation-form', 'class': 'form-area'}}) }}
+    <fieldset>
+        <legend class="hidden">form area</legend>
+        <!-- alert -->
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {{ form_errors(form) }}
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- tab presentation -->
+            <div role="tabpanel" class="tab-pane active" id="presentation">
+                <!-- form-holder -->
+                <div class="form-holder">
+                    <div class="row">
+                        {% if listing.experiment.description %}
+                            <div class="col-md-7 fcoldesc">
+                                <h5>{{ 'listing.edit.delivery.section.title'|trans }}</h5>
+                                <p>{{ listing.experiment.description|nl2br }}</p>
+                            </div>
+                        {% endif %}
+                        {% if listing.experiment.deliverables|length %}
+                            <div class="col-md-4 lcoldesc">
+                                <h5>{{ 'listing.new.expr.delivery.heading'|trans }}</h5>
+                                <ul>
+                                    {% for deliverable in  listing.experiment.deliverables %}
+                                        <li>- {{ deliverable }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <fieldset>
+                        <h6>{{ 'listing.edit.achievement.manage.title'|trans }}</h6>
+                        <div class="row exprdesc">
+                            <span>
+                                {{ form_label(form.duration) }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form.duration) }}
+
+                                <span>{{ 'listing.duration.unit.text'|trans }}</span>
+                            </div>
+                            <button type="submit" class="btn btn-blue form-btn">{{ 'listing.save'|trans }}</button>
+                        </div>
+
+                        {# <h2>{{ 'listing.edit.presentation.title'|trans }}</h2> #}
+                        {# For html customizations see views\form\translations.html.twig #}
+
+                        {{ form_widget(form.translations) }}
+
+                         <div class="row {% if locales|length == 1 %}hidden{% endif %}" style="margin-top:15px;">
+                            {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' %}
+                            <div align="center">
+                                <div class="col-md-6 col-xs-12">
+                                    <span class="label" style="max-width: 184px;">{{ form_label(form.fromLang) }} :</span>
+                                    <div class="select-holder">
+                                        {{ form_widget(form.fromLang,{
+                                            'attr': {
+                                                'class': "no-arrow"
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-xs-12">
+                                    <span class="label">{{ form_label(form.toLang) }} :</span>
+                                    <div class="select-holder">
+                                        {{ form_widget(form.toLang,{
+                                            'attr': {
+                                                'class': "no-arrow"
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-xs-12">
+                                    <a id="btn-translate" class="btn btn-blue" href="#">{{ 'listing.translate.button'|trans }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-holder-actions">
+                    <button type="submit" class="btn btn-blue form-btn">{{ 'listing.save'|trans }}</button>
+                </div><!-- /.form-holder-actions -->
+            </div>
+        </div>
+    </fieldset>
+
+    {{ form_end(form) }}
+{%- endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {% include '@CocoricoCore/Frontend/Listing/js/_translator_js.html.twig' only %}
+{% endblock %}

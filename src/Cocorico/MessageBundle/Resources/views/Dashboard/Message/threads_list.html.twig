@@ -1,0 +1,80 @@
+{% trans_default_domain 'cocorico_message' %}
+
+{% if threads.count %}
+    {% for thread in threads %}
+        {% set lastMessage = thread.lastMessage %}
+        {% set isRead = (thread.isReadByParticipant(app.user)) ? '' : 'border-black' %}
+        {% set users = thread.getOtherParticipants(app.user) %}
+        {% if users|length > 0 %}
+            {% set user = users[0] %}
+        {% else %}
+            {% set user = app.user %}
+        {% endif %}
+        {% set listing = thread.listing %}
+
+        <article class="post {{ isRead }}">
+            <div class="post-area">
+                <div class="img-holder">
+                    <a href="{{ url('cocorico_dashboard_message_thread_view', {'threadId': thread.id}) }}">
+                        {% set image_user = user.images|length ? user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_medium') }}"
+                             alt="image description">
+                    </a>
+                </div>
+                <div class="area">
+
+                    <header class="head">
+                        <div class="area">
+                            <h2>
+                                <a href="{{ url('cocorico_dashboard_message_thread_view', {'threadId': thread.id}) }}">
+                                    {{ listing.title }}
+                                </a>
+                            </h2>
+                        </div>
+                        <div class="meta">
+                            <p>
+                                <strong>{{ 'threads.list.participants'|trans }}</strong> {{ user.getName }}
+                            </p>
+                            {% if thread.listing.user != app.user %}
+                                {% if user.averageOffererRating %}
+                                    {{ user.averageOffererRating|cocorico_star_rating }}
+                                {% endif %}
+                            {% else %}
+                                {% if user.averageAskerRating %}
+                                    {{ user.averageAskerRating | cocorico_star_rating }}
+                                {% endif %}
+                            {% endif %}
+                            <time>
+                                <strong>{{ 'threads.list.date'|trans }}</strong> {{ lastMessage.createdAt |date("d/m/Y") }}
+                            </time>
+                        </div>
+                    </header>
+
+                    <div class="post-content">
+                        <p>
+                            <strong>{{ lastMessage.sender.getName }} {{ 'threads.list.say'|trans }}</strong>
+                            {{ lastMessage.body|strip_private_info|truncate(300, true) }}
+                            <a href="{{ url('cocorico_dashboard_message_thread_view', {'threadId': thread.id}) }}">
+                                [{{ 'threads.list.more'|trans }}]
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <a href="{{ url('cocorico_dashboard_message_thread_view', {'threadId': thread.id}) }}"
+                   class="btn btn-blue">
+                    {{ 'threads.list.reply'|trans }}
+                </a>
+                <a href="{{ url('cocorico_dashboard_message_thread_view', {'threadId': thread.id}) }}"
+                   class="btn btn-blue">
+                    {{ 'threads.list.open'|trans }}
+                </a>
+                <a href="{{ url('cocorico_dashboard_message_thread_delete', {'threadId': thread.id}) }}"
+                   class="btn btn-blue">
+                    {{ 'threads.list.delete'|trans }}
+                </a>
+            </footer>
+        </article>
+    {% endfor %}
+{% endif %}

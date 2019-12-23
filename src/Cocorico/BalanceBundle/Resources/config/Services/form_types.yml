@@ -1,0 +1,25 @@
+services:
+    cocorico_balance.form.type.credit:
+        class: Cocorico\BalanceBundle\Form\Type\Dashboard\CreditFormType
+        tags:
+            - { name: form.type, alias: credit }
+
+    cocorico_balance.form.type.credit_balance_movement:
+        class: Cocorico\BalanceBundle\Form\Type\Dashboard\CreditBalanceMovementFormType
+        tags:
+            - { name: form.type, alias: credit_balance_movement }
+
+    cocorico_balance.form.type.debit:
+        class: Cocorico\BalanceBundle\Form\Type\Frontend\DebitFormType
+        tags:
+            - { name: form.type, alias: debit }
+
+    cocorico_balance.form.type.recover:
+        class: Cocorico\BalanceBundle\Form\Type\Dashboard\RecoverFormType
+        tags:
+            - { name: form.type, alias: recover }
+
+    cocorico_balance.form.type.recover_check:
+        class: Cocorico\BalanceBundle\Form\Type\Dashboard\RecoverCheckFormType
+        tags:
+            - { name: form.type, alias: recover_check }

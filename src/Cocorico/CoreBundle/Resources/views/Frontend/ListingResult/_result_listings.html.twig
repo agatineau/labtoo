@@ -1,0 +1,58 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<!-- post -->
+{%- for listingTmp in listings -%}
+    {% set listing = listingTmp[0] %}
+    {% set listing_translation = listing.translations[app.request.locale] %}
+    {% set listing_user = listing.user %}
+    {# {% set listing_user_name = listing.user.firstName ~ listing.user.lastName[1] ~ '.' %} #}
+    {% set user_image = listing_user.images|length ? listing_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+
+    <article class="listing-post col-sm-6 col-xs-12">
+        <div class="listing-box">
+            <div class="frame">
+                <div class="post-info">
+                    <div class="box">
+                        <div class="box-holder">
+                            <div class="head">
+                                <figure class="head-image">
+                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_msmall') }}" alt="" />
+
+                                    <div class="head-image-badge tooltip-holder">
+                                        {% if  listing.certified %}
+                                            <i class="sprite-ico-badge"></i>
+                                        {% endif %}
+
+                                        <div class="tooltip-alt">{{ 'lisitng.search.certificate.tooltip'|trans }}</div><!-- /.tooltip-alt -->
+                                    </div><!-- /.head-image-badge -->
+                                </figure><!-- /.head-image -->
+
+                                <h5 class="box-title">{{listing.user.firstName}} {{ listing.user.lastName|user_name }}{{ '.' }}</h5><!-- /.box-title -->
+
+                                {% if listing.averageRating %}
+                                    {{ listing.averageRating | cocorico_star_rating }}
+                                {% endif %}
+
+                                <p>{{'lisitng.booking.duration.text'|trans({}, 'cocorico_booking')}} : {{listing.duration}} {{ 'listing.booking.duration.unit.text'|trans({}, 'cocorico_booking') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-content">
+                    <div class="textbox">
+                        <h5>{{'listing.offerer.experience.text'|trans}} :</h5>
+                        <p>{{- listing_translation.informativeDescription|truncate(200, true)|replace({'\r\n':' '}) }}</p>
+                    </div>
+
+                    <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}" class="btn btn-blue btn-block btn-small">{{ 'listing.search.select.btn.link.text'|trans }}</a>
+                </div>
+            </div>
+        </div><!-- /.listing-box -->
+    </article>
+{%- else -%}
+    {{ 'listing.search.result.no_results'|trans|nl2br }}
+{%- endfor -%}
+
+<div data-id="nb-result-map-drag"
+     style="color: transparent">{{ 'listing.search.result.results'|trans({'%nb_results%': nb_listings}) }}</div>

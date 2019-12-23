@@ -1,0 +1,309 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{%- block meta_title -%}
+    {{ 'listing.new.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'listing.new.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        #map-listing {
+            width: {{ listing_new_map_w }}%;
+            height: {{ listing_new_map_h }}px;
+        }
+    </style>
+{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% block header %}
+            {% embed "@CocoricoCore/Frontend/Common/_header.html.twig" with {
+            'header_class': 'header-fixed'} %}
+            {% endembed %}
+        {% endblock %}
+
+        {% trans_default_domain 'cocorico_listing' %}
+
+        {% block breadcrumbs %}{% endblock %}
+
+        {% block main %}
+            <div class="intro intro-medium" style="background-image: url({{asset('images/intro-bg.jpg')}});">
+                <div class="intro-caption">
+                    <div class="container">
+                        <h1>
+                            <small>{{ 'listing.new.title'|trans }}</small>
+
+                            <span>{{ 'listing.new.sub.title'|trans }}</span>
+                        </h1>
+                    </div><!-- /.container -->
+                </div><!-- /.intro-caption -->
+            </div><!-- /.intro -->
+
+            <div class="container">
+                {#<ul class="list-images">
+                    <li>
+                        <figure>
+                            <img src="{{asset('images/image-card.png')}}" alt="" />
+                        </figure>
+
+                        <h5>{{ 'listing.infoarea.title1'|trans }}</h5>
+
+                        <p>{{ 'listing.infoarea.desc1'|trans }}</p>
+                    </li>
+
+                    <li>
+                        <figure>
+                            <img src="{{asset('images/image-list.png')}}" alt="" />
+                        </figure>
+
+                        <h5>{{ 'listing.infoarea.title2'|trans }}</h5>
+
+                        <p>{{ 'listing.infoarea.desc2'|trans }}</p>
+                    </li>
+
+                    <li>
+                        <figure>
+                            <img src="{{asset('images/image-umbrella.png')}}" alt="" />
+                        </figure>
+
+                        <h5>{{ 'listing.infoarea.title3'|trans }}</h5>
+
+                        <p>{{ 'listing.infoarea.desc3'|trans }}</p>
+                    </li>
+                </ul>#}<!-- /.list-images -->
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ form_start(form, {'attr': {'class': 'form listing-section'}}) }}
+                        {{ form_errors(form) }}
+                        <fieldset>
+                            <legend class="hidden">listing-section</legend>
+
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+                            <div id="listing-category" class="form-selection form-inner-small">
+                                <h2><strong class="step-number"></strong> / {{ 'listing.new.first.step'|trans }}</h2>
+                                <div class="selection-area">
+                                    <div class="col">
+                                        {{ render(controller('CocoricoCoreBundle:Frontend/ListingCategories:categoriesForm', {'listing': listing})) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% include '@CocoricoExperiment/Frontend/Experiment/selector.html.twig' %}
+
+                            {% include '@CocoricoExperiment/Frontend/Experiment/details_offerer.html.twig' %}
+
+                            <div id="listing-details" class="form-ad-info form-inner-large form-inner form-element hidden">
+                                <h2><strong class="step-number"></strong> / {{ 'listing.new.fifth.step'|trans }}</h2>
+
+                                <div class="field-row">
+                                    {{ form_errors(form.duration) }}
+                                    <span class="label">
+                                        {{ form_label(form.duration) }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(form.duration, {
+                                            'attr': {
+                                                'class': "step-field"
+                                            }
+                                        }) }}
+                                        <span>{{ 'listing.duration.unit.text'|trans }}</span>
+                                    </div>
+
+                                </div>
+
+                                {#For html customizations see views\form\translations.html.twig#}
+                                {{ form_widget(form.translations) }}
+                            </div>
+
+                            <div id="listing-location" class="form-inquiry form-inner form-element hidden">
+                                <h2><strong class="step-number"></strong> / {{ 'listing.new.sixth.step'|trans }}</h2>
+
+                                <div class="columns-holder" id="listing-location">
+                                    <div class="column">
+                                        <h6>{{ 'listing.new.address.title'|trans }} :</h6>
+
+                                        <p class="error"></p>
+                                        {{ form_errors(form.location.coordinate) }}
+                                        {{ form_widget(form.location.coordinate) }}
+
+                                        <div class="field-row">
+                                            {{ form_errors(form.location.country) }}
+                                            <span class="label">{{ form_label(form.location.country) }}</span>
+                                            <div class="select-holder-alt">
+                                                {{ form_widget(form.location.country, {
+                                                    'attr': {
+                                                        'class': "no-arrow step-field"
+                                                    }
+                                                }) }}
+                                            </div>
+                                        </div>
+                                        <div class="field-row">
+                                            <div class="col location">
+                                                {{ form_errors(form.location.city) }}
+                                                <span class="label">{{ form_label(form.location.city) }}</span>
+                                                <div class="field-holder">
+                                                    {{ form_widget(form.location.city, {
+                                                        'attr': {
+                                                            'class': "form-control step-field is-empty"
+                                                        }
+                                                    }) }}
+                                                </div>
+                                            </div>
+                                            <div class="col postel-code">
+                                                {{ form_errors(form.location.zip) }}
+                                                <span class="label">{{ form_label(form.location.zip) }}</span> <div class="field-holder">
+                                                {{ form_widget(form.location.zip, {
+                                                        'attr': {
+                                                            'class': "form-control step-field is-empty"
+                                                        }
+                                                    }) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field-row">
+                                            <div class="col cell">
+                                                {{ form_errors(form.location.street_number) }}
+                                                <span class="label">
+                                                    {{ form_label(form.location.street_number) }}
+                                                    <button title="{{ 'listing.location.help'|trans }}"
+                                                            data-placement="right"
+                                                            data-toggle="tooltip" class="tooltip-button"
+                                                            type="button"
+                                                            data-original-title="{{ 'listing.location.help'|trans }}">
+                                                        ?
+                                                    </button>
+                                                </span>
+                                                <div class="field-holder">
+                                                    {{ form_widget(form.location.street_number, {
+                                                        'attr': {
+                                                            'class': "form-control step-field is-empty"
+                                                        }
+                                                    }) }}
+                                                </div>
+                                            </div>
+                                            <div class="col street">
+                                                {{ form_errors(form.location.route) }}
+                                                <span class="label">{{ form_label(form.location.route) }}</span>
+                                                <div class="field-holder">
+                                                    {{ form_widget(form.location.route, {
+                                                        'attr': {
+                                                            'class': "form-control step-field is-empty"
+                                                        }
+                                                    }) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions text-right">
+                                            <a href="javascript:void(0)" class="btn btn-blue validate-location">
+                                                <span>{{ 'listing.location.validate'|trans }}</span>
+                                            </a>
+                                        </div>
+
+                                        <p>
+                                            <em>{{ 'listing.location.address_found'|trans }} <strong id="formatted-address">{{ 'listing.location.none'|trans }}</strong></em>
+                                        </p>
+
+                                        <div class="alert alert-info" role="alert">
+                                            <span class="ico">
+                                                <i class="sprite-ico-warning"></i>
+                                            </span>
+
+                                            <p>{{ 'listing.location.drag_message'|trans }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="alert" role="alert">
+                                            <span class="ico">
+                                                <i class="sprite-ico-marker"></i>
+                                            </span>
+
+                                            <p>{{ 'listing.location.private_message'|trans }}</p>
+                                        </div>
+                                        <div class="map-box">
+                                            <div class="map-canvas" id="map-listing" data-lat="48.837885" data-lng="2.400818"></div><!-- /.map-canvas -->
+                                        </div>
+                                        {# <div id="map-listing" class="map-box"></div> #}
+                                        {# <div class="map-box">
+                                            <div class="map-canvas" data-lat="48.837885" data-lng="2.400818"></div><!-- /.map-canvas -->
+                                        </div> #}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="listing-submit" class="hidden">
+                                <div class="btns-area">
+                                    {{ form_errors(form.tac) }}
+                                    <div class="agreement">
+                                        {{ form_widget(form.tac) }}
+                                        <span class="label">
+                                            {{ form_label(form.tac, null, {'required': false} ) }}
+                                            <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}" target="_blank">
+                                                {{ 'listing.new.tac.link'|trans }}
+                                            </a>*
+                                        </span>
+                                    </div>
+                                    <input type="submit" class="btn btn-red btn-small form-btn" value="{{ 'listing.new.save'|trans }}">
+                                </div>
+                            </div>
+                        </fieldset>
+                        {{ form_widget(form._token) }}
+                        {{ form_end(form, {'render_rest': false}) }}
+                    </div>
+                </div>
+            </div>
+
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include '@CocoricoExperiment/Frontend/Listing/js/_new_js.html.twig' %}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/Listing/js/_geocoding_js.html.twig' with {
+    'map_elt': '#map-listing',
+    'marker_draggable': true
+    } only %}
+
+
+    <script>
+        $(function () {
+            {#Currency conversion#}
+            currencyConversionHandler('#convert_amount_one', '#convert_amount_two', '#convert_currency_two');
+
+            //Disable submit button on click
+            $("[type=submit]").click(function (e) {
+                $(this).prop('disabled', true);
+                $(this).closest('form').submit();
+            });
+        });
+    </script>
+
+    {#Translations#}
+    {% include '@CocoricoCore/Frontend/Listing/js/_translator_js.html.twig' only %}
+
+
+    {#Files upload#}
+    {# {% include '@CocoricoCore/Frontend/Common/js/_upload_js.html.twig' with {
+    'upload_elt': '#listing_image_new',
+    'upload_images': '#listing_image_uploaded',
+    'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
+    'upload_max': listing_img_max - listing.images.count,
+    } only %} #}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+
+cocorico_balance:
+    resource: "@CocoricoBalanceBundle/Controller/Frontend"
+    type: annotation
+    prefix: /
+
+cocorico_balance_dashboard:
+    resource: "@CocoricoBalanceBundle/Controller/Dashboard"
+    type: annotation
+    prefix: /dashboard

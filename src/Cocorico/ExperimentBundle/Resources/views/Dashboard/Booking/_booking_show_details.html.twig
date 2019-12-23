@@ -1,0 +1,42 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set experiment = booking.listing.experiment %}
+<div class="row">
+    {% if experiment is not null %}
+    {% if experiment.materials|length %}
+        <div class="col-sm-7">
+            <div class="box-info">
+                <h5>{{ 'booking.provide.elements.header'|trans|raw }}</h5>
+                <div class="box-info-inner">
+                    <p>{{ 'booking.provide.elements.info'|trans }}</p>
+                    <ul>
+                        {% for material in  experiment.materials %}
+                            <li>● {{ material }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if experiment.deliverables|length %}
+        <div class="col-sm-5">
+            <div class="form-box-holder">
+                <div class="form-box-body">
+                    <figure>
+                        <img src="{{asset('images/cuvette-small.png')}}" alt="" />
+                    </figure>
+                    <div class="form-box-content">
+                        <h5>{{ 'booking.expected.deliver.header'|trans }}</h5>
+
+                        <ul>
+                            {% for deliverable in  experiment.deliverables %}
+                                <li>● {{ deliverable }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% endif %}
+</div>

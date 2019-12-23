@@ -1,0 +1,281 @@
+{% extends '::base.html.twig' %}
+
+{% set user_images = user.images %}
+{% set user_description = "" %}
+{% if  user.translations[app.request.locale] is defined %}
+    {% set user_description = user.translations[app.request.locale].description|strip_private_info %}
+{% endif %}
+{% set user_address = user.getAddresses %}
+{% set user_address = (user_address is empty) ? null : user_address[0] %}
+
+{%- block meta_title -%}
+    {{ 'user.show.meta_title'|trans({}, 'cocorico_meta') ~ " "  ~ user.name ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'user.show.meta_desc'|trans({}, 'cocorico_meta') ~ " " ~ user_description|truncate(200, true) }}
+{%- endblock -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        @media screen and (min-width: 1280px) {
+            .main_profile {
+                margin-top: 95px !important;
+            }
+        }
+    </style>
+{% endblock %}
+
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' with {
+       'main_class': 'main_profile'} %}
+
+        {% trans_default_domain 'cocorico_user' %}
+
+        {# {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %} #}
+
+        {% block main %}
+            <div class="intro intro-xsmall" style="background-image: url({{asset('images/intro-bg.jpg')}});">
+                <div class="intro-caption">
+                    <div class="container">
+                        {% if app.session.get('listing_search_session') is defined and app.session.get('listing_search_session') %}
+                            <a href="{{ path('cocorico_listing_search_new',{'mode':'edit'}) }}" class="btn btn-red">{{ 'listing.detail.edit_search.link.text'|trans({}, 'cocorico_listing') }}</a>>
+                        {% else %}
+                            <a href="{{ path('cocorico_listing_search_new') }}" class="btn btn-red">{{ 'listing.detail.search.link.text'|trans({}, 'cocorico_listing') }}</a>
+                        {% endif %}
+                    </div><!-- /.container -->
+                </div><!-- /.intro-caption -->
+            </div><!-- /.intro intro-xsmall -->
+
+            {# {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }} #}
+
+            <div class="container">
+            <!-- two-columns -->
+                <div class="twocolumns row">
+                    <aside id="sidebar" class="col-xs-12 col-sm-5 col-lg-3 col-md-4">
+                        <div class="holder">
+                            <!-- gallery-small -->
+                            <section class="members-list">
+                                <div class="members-list-inner">
+                                    <div id="user_profile" class="gallery-small slideshow">
+                                        <div class="slideset">
+                                            {% if user_images|length %}
+                                                {% for image in user_images %}
+                                                    <div class="slide">
+                                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_contact') }}"
+                                                             alt="{{ user.name }}"/>
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                <div class="slide">
+                                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_contact') }}"
+                                                         alt="{{ user.name }}"/>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <a href="#" class="btn-prev">previous<span></span></a>
+                                        <a href="#" class="btn-next">next<span></span></a>
+                                    </div>
+                                    <h4>{{ user.name }}</h4>
+
+                                        {% if user_address %}
+                                            <p>
+                                                {% if user_address.zip %}
+                                                    {{ user_address.zip }} ,
+                                                {% endif %}
+                                                {% if user_address.city %}
+                                                    {{ user_address.city }}
+                                                {% endif %}
+                                            </p>
+                                        {% endif %}
+                                </div>
+                                <ul class="list-meta">
+                                    <li>
+                                        <strong>{{ 'user.profile.subscribe-date.title'|trans }}</strong>
+                                        <time datetime="{{ user.createdAt|date("Y-m-d") }}">
+                                            {{ user.createdAt|localizeddate('short', 'none', 'fr') }}
+                                        </time>
+                                    </li>
+
+                                    {% if user.diploma is not null %}
+                                        <li>
+                                            <strong>{{ 'listing.user.diploma.text'|trans({}, 'cocorico_listing') }} :</strong>
+                                            {{ user.diploma }}
+                                        </li>
+                                    {% endif %}
+
+                                    {% if user.researchGate is not null %}
+                                        {% set userResearchGate = user.researchGate %}
+                                        {% if 'http' not in user.researchGate %}
+                                            {% set userResearchGate = 'http://' ~ user.researchGate %}
+                                        {% endif %}
+                                        <li>
+                                            <strong>{{ 'listing.user.research.gate.text'|trans({}, 'cocorico_listing') }} : </strong>
+
+                                            <a href="{{ userResearchGate }}" target="_blank">{{ user.researchGate }}</a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if user.site is not null %}
+                                        {% set userSite = user.site %}
+                                        {% if 'http' not in user.site %}
+                                            {% set userSite = 'http://' ~ user.site %}
+                                        {% endif %}
+                                        <li>
+                                            <strong>{{ 'listing.user.site.text'|trans({}, 'cocorico_listing') }} : </strong>
+
+                                            <a href="{{ userSite }}" target="_blank">{{ user.site }}</a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if user.certification is not null %}
+                                        <li>
+                                            <strong>{{ 'listing.user.certification.text'|trans({}, 'cocorico_listing') }} : </strong>
+
+                                            {{ user.certification }}
+                                        </li>
+                                    {% endif %}
+
+                                    <li>
+                                        <strong>{{ 'user.profile.languages'|trans }}</strong>
+                                        {{ user.motherTongue|language_name(app.request.locale) }}
+                                        {% for cpt_lang, language in user.languages %}
+                                            {% if loop.index > 0 or not loop.last %}, {% endif %}
+                                            {{ language.code|language_name(app.request.locale) }}
+                                            {% set cpt_lang = cpt_lang + 1 %}
+                                        {% endfor %}
+                                    </li>
+                                </ul><!-- /.list-meta -->
+                            </section>
+                        </div>
+                    </aside>
+                    <!-- contain the main content of the page -->
+                    <div id="content" class="listing-area col-xs-12 col-sm-7 col-lg-9 col-md-8">
+                        <!-- profile-detail -->
+                        <section class="profile-detail">
+                            <header class="head">
+                                <h1>{{ 'user.profile.h1'|trans }}</h1>
+
+                                {% if user_description %}
+                                    <blockquote>
+                                        "{{ user_description }}"
+                                    </blockquote>
+                                {% endif %}
+                            </header>
+                            <!-- blog -->
+                            <div class="blog">
+                                <div class="head">
+                                    <h3>
+                                        ({{ user.reviewsTo | length }})
+                                        {{ 'user.comments.count.label'|trans }}
+                                    </h3>
+                                </div>
+
+
+                                <div class="posts-holder">
+                                    {% for review in user.reviewsTo %}
+                                        <!-- post -->
+                                        {% set reviewBy = review.reviewBy %}
+                                        {% set image_user = reviewBy.images|length ? reviewBy.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+                                        <article class="post listing-detail-post">
+                                            <header class="head">
+                                                <div class="author-img">
+                                                    <div class="img-holder">
+                                                        <img alt="{{ reviewBy.name }}"
+                                                             src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_msmall') }}">
+                                                    </div>
+                                                </div>
+                                                <div class="meta">
+                                                    <a href="{{ path('cocorico_user_profile_show', { 'id': reviewBy.id }) }}"
+                                                       class="author-name">{{ reviewBy.name }}</a>
+                                                    <!-- rating -->
+                                                        {% if user.averageAskerRating == 0 %}
+                                                            {% set rating = user.averageOffererRating %}
+                                                        {% elseif user.averageOffererRating == 0 %}
+                                                            {% set rating = user.averageAskerRating %}
+                                                        {% else %}
+                                                            {% set rating = (user.averageAskerRating + user.averageOffererRating) / 2 %}
+                                                        {% endif %}
+
+                                                        {% if rating %}
+                                                            {{ rating | cocorico_star_rating }}
+                                                        {% endif %}
+                                                    <time datetime="{{ review.createdAt|date('Y-m-d') }}">
+                                                        {{ review.createdAt|localizeddate('short', 'none', 'fr') }}
+                                                    </time>
+                                                </div>
+                                            </header>
+                                            <div class="post-content">
+                                                <p>{{ review.comment|strip_private_info }}</p>
+                                            </div>
+                                            {#<footer class="footer">
+                                                {% if review.booking.listing.user == user %}
+                                                    {% set listing_translation = review.booking.listing.translations[app.request.locale] %}
+
+                                                    <a href="{{ path('cocorico_listing_show', {'slug' : listing_translation.slug}) }}"
+                                                       class="link">
+                                                        {{ listing_translation.title }}
+                                                    </a>
+                                                {% endif %}
+                                                <!-- rating -->
+                                                {% if review.rating %}
+                                                    {{ review.rating | cocorico_star_rating }}
+                                                {% endif %}
+                                            </footer>#}
+                                        </article>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+            {#</div>#}
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
+    'map_elt': '',
+    'auto_complete_elt': '#location'
+    } only %}
+
+    <script>
+        $(function () {
+            // Categories
+            initMultiSelect(
+                    '#categories',
+                    '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
+            );
+        });
+    </script>
+{% endblock %}
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {% include 'CocoricoSeoBundle:Frontend:Profile/_show_markup.jsonld.twig' ignore missing with {
+    'user': user,
+    'user_listings': user_listings,
+    'user_description': user_description,
+    'user_address': user_address
+    } only %}
+{% endblock %}

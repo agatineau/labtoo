@@ -1,0 +1,37 @@
+services:
+
+    cocorico_experiment.listing_form.event_subscriber:
+        class: Cocorico\ExperimentBundle\EventSubscriber\ListingFormSubscriber
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    cocorico_experiment.booking.subscriber:
+        class: Cocorico\ExperimentBundle\EventSubscriber\BookingSubscriber
+        arguments:
+            - "@cocorico_experiment.model.listing_search_session"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    cocorico_experiment.booking_amount.subscriber:
+        class: Cocorico\ExperimentBundle\EventSubscriber\BookingAmountSubscriber
+        arguments:
+            - "@cocorico_experiment.model.listing_search_session"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    cocorico_experiment.listing_answer_indexer.subscriber:
+        class: Cocorico\ExperimentBundle\EventSubscriber\ListingAnswerIndexerSubscriber
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    cocorico_experiment.experiment.subscriber:
+        class: Cocorico\ExperimentBundle\EventSubscriber\ExperimentSubscriber
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    cocorico_experiment.listing_search_form.subscriber:
+        class: Cocorico\ExperimentBundle\EventSubscriber\ListingSearchFormSubscriber
+        tags:
+            - { name: kernel.event_subscriber }

@@ -1,0 +1,38 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div id="experiment-details">
+
+    {% if experiment is defined and experiment.deliverables|length %}
+
+        <div class="form-inner-medium form-element">
+            <h2><strong class="step-number"></strong> / {{ 'listing.search.new.third.step'|trans }}</h2>
+            <div class="form-box">
+                <figure>
+                    <img src="{{ asset('images/cuvette-small.png') }}" alt=""/>
+                </figure>
+                <ul>
+                    {% for deliverable in  experiment.deliverables %}
+                        <li>● {{ deliverable }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if form.answers|length %}
+
+        <div class="form-inner form-element">
+            <h2><strong class="step-number"></strong> / {{ 'listing.search.new.forth.step'|trans }}</h2>
+            <div class="steps">
+                {{ form_widget(form.answers) }}
+            </div>
+        </div>
+
+        <div class="text-center">
+            <p><strong>{{ 'listing.last.block.text'|trans }}</strong></p>
+        </div>
+
+    {% endif %}
+
+</div>

@@ -1,0 +1,205 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set voucherBundleEnabled = bundleExist('CocoricoVoucherBundle') %}
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+{% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
+{% set deliveryBundleEnabled = bundleExist('CocoricoDeliveryBundle') %}
+{% set carrierBundleEnabled = bundleExist('CocoricoCarrierBundle') %}
+{% set depositBundleEnabled = bundleExist('CocoricoListingDepositBundle') %}
+
+{% set listing = booking.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+{% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+{% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+
+{% set amount = booking.amountDecimal | format_price(app.request.locale, 2, false) %}
+{% set amount_excl_vat = booking.amountExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set amount_total = booking.amountToPayByAskerDecimal | format_price(app.request.locale, 2, false) %}
+{# {% set amount_total_excl_vat = booking.amountTotalExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %} #}
+{% set amount_total_vat = booking.amountTotalVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set fee_as_asker = booking.amountFeeAsAskerDecimal | format_price(app.request.locale, 2, false) %}
+{% set fee_as_offerer = booking.AmountFeeAsOffererDecimal | format_price(app.request.locale, 2, false) %}
+
+{# this is for temporery change #}
+{% set amount_of_booking = (booking.amountToPayByAskerDecimal - booking.amountFeeAsAskerDecimal) | format_price(app.request.locale, 2, false) %}
+
+{% if optionBundleEnabled %}
+    {% set amount = (booking.amountDecimal - booking.amountOptionsDecimal) | format_price(app.request.locale, 2, false) %}
+{% endif %}
+
+{% set user = listing.user %}
+{% set user_image = user.images %}
+{% set user_address = user.getAddresses %}
+{% set user_address = (user_address is empty) ? null : user_address[0] %}
+
+{%- block meta_title -%}
+    {{ 'booking.new.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~  amount_total ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'booking.new.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+{%- endblock -%}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+
+    {% if display_errors is defined and not display_errors %}
+        <style>
+            .errors {
+                display: none;
+            }
+        </style>
+    {% endif %}
+{%- endblock -%}
+
+{% block layout %}
+
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_booking' %}
+
+        {% block header %}
+            {% embed "@CocoricoCore/Frontend/Common/_header.html.twig" with {
+            'header_class': 'header-fixed'} %}
+            {% endembed %}
+        {% endblock %}
+        {# {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %} #}
+
+        {% block main %}
+            <div class="intro intro-medium" style="background-image: url({{asset('images/intro-bg.jpg')}});">
+                <div class="intro-caption">
+                    <div class="container">
+                        <h1>
+                            <span class="alt">{{ 'booking.new.intro.header'|trans }}</span>
+
+                            <small>{{ booking.listing.experiment.title }}</small>
+                        </h1>
+                    </div><!-- /.container -->
+                </div><!-- /.intro-caption -->
+            </div><!-- /.intro -->
+            <!-- two-columns -->
+            <div class="container">
+                <div class="twocolumns row alt">
+                    <!-- contain the main content of the page -->
+                    <div id="content" class="listing-area col-xs-12 col-md-8 col-lg-9">
+                        <div class="content-holder content-holder-alt">
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+                            {{ form_start(form, {'attr': {'id': 'booking-new'}}) }}
+                            {#{{ form_errors(form) }}#}
+
+                            {% include 'CocoricoCoreBundle:Frontend:Booking/_amounts.html.twig' with {
+                            'booking' : booking
+                            } only %}
+
+                            {% include 'CocoricoCoreBundle:Frontend:Booking/_details.html.twig' with {
+                            'booking' : booking
+                            } only %}
+
+                            {#Delivery OR Carrier bundle form#}
+                            {% if deliveryBundleEnabled %}
+                                {% include 'CocoricoDeliveryBundle:Frontend:Booking/_form_delivery.html.twig' with {
+                                'form': form,
+                                'booking': booking
+                                } only %}
+                            {% elseif carrierBundleEnabled %}
+                                {% include 'CocoricoCarrierBundle:Frontend:Booking/_form_carrier.html.twig' with {
+                                'form': form,
+                                'booking': booking
+                                } only %}
+                            {% endif %}
+
+                            {% if optionBundleEnabled %}
+                                {% include 'CocoricoListingOptionBundle:Frontend:Booking/_form_options.html.twig' with {
+                                'form': form,
+                                'booking': booking
+                                } only %}
+                            {% endif %}
+
+                            {% if voucherBundleEnabled %}
+                                {% include 'CocoricoVoucherBundle:Frontend/Booking:_form_voucher.html.twig' with {'form': form, 'booking': booking} only %}
+                            {% endif %}
+
+                            {% if depositBundleEnabled %}
+                                {% include 'CocoricoListingDepositBundle:Frontend/Booking:_show_amount_deposit.html.twig' with {'booking': booking} only %}
+                            {% endif %}
+
+                            {# {% if addressDelivery %}
+                                {% include 'CocoricoCoreBundle:Frontend:Booking/_form_user_address.html.twig' with {
+                                'form' : form.userAddress
+                                } only %}
+                            {% endif %} #}
+
+                            <div class="form-message">
+                                <fieldset>
+                                    <legend class="hidden">form-message</legend>
+                                    <h2>{{ form_label(form.message) }}</h2>
+
+                                    {{ form_errors(form.message) }}
+                                    <div class="no-scroll">
+                                        {{ form_widget(form.message,{
+                                            'attr': {
+                                                'placeholder': 'booking.new.message.placeholder'|trans
+                                            }
+                                        }) }}
+                                    </div>
+                                    <input type="submit" class="hidden" value="submit">
+                                </fieldset>
+                            </div>
+
+
+                            <div class="btns-area">
+                                {{ form_errors(form.tac) }}
+                                <div class="agreement">
+                                    {{ form_widget(form.tac) }}
+                                    <span class="label">
+                                            {{ form_label(form.tac, null, {'required': false} ) }}
+                                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+                                           target="_blank">
+                                                {{ 'booking.new.tac.link'|trans }}
+                                            </a>*
+                                    </span>
+                                </div>
+
+                                <input type="submit" value="{{ 'booking.new.validation.submit'|trans }}"
+                                       class="btn btn-red">
+                            </div>
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+
+                    {% include 'CocoricoCoreBundle:Frontend:Booking/_side.html.twig' with {
+                    'booking' : booking
+                    } only %}
+
+                </div>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if deliveryBundleEnabled %}
+        {% include 'CocoricoDeliveryBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {
+        'listing_location': listing_location
+        } only %}
+    {% elseif carrierBundleEnabled %}
+        {% include 'CocoricoCarrierBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {} only %}
+    {% endif %}
+
+    {% if optionBundleEnabled %}
+        {% include 'CocoricoListingOptionBundle:Frontend:Booking/js/_options_js.html.twig' only %}
+    {% endif %}
+{% endblock %}

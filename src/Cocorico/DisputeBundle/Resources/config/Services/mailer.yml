@@ -1,0 +1,28 @@
+parameters:
+    cocorico_dispute.booking_deferred_by_asker_asker.email.template: "CocoricoDisputeBundle:Mails/Asker:booking_deferred_by_asker_asker.txt.twig"
+    cocorico_dispute.booking_deferred_by_asker_offerer.email.template: "CocoricoDisputeBundle:Mails/Offerer:booking_deferred_by_asker_offerer.txt.twig"
+    cocorico_dispute.booking_disputed_by_asker_asker.email.template: "CocoricoDisputeBundle:Mails/Asker:booking_disputed_by_asker_asker.txt.twig"
+    cocorico_dispute.booking_disputed_by_asker_offerer.email.template: "CocoricoDisputeBundle:Mails/Offerer:booking_disputed_by_asker_offerer.txt.twig"
+    cocorico_dispute.booking_disputed_by_asker_admin.email.template: "CocoricoDisputeBundle:Mails/Admin:booking_disputed_by_asker_admin.txt.twig"
+
+services:
+    cocorico_dispute.mailer.twig_swift:
+        class: Cocorico\DisputeBundle\Mailer\TwigSwiftMailer
+        arguments:
+            - "@mailer"
+            - "@router"
+            - "@twig"
+            - "@request_stack"
+            - "@translator.default"
+            - parameters:
+                cocorico_time_unit: "%cocorico.time_unit%"
+                cocorico_locales: "%cocorico.locales%"
+                cocorico_locale: "%cocorico.locale%"
+                cocorico_from_email: "%cocorico.from_email%"
+                cocorico_contact_email: "%cocorico.contact_mail%"
+            - templates:
+                booking_deferred_by_asker_offerer: "%cocorico_dispute.booking_deferred_by_asker_offerer.email.template%"
+                booking_deferred_by_asker_asker: "%cocorico_dispute.booking_deferred_by_asker_asker.email.template%"
+                booking_disputed_by_asker_offerer: "%cocorico_dispute.booking_disputed_by_asker_offerer.email.template%"
+                booking_disputed_by_asker_asker: "%cocorico_dispute.booking_disputed_by_asker_asker.email.template%"
+                booking_disputed_by_asker_admin: "%cocorico_dispute.booking_disputed_by_asker_admin.email.template%"
