@@ -3,5 +3,12 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"githubPullRequests.remotes": [
+			"origin",
+			"upstream",
+			"https://github.com/agatineau/labtoo"
+		]
+	}
 }
