@@ -75,7 +75,8 @@
     "cocorico/report-bundle": "^0.1",
     "cocorico/mangopay-bundle": "^0.6",
     "cocorico/elasticsearch-bundle": "^0.1.21",
-    "mongodb/mongodb": "^1.1"
+    "mongodb/mongodb": "^1.1",
+    "alcaeus/mongo-php-adapter": "^1.1"
   },
   "repositories": [
     {
@@ -126,7 +127,8 @@
   "config": {
     "bin-dir": "bin",
     "platform": {
-      "php": "5.6.40"
+      "php": "5.6.40",
+      "ext-mongo": "1.6.16"
     },
     "component-dir": "web/assets"
   },
