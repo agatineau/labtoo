@@ -2,7 +2,6 @@ app/DoctrineMigrations
 app/bootstrap.php.cache
 app/spool
 app/cache
-app/bootstrap.php.cache
 !app/cache/.gitkeep
 app/config/parameters.yml
 app/config/parameters_test.yml
@@ -11,7 +10,6 @@ app/SymfonyRequirements.php
 app/logs
 !app/logs/.gitkeep
 !app/build/logs/.gitkeep
-
 
 bin/chromedriver
 bin/chromedriver.exe
@@ -57,7 +55,6 @@ web/sitemap.xml
 
 watch
 
-
 C_local.0
 C_local.ns
 *.php~
@@ -67,11 +64,9 @@ behat.yml
 features/_datas/cocorico_test.db
 tmp/patch
 
-php
 web/myco*.php
 
 /auth.json
-
 
 tmp/*
 tmp/*.*
