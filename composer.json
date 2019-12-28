@@ -75,8 +75,7 @@
     "cocorico/report-bundle": "^0.1",
     "cocorico/mangopay-bundle": "^0.6",
     "cocorico/elasticsearch-bundle": "^0.1.21",
-    "mongodb/mongodb": "^1.1",
-    "alcaeus/mongo-php-adapter": "^1.1"
+    "mongodb/mongodb": "^1.1"
   },
   "repositories": [
     {
