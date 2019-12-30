@@ -9,3 +9,18 @@ services:
       - ./:/app:rw,cached
     ports:
       - "80:80"
+  db:
+    image: mysql:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root' # change me
+      MYSQL_DATABASE: 'labtoo'
+      MYSQL_USER: 'labtoo'
+      MYSQL_PASSWORD: 'labtoo' # change me
+    ports:
+      - '3306:3306'
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data: {}
