@@ -29,18 +29,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN docker-php-ext-install intl \
     && docker-php-ext-install soap \
     && docker-php-ext-install exif \
-
     && docker-php-ext-configure pdo_mysql \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install opcache \
-
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install zip \
     && pecl install imagick \
     && pecl install mongo-1.2.12 \
-
     && docker-php-ext-enable \
     opcache \
     imagick \
