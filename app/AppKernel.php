@@ -69,11 +69,11 @@ class AppKernel extends Kernel
             //new Cocorico\CarrierBundle\CocoricoCarrierBundle(),
             //new Cocorico\ListingDepositBundle\CocoricoListingDepositBundle(),
             new Cocorico\ExperimentBundle\CocoricoExperimentBundle(),
-            new Cocorico\DisputeBundle\CocoricoDisputeBundle(),
-            new Cocorico\BalanceBundle\CocoricoBalanceBundle(),
-            new Labtoo\MangoPayBundle\LabtooMangoPayBundle(),
-            new FOS\ElasticaBundle\FOSElasticaBundle(),
-            new Cocorico\ElasticsearchBundle\CocoricoElasticsearchBundle(),
+            //new Cocorico\DisputeBundle\CocoricoDisputeBundle(),
+            //new Cocorico\BalanceBundle\CocoricoBalanceBundle(),
+            //new Labtoo\MangoPayBundle\LabtooMangoPayBundle(),
+            //new FOS\ElasticaBundle\FOSElasticaBundle(),
+            //new Cocorico\ElasticsearchBundle\CocoricoElasticsearchBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'staging'), true)) {
