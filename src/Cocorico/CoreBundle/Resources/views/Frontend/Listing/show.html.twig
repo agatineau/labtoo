@@ -95,8 +95,20 @@
                                         <div class="add-info">
                                             <strong>{{ 'listing.booking.search_info'|trans({}, 'cocorico_booking') }}</strong>
                                         </div>
+                                        
                                         <div class="reservation-form">
-                                            <input type="submit" value="{{ 'listing.booking.submit'|trans({}, 'cocorico_booking') }}" disabled class="btn btn-red form-btn" />
+                                            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
+                                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
+                                                    class="contact-opener btn btn-default no-margin btn-blue" data-toggle="modal"
+                                                    data-target="#modal">
+                                                    {{ 'listing.show.user.contact'|trans }}
+                                                </a>
+                                            {%- else -%}
+                                                <a class="contact-opener btn btn-default no-margin btn-blue"
+                                                    href=" {{ path('cocorico_user_login') }}">
+                                                    {{ 'listing.show.user.contact'|trans }}
+                                                </a>
+                                            {%- endif -%}                            
                                         </div>
                                     </section>
                                 {% endif %}
@@ -144,18 +156,6 @@
 
                                             <a href="#blog" class="waypoint">{{ reviews|length }}</span> {{ 'listing.show.comments'|trans }}</a>
 
-                                            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
-                                                   class="contact-opener btn btn-default no-margin btn-blue" data-toggle="modal"
-                                                   data-target="#modal">
-                                                    {{ 'listing.show.user.contact'|trans }}
-                                                </a>
-                                            {%- else -%}
-                                                <a class="contact-opener btn btn-default no-margin btn-blue"
-                                                   href=" {{ path('cocorico_user_login') }}">
-                                                    {{ 'listing.show.user.contact'|trans }}
-                                                </a>
-                                            {%- endif -%}
 
                                             {#{%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
                                                 {# contact button and form #}
@@ -240,12 +240,6 @@
                                                         </a>
                                                     </li>
 
-                                                    <li>
-                                                        <a href="https://plus.google.com/share?{{ {'url': url}|url_encode }}" class="red">
-                                                            <i class="icon-gplus"></i>
-                                                            <span class="hidden">google-plus</span>
-                                                        </a>
-                                                    </li>
                                                 </ul>
                                             </div><!-- /.socials -->
                                         </div><!-- /.profile-content -->

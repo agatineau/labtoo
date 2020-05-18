@@ -4,28 +4,6 @@
         {% if app.request.isXmlHttpRequest %}
             {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
         {% endif %}
-        <strong class="title">{{ 'lisitng.booking.price.text'|trans }} :</strong>
-
-        <div class="add-info">
-            {% set feeAsAsker = feeAsAsker * 100 %}
-            {% if booking.user is not null %}
-                {% set feeAsAsker = booking.user.feeAsAsker is not null ? booking.user.feeAsAsker : feeAsAsker %}
-            {% endif %}
-            {% set feeAsAsker = booking.amountDecimal * (feeAsAsker / 100)  %}
-            {% set amount = (booking.amountDecimal + feeAsAsker) / (1 + vatRate) %}
-            {% set amount = amount | format_price(app.request.locale, 0) %}
-            <strong class="price">
-                {{ amount }}
-                <sup>
-                    <small>{{ vatExcludeText(app.request.getLocale()) }}</small>
-                </sup> *
-            </strong>
-
-            <span class="text">
-                {{ 'lisitng.booking.duration.text'|trans }}
-                 : {{ booking.listing.duration }} {{ 'listing.booking.duration.unit.text'|trans }}
-            </span>
-        </div>
 
         <div class="reservation-form">
             {{ form_start(form, {'attr': {'id': 'booking-price-form', 'class': 'date-selection'}}) }}
@@ -44,13 +22,23 @@
                     </div><!-- /.form-controls -->
                 </div><!-- /.form-row -->
             {% endif %}
+
             {# {% if form.vars['errors'] is empty %}
                 <a href="" data-id="submit-booking" class="btn btn-red form-btn">{{ 'listing.show.book.now.submit'|trans }}</a>
             {% endif %} #}
 
-            <input type="submit" value="{{ 'listing.booking.submit'|trans }}" class="btn btn-red form-btn" />
-
-            <span class="text">* {{ 'listing.show.including_booking_fees'|trans }}</span>
+            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
+                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
+                    class="contact-opener btn btn-default no-margin btn-blue" data-toggle="modal"
+                    data-target="#modal">
+                    {{ 'listing.show.user.contact'|trans }}
+                </a>
+            {%- else -%}
+                <a class="contact-opener btn btn-default no-margin btn-blue"
+                    href=" {{ path('cocorico_user_login') }}">
+                    {{ 'listing.show.user.contact'|trans }}
+                </a>
+            {%- endif -%}
 
             <div id="time-error" class="errors" style="display:none">
                 <i class="icon-error-field"></i>
