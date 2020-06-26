@@ -22,7 +22,7 @@
         {% endblock %}
 
         {% block main %}
-            <div class="intro" style="background-image: url({{asset('images/intro-bg.jpg')}});">
+            <div class="intro" style="background-image: url({{asset('/uploads/pictures/home/intro-bg.jpg')}});">
                 <div class="intro-caption">
                     <div class="container">
                         <h1>
@@ -39,19 +39,19 @@
             </div><!-- /.intro -->
             <div class="infoarea container">
             {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
-                <h4 class="infoarea-title">{{ 'home.infoarea.main.title'|trans }}</h4><!-- /.infoarea-title -->
+                <h2 class="infoarea-title">{{ 'home.infoarea.main.title'|trans }}</h2><!-- /.infoarea-title -->
 
-                <h5 class="infoarea-subtitle">{{ 'home.infoarea.sub.title'|trans }}</h5><!-- /.infoarea-subtitle -->
+                <h3 class="infoarea-subtitle">{{ 'home.infoarea.sub.title'|trans }}</h3><!-- /.infoarea-subtitle -->
 
                 <div class="row">
                     <!-- info-box -->
                     <div class="col-xs-12 col-sm-12 col-md-4 info-box">
-                        <img src="{{asset('images/infoarea-ico-1.png')}}" alt="icon description" class="icon">
+                        <img src="{{asset('/uploads/pictures/home/infoarea-ico-1.png')}}" alt="icon description" class="icon">
 
                         <div class="textbox">
-                            <h5>
+                            <h4>
                                 {{ 'home.subinfo.title1'|trans|raw }}
-                            </h5>
+                            </h4>
 
                             <p>{{ 'home.subinfo.desc1'|trans|raw }}</p>
                         </div>
@@ -59,12 +59,12 @@
 
                     <!-- info-box -->
                     <div class="col-xs-12 col-sm-12 col-md-4 info-box">
-                        <img src="{{asset('images/infoarea-ico-2.png')}}" alt="icon description" class="icon">
+                        <img src="{{asset('/uploads/pictures/home/infoarea-ico-2.png')}}" alt="icon description" class="icon">
 
                         <div class="textbox">
-                            <h5>
+                            <h4>
                                 {{ 'home.subinfo.title2'|trans|raw }}
-                            </h5>
+                            </h4>
 
                             <p>{{ 'home.subinfo.desc2'|trans|raw }}</p>
                         </div>
@@ -72,12 +72,12 @@
 
                     <!-- info-box -->
                     <div class="col-xs-12 col-sm-12 col-md-4 info-box">
-                        <img src="{{asset('images/infoarea-ico-3.png')}}" alt="icon description" class="icon">
+                        <img src="{{asset('/uploads/pictures/home/infoarea-ico-3.png')}}" alt="icon description" class="icon">
 
                         <div class="textbox">
-                            <h5>
+                            <h4>
                                 {{ 'home.subinfo.title3'|trans|raw }}
-                            </h5>
+                            </h4>
 
                             <p>{{ 'home.subinfo.desc3'|trans|raw }}</p>
                         </div>
@@ -85,12 +85,12 @@
                 </div>
             </div>
 
-            <section class="section" style="background-image: url({{asset('images/section-bg-1.jpg')}});">
+            <section class="section" style="background-image: url({{asset('/uploads/pictures/home/section-bg-1.jpg')}});">
                 <div class="container">
                     <header class="section-head">
-                        <h4 class="section-title">{{ 'infoarea.section.title'|trans }}</h4><!-- /.section-title -->
+                        <h2 class="section-title">{{ 'infoarea.section.title'|trans }}</h2><!-- /.section-title -->
 
-                        <h5 class="section-subtitle">{{ 'infoarea.section.sub.title'|trans }}</h5><!-- /.section-subtitle -->
+                        <h3 class="section-subtitle">{{ 'infoarea.section.sub.title'|trans }}</h3><!-- /.section-subtitle -->
                     </header><!-- /.section-head -->
 
                     <div class="section-body">
@@ -98,11 +98,11 @@
                             <div class="box col-md-6 col-sm-6">
                                 <div class="box-inner">
                                     <div class="box-image">
-                                        <img src="{{asset('images/cuvette.png')}}" alt="" />
+                                        <img src="{{asset('/uploads/pictures/home/section3.1.png')}}" alt="home section 3 picto 1" />
                                     </div><!-- /.box-image -->
 
                                     <div class="box-content">
-                                        <h6 class="box-title">{{ 'infoarea.section.title1'|trans }}</h6><!-- /.box-title -->
+                                        <h4 class="box-title">{{ 'infoarea.section.title1'|trans }}</h4><!-- /.box-title -->
 
                                         <p>{{ 'infoarea.section.desc1'|trans }}</p>
                                     </div><!-- /.box-content -->
@@ -118,11 +118,11 @@
                             <div class="box col-md-6 col-sm-6">
                                 <div class="box-inner">
                                     <div class="box-image">
-                                        <img src="{{asset('images/zoom.png')}}" alt="" />
+                                        <img src="{{asset('//uploads/pictures/home/section3.2.png')}}" alt="home section 3 picto 2" />
                                     </div><!-- /.box-image -->
 
                                     <div class="box-content">
-                                        <h6 class="box-title">{{ 'infoarea.section.title2'|trans }}</h6><!-- /.box-title -->
+                                        <h4 class="box-title">{{ 'infoarea.section.title2'|trans }}</h4><!-- /.box-title -->
 
                                         <p>{{ 'infoarea.section.desc2'|trans }}</p>
                                     </div><!-- /.box-content -->
@@ -142,9 +142,9 @@
             <section class="section section-dark">
                 <div class="container">
                     <header class="section-head">
-                        <h4 class="section-title">{{ 'home.testimonial.main.title'|trans }}</h4><!-- /.section-title -->
+                        <h2 class="section-title">{{ 'home.testimonial.main.title'|trans }}</h2><!-- /.section-title -->
 
-                        <h5 class="section-subtitle">{{ 'home.testimonial.sub.title'|trans }}</h5><!-- /.section-subtitle -->
+                        <h3 class="section-subtitle">{{ 'home.testimonial.sub.title'|trans }}</h3><!-- /.section-subtitle -->
                     </header><!-- /.section-head -->
 
                     <div class="section-body">
@@ -154,13 +154,13 @@
                                     <div class="slide">
                                         <div class="testimonial slide-testimonial">
                                             <div class="testimonial-image">
-                                                <img src="{{asset('images/Patricia_opt.jpg')}}" alt="" />
+                                                <img src="{{asset('/uploads/pictures/home/testimonial-1.png')}}" alt="{{ 'home.testimonial.title1'|trans }}" />
                                             </div><!-- /.testimonial-image -->
 
                                             <div class="testimonial-content">
-                                                <h5 class="testimonial-title">
+                                                <h4 class="testimonial-title">
                                                     {{ 'home.testimonial.title1'|trans }}
-                                                </h5><!-- /.testimonial-title -->
+                                                </h4><!-- /.testimonial-title -->
 
                                                 <p>{{ 'home.testimonial.desc1'|trans }}</p>
                                             </div><!-- /.testimonial-content -->
@@ -170,11 +170,13 @@
                                     <div class="slide">
                                         <div class="testimonial slide-testimonial">
                                             <div class="testimonial-image">
-                                                <img src="{{asset('images/Aurelien_opt.jpg')}}" alt="" />
+                                                <img src="{{asset('/uploads/pictures/home/testimonial-2.png')}}" alt="{{ 'home.testimonial.title2'|trans }}" />
                                             </div><!-- /.testimonial-image -->
 
                                             <div class="testimonial-content">
-                                                <h5 class="testimonial-title">{{ 'home.testimonial.title2'|trans }}</h5><!-- /.testimonial-title -->
+                                                <h4 class="testimonial-title">
+                                                    {{ 'home.testimonial.title2'|trans }}
+                                                </h4><!-- /.testimonial-title -->
 
                                                 <p>{{ 'home.testimonial.desc2'|trans }}</p>
                                             </div><!-- /.testimonial-content -->
@@ -184,11 +186,13 @@
                                     <div class="slide">
                                         <div class="testimonial slide-testimonial">
                                             <div class="testimonial-image">
-                                                <img src="{{asset('images/Michael_opt.jpg')}}" alt="" />
+                                                <img src="{{asset('/uploads/pictures/home/testimonial-3.png')}}" alt="{{ 'home.testimonial.title3'|trans }}" />
                                             </div><!-- /.testimonial-image -->
 
                                             <div class="testimonial-content">
-                                                <h5 class="testimonial-title">{{ 'home.testimonial.title3'|trans }}</h5><!-- /.testimonial-title -->
+                                                <h4 class="testimonial-title">
+                                                    {{ 'home.testimonial.title3'|trans }}
+                                                </h4><!-- /.testimonial-title -->
 
                                                 <p>{{ 'home.testimonial.desc3'|trans }}</p>
                                             </div><!-- /.testimonial-content -->
