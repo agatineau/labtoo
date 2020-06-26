@@ -18,11 +18,11 @@
 {% endif %}
 
 {%- block meta_title -%}
-    {{ seo_meta_tile }}
+    {{ seo_meta_tile|raw }}
 {%- endblock -%}
 
 {%- block meta_description -%}
-    {{ seo_meta_desc }}
+    {{ seo_meta_desc|raw }}
 {%- endblock -%}
 {# END SEO #}
 
@@ -39,7 +39,8 @@
 
 
 {% block layout %}
-    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' with {
+       'main_class': 'main_profile'} %}
         {% trans_default_domain 'cocorico_listing' %}
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
@@ -50,19 +51,42 @@
 
         {% block main %}
 
-            <div class="intro intro-xsmall" style="background-image: url({{asset('images/intro-bg.jpg')}});">
+            <div class="intro intro-medium search-header search-header-section">
                 <div class="intro-caption">
                     <div class="container">
-                        <h1><small>{{ listing_search_session.experiment.title }}</small></h1>
-                        <p>
-                            {{ listing_search_session.listingCategory.parent.translations[app.request.locale].name }}
-                            > {{ listing_search_session.listingCategory.translations[app.request.locale].name }}
-                        </p>
-                        {% if app.session.get('listing_search_session') is defined and app.session.get('listing_search_session') %}
-                            <a href="{{ path('cocorico_listing_search_new',{'mode':'edit'}) }}" class="btn btn-red">{{ 'listing.detail.edit_search.link.text'|trans }}</a>
-                        {% else %}
-                            <a href="{{ path('cocorico_listing_search_new') }}" class="btn btn-red">{{ 'listing.detail.search.link.text'|trans }}</a>
-                        {% endif %}
+                        <div class="col-md-12 p-0">
+                            <a href="{{ path('cocorico_listing_search_experiment', { 'category': listing_search_session.listingCategory.getSlug(), 'experiment': listing_search_session.experiment.getSlug() }) }}" class="m-0">
+                                <div class="section-back">
+                                    <p class="icon-back">
+                                        <span class="arrow-left-link"></span>
+                                    </p>
+                                    <h1 class="main-title">
+                                        {{ 'search-page-back-link-title'|trans }}
+                                    </h1>
+                                </div>
+                            </a>
+                            <p class="breadcrumb-links">
+
+                                {# Main category link #}
+                                <a href="{{ path('cocorico_listing_search_category', {'category': listing_search_session.listingCategory.getSlug()}) }}">
+                                    {{ listing_search_session.listingCategory.parent.translations[app.request.locale].name }}
+                                </a>
+                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+
+                                {# Sub category link #}
+                                <a href="{{ path('cocorico_listing_search_category', {'category': listing_search_session.listingCategory.getSlug()}) }}">
+                                    {{ listing_search_session.listingCategory.translations[app.request.locale].name }}
+                                </a>
+                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+
+                                {# Experiment page link #}
+                                <a href="{{ path('cocorico_listing_search_experiment', { 'category': listing_search_session.listingCategory.getSlug(), 'experiment': listing_search_session.experiment.getSlug() }) }}" class="m-0">
+                                    {{ listing_search_session.experiment.title }}
+                                </a>
+                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                <span>{{ 'search-page-search-for-experts-title'|trans }}</span>
+                            </p>
+                        </div>
                     </div><!-- /.container -->
                 </div><!-- /.intro-caption -->
             </div><!-- /.intro intro-xsmall -->
@@ -72,29 +96,13 @@
 
             <div class="container">
             <!-- two-columns -->
-            <div class="twocolumns row">
-                <!-- maparea -->
-                <div class="maparea maparea-large col-xs-12 col-md-4">
-                    <div class="checkbox search-on-drag-cb-wrapper">
-                        <input type="checkbox" name="search-on-drag" id="search-on-drag">
-                        <label class="form-label" for="search-on-drag">
-                            {{ 'search-on-map-drag'|trans }}
-                        </label>
-                    </div>
-                    <div class="map-holder eq-height">
-                        <div id="map-canvas" class="map-canvas" data-zoom="14"></div>
-                        {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
-                        'markers': markers,
-                        } only %}
-                    </div>
-                </div>
-
+            <div class="twocolumns row search-result-page">
                 <!-- postarea -->
-                <section class="listing-area col-xs-12 col-md-8 eq-height">
+                <section class="listing-area col-xs-12 col-md-8 {% if listings|length <= 0 %} border-0{% endif %}">
                     <!-- form-category -->
                     {# <form action="#" class="form-category col-xs-12"> #}
-                    {{ form_start(form, {'attr': {'class': 'form-category col-xs-12'}}) }}
-                        <fieldset>
+                    {{ form_start(form, {'attr': {'class': 'form-category col-xs-12 p-0'}}) }}
+                        <fieldset class="hidden">
                             <legend class="hidden">form-category</legend>
 
                             <div class="sub-holder">
@@ -113,13 +121,6 @@
                             </div>
 
                             <div class="form-box">
-                                <h4>{{ 'listing.search.experience.price.text'|trans }} : </h4>
-
-                                <p class="form-price">
-                                    {{ listing_search_session.amountExcludingVATDecimal(vatRate,app.user)|format_price(app.request.locale, 0) }}
-                                    <small>({{ vatExcludeText(app.request.getLocale()) }})</small>
-                                </p><!-- /.form-price -->
-
                                 <div class="form-box-foot">
                                     <h6>{{ 'listing.search.expert.text'|trans }} :</h6>
                                 </div><!-- /.form-box-foot -->
@@ -128,7 +129,7 @@
                     {# </form> #}
                     {{ form_end(form) }}
 
-                    <h1 data-id="result-title">
+                    <h1 data-id="result-title" class="hidden">
                         <span data-id="title">{{ 'listing.search.result.results'|trans({'%nb_results%': nb_listings}) }}</span>
 
                         {% if bundleExist('CocoricoListingAlertBundle') %}
@@ -142,11 +143,11 @@
                         {% endif %}
                     </h1>
                     {#TO NOT DELETE#}
-                    <div data-id="seo-desc">
+                    <div data-id="seo-desc" class="hidden">
                         {{ seo_desc|raw }}
                     </div>
 
-                    <div class="listing-holder row">
+                    <div class="listing-holder row m-0">
                         {% include '@CocoricoCore/Frontend/ListingResult/_result_listings.html.twig'  with {
                         'listings': listings,
                         'nb_listings': nb_listings
@@ -154,26 +155,34 @@
                         <!-- post -->
 
                     </div>
-                    {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
-                    'pagination': pagination
-                    } only %}
-                    {# <nav class="nav-pagination text-center">
-                        <ul class="pagination">
-                            <li><a href="#" aria-label="Previous"> <i class="icon-left-open-mini"></i>
-                                <span class="hidden">previous</span>
-                            </a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li class="active"><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#" aria-label="Next"> <i class="icon-right-open-mini"></i>
-                                <span class="hidden">next</span>
-                            </a></li>
-                        </ul>
-                    </nav> #}
-                    <!-- <div data-id="seo-desc-moved"></div> -->
+                    <div class="pagination-section">
+                        {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+                        'pagination': pagination
+                        } only %}
+                    </div>
                 </section>
+                <!-- maparea -->
+                <div class="maparea col-xs-12 col-md-4">
+                    <div class="checkbox search-on-drag-cb-wrapper hidden">
+                        <input type="checkbox" name="search-on-drag" id="search-on-drag">
+                        <label class="form-label" for="search-on-drag">
+                            {{ 'search-on-map-drag'|trans }}
+                        </label>
+                    </div>
+                    <div class="map-holder">
+                        <div id="map-canvas" class="map-canvas" data-zoom="14"></div>
+                        {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
+                        'markers': markers,
+                        } only %}
+                    </div>
+                    <p class="price-label">{{ 'listing.search.experience.price.text'|trans }} : </p>
+                    <div class="listing-price">
+                        <p class="price">
+                            {{ listing_search_session.amountExcludingVATDecimal(vatRate,app.user)|format_price(app.request.locale, 0) }}
+                            ({{ vatExcludeText(app.request.getLocale()) }})
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -275,7 +284,11 @@
     'auto_complete_elt': '#location_address',
     'default_lat': location.lat,
     'default_lng': location.lng,
-    'extend_search': extendSearch
+    'extend_search': extendSearch,
+    'street_view_control': 'false',
+    'fullscreen_control': 'false',
+    'zoom_control': 'false',
+    'map_type_control': 'false',
     } only %}
 
     {#Extend search call#}
@@ -301,6 +314,12 @@
                 setTimeout(function (){
                     google.maps.event.trigger(map, "resize");
                 }, 50);
+
+                $('.listing-post .box-title').css('height','');
+                $('.listing-post .box-description').css('height','');
+                setTimeout(function () {
+                    listingPostDivHeightSet();
+                }, 100);
             });
 
             //Set listings markers on load through data-markers attribute
@@ -341,7 +360,31 @@
                 $(this).closest('form').submit();
             });
 
+            listingPostDivHeightSet();
         });
+        function listingPostDivHeightSet()
+        {
+            var highestTitle = 0;
+            var highestDescription = 0;
+            $('.listing-post').each(function(){
+
+                $('.box-title', this).each(function(){
+                    // If this title is higher than the cached highest then store it
+                    if($(this).height() > highestTitle) {
+                        highestTitle = $(this).height();
+                    }
+                });
+
+                $('.box-description', this).each(function(){
+                    // If this description is higher than the cached highest then store it
+                    if($(this).height() > highestDescription) {
+                        highestDescription = $(this).height();
+                    }
+                });
+            });
+            $('.box-title').height(highestTitle);
+            $('.box-description').height(highestDescription);
+        }
     </script>
 {% endblock %}
 
