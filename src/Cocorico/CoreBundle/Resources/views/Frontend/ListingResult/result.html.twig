@@ -66,25 +66,37 @@
                                 </div>
                             </a>
                             <p class="breadcrumb-links">
-
                                 {# Main category link #}
-                                <a href="{{ path('cocorico_listing_search_category', {'category': listing_search_session.listingCategory.getSlug()}) }}">
-                                    {{ listing_search_session.listingCategory.parent.translations[app.request.locale].name }}
-                                </a>
-                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
-
-                                {# Sub category link #}
-                                <a href="{{ path('cocorico_listing_search_category', {'category': listing_search_session.listingCategory.getSlug()}) }}">
-                                    {{ listing_search_session.listingCategory.translations[app.request.locale].name }}
-                                </a>
-                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
-
-                                {# Experiment page link #}
-                                <a href="{{ path('cocorico_listing_search_experiment', { 'category': listing_search_session.listingCategory.getSlug(), 'experiment': listing_search_session.experiment.getSlug() }) }}" class="m-0">
-                                    {{ listing_search_session.experiment.title }}
-                                </a>
-                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
-                                <span>{{ 'search-page-search-for-experts-title'|trans }}</span>
+                                <span itemscope itemtype="http://schema.org/BreadcrumList">
+                                    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                        <a href="{{ path('cocorico_listing_search_category', {'category': listing_search_session.listingCategory.getSlug()}) }}" itemprop="item">
+                                            <span itemprop="name">{{ listing_search_session.listingCategory.parent.translations[app.request.locale].name }}</span>
+                                        </a>
+                                        <meta itemprop="position" content="1">
+                                        <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                    </span>
+                                    {# Sub category link #}
+                                    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                        <a href="{{ path('cocorico_listing_search_category', {'category': listing_search_session.listingCategory.getSlug()}) }}" itemprop="item">
+                                            <span itemprop="name">{{ listing_search_session.listingCategory.translations[app.request.locale].name }}</span>
+                                        </a>
+                                        <meta itemprop="position" content="2">
+                                        <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                    </span>
+                                    {# Experiment page link #}
+                                    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                        <a href="{{ path('cocorico_listing_search_experiment', { 'category': listing_search_session.listingCategory.getSlug(), 'experiment': listing_search_session.experiment.getSlug() }) }}" class="m-0" itemprop="item">
+                                            <span itemprop="name">{{ listing_search_session.experiment.title }}</span>
+                                        </a>
+                                        <meta itemprop="position" content="3">
+                                        <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                    </span>
+                                    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                        <span itemprop="name" data-id="title">{{ 'listing.search.result.results'|trans({'%nb_results%': nb_listings}) }}</span>
+                                        <meta itemprop="position" content="4">
+                                    </span>
+                                </span>
+                                
                             </p>
                         </div>
                     </div><!-- /.container -->
@@ -129,19 +141,7 @@
                     {# </form> #}
                     {{ form_end(form) }}
 
-                    <h1 data-id="result-title" class="hidden">
-                        <span data-id="title">{{ 'listing.search.result.results'|trans({'%nb_results%': nb_listings}) }}</span>
 
-                        {% if bundleExist('CocoricoListingAlertBundle') %}
-                            <div class="listing-alert">
-                                <a href="{{ path('cocorico_listing_alert_new') }}" data-id="listing-alert"
-                                   class="btn btn-default">
-                                    {{ "listing.search.result.alert.link"|trans }}
-                                </a>
-                            </div>
-                            <div data-id="listing-alert-dialog"></div>
-                        {% endif %}
-                    </h1>
                     {#TO NOT DELETE#}
                     <div data-id="seo-desc" class="hidden">
                         {{ seo_desc|raw }}
@@ -174,13 +174,6 @@
                         {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
                         'markers': markers,
                         } only %}
-                    </div>
-                    <p class="price-label">{{ 'listing.search.experience.price.text'|trans }} : </p>
-                    <div class="listing-price">
-                        <p class="price">
-                            {{ listing_search_session.amountExcludingVATDecimal(vatRate,app.user)|format_price(app.request.locale, 0) }}
-                            ({{ vatExcludeText(app.request.getLocale()) }})
-                        </p>
                     </div>
                 </div>
             </div>
