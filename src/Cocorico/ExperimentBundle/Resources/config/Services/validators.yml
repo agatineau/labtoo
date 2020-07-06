@@ -1,6 +1,0 @@
-services:
-
-    cocorico.experiment_validator:
-        class: Cocorico\ExperimentBundle\Validator\Constraints\ExperimentValidator
-        tags:
-            - { name: validator.constraint_validator, alias: experiment }

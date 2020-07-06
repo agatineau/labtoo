@@ -1,9 +1,0 @@
-services:
-    labtoo_mangopay.user.subscriber:
-        class: Labtoo\MangoPayBundle\Event\UserSubscriber
-        arguments:
-            - "@labtoo_mangopay.user_manager"
-            - "@cocorico_mangopay.wallet_manager"
-            - "@cocorico_mangopay.bank_account_manager"
-        tags:
-            - { name: kernel.event_subscriber}

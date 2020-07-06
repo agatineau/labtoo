@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 61.2 (101010) - https://sketch.com -->
+    <title>6444715B-53A7-48F3-A0B4-8C7AFC95830B</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M6.14168377,-0.328208739 L4.18879004,3.55021787 L-0.180548001,4.17416415 C-0.964098011,4.28547851 -1.27811615,5.23165056 -0.709892855,5.77357573 L2.45122303,8.79078072 L1.7035608,13.0529489 C1.5689816,13.8233615 2.39739135,14.4004385 3.09122189,14.0401315 L7,12.0276851 L10.9087781,14.0401315 C11.6026087,14.3975092 12.4310184,13.8233615 12.2964392,13.0529489 L11.548777,8.79078072 L14.7098929,5.77357573 C15.2781161,5.23165056 14.964098,4.28547851 14.180548,4.17416415 L9.81120996,3.55021787 L7.85831623,-0.328208739 C7.50841031,-1.01952949 6.49458034,-1.02831747 6.14168377,-0.328208739 Z" id="path-1"></path>
+    </defs>
+    <g id="Asset-Artboard-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-/-Solid-/Listing-related/-Stars">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Icons/Solid/star" fill="#FFFFFF" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

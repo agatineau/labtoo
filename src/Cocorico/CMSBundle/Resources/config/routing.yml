@@ -1,3 +1,0 @@
-cocorico_cms_frontend:
-    resource: "@CocoricoCMSBundle/Controller/Frontend"
-    type:     annotation

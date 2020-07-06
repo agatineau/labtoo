@@ -1,8 +1,0 @@
-imports:
-    - { resource: Services/admin.yml }
-    - { resource: Services/event_subscribers.yml }
-    - { resource: Services/forms.yml }
-    - { resource: Services/forms_handlers.yml }
-    - { resource: Services/managers.yml }
-    - { resource: Services/models.yml }
-    - { resource: Services/validators.yml }

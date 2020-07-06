@@ -1,3 +1,0 @@
-cocorico_dispute:
-    resource: "@CocoricoDisputeBundle/Controller"
-    type:     annotation

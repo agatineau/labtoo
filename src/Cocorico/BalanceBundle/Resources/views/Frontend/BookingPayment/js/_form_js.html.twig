@@ -1,7 +1,0 @@
-<script>
-    $('[name="paymentMethod"]').change(function(){
-        var $options = $(this).closest('.form-options');
-        $options.find('.form-options-inner').hide();
-        $options.find('#payment-method-' + $(this).val() + '-form').show();
-    });
-</script>

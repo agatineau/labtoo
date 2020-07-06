@@ -1568,6 +1568,11 @@ ul.dropdown-menu li a {
     border-bottom-left-radius: 5px;
 }
 
+.add-expertise {
+    float: right;
+    text-transform: none !important;
+}
+
 @-moz-document url-prefix() {
     ul.dropdown-menu ul.menu-sub-tabs li.firstTab {
         margin-left: 0;
@@ -1622,6 +1627,36 @@ ul.dropdown-menu li a {
     ul.dropdown-menu li a {
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
+    }
+
+    #header.header-fixed {
+        background-color: transparent !important;
+    }
+
+    .resp-bg {
+        background: #ffffff;
+    }
+
+    #header {
+        padding: 0 0 !important;
+    }
+
+    #header.sticky_header .navbar-header {
+        background: rgba(255, 255, 255, 0.8);
+        width: 100% !important;
+    }
+
+    #header .navbar-default {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    #header .navbar-brand {
+        margin-left: 20px !important;
+    }
+
+    #header .navbar-toggle {
+        margin-right: 15px !important;
     }
 
 }
@@ -2096,7 +2131,7 @@ ul.collection {
 }
 
 .min-height {
-    min-height: 300px;
+    min-height: 180px;
 }
 
 /** Listing Alert**/
