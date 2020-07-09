@@ -1,0 +1,73 @@
+twig:
+    globals:
+        experiment_img_max_upload_size: "%cocorico_experiment.experiment_img_max_upload_size%"
+        experiment_img_xsmall_w: "%cocorico_experiment.experiment_img_xsmall_w%"
+        experiment_img_xsmall_h: "%cocorico_experiment.experiment_img_xsmall_h%"
+        experiment_img_small_w: "%cocorico_experiment.experiment_img_small_w%"
+        experiment_img_small_h: "%cocorico_experiment.experiment_img_small_h%"
+        experiment_img_xxmedium_w: "%cocorico_experiment.experiment_img_xxmedium_w%"
+        experiment_img_xxmedium_h: "%cocorico_experiment.experiment_img_xxmedium_h%"
+        experiment_img_xmedium_w: "%cocorico_experiment.experiment_img_xmedium_w%"
+        experiment_img_xmedium_h: "%cocorico_experiment.experiment_img_xmedium_h%"
+        experiment_img_medium_w: "%cocorico_experiment.experiment_img_medium_w%"
+        experiment_img_medium_h: "%cocorico_experiment.experiment_img_medium_h%"
+        experiment_img_large_w: "%cocorico_experiment.experiment_img_large_w%"
+        experiment_img_large_h: "%cocorico_experiment.experiment_img_large_h%"
+        experiment_img_preview_w: "%cocorico_experiment.experiment_img_preview_w%"
+        experiment_img_preview_h: "%cocorico_experiment.experiment_img_preview_h%"
+
+oneup_uploader:
+    mappings:
+       experiment_images:
+            max_size: 10000000
+            frontend: blueimp
+            allowed_mimetypes: ["image/gif", "image/jpg", "image/jpeg", "image/png"]
+            enable_progress: true
+            namer: cocorico.namer.image_namer
+            storage:
+                directory: "%kernel.root_dir%/../web/uploads/experiments/images/"
+
+liip_imagine:
+    filter_sets:
+        experiment_xsmall:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_xsmall_w%", "%cocorico_experiment.experiment_img_xsmall_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
+        experiment_small:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_small_w%", "%cocorico_experiment.experiment_img_small_h%"], mode: outbound, cache_type: public, cache_expires: 1 months }
+        experiment_xxmedium:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_xxmedium_w%", "%cocorico_experiment.experiment_img_xxmedium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
+        experiment_xmedium:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_xmedium_w%", "%cocorico_experiment.experiment_img_xmedium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
+        experiment_medium:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_medium_w%", "%cocorico_experiment.experiment_img_medium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
+        experiment_xxlarge:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_xxlarge_w%", "%cocorico_experiment.experiment_img_xxlarge_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
+        experiment_xlarge:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                upscale: { min: ["%cocorico_experiment.experiment_img_xlarge_w%", "%cocorico_experiment.experiment_img_xlarge_h%"] }
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_xlarge_w%", "%cocorico_experiment.experiment_img_xlarge_h%"], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
+        experiment_large:
+            quality: 85
+            filters:
+                auto_rotate: ~
+                upscale: { min: ["%cocorico_experiment.experiment_img_large_w%", "%cocorico_experiment.experiment_img_large_h%"] }
+                thumbnail: { size: ["%cocorico_experiment.experiment_img_large_w%", "%cocorico_experiment.experiment_img_large_h%"], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }

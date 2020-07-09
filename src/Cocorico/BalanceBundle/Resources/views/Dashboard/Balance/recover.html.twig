@@ -1,0 +1,40 @@
+{% extends '@CocoricoBalance/Dashboard/Balance/layout.html.twig' %}
+{% trans_default_domain 'cocorico_balance' %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'balance_recover' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    <fieldset>
+        <legend class="hidden">legend</legend>
+        <div class="tab-content credit-table">
+            <h6>{{ 'recover.head.title'|trans }}</h6>
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+            <div class="tab-pane active" role="tabpanel">
+                {{ form_start(form) }}
+                <div class="form-holder columns-holder alt">
+                    <div class="balance-header">
+                        {{ 'recover.label'|trans }} {{ app.user.amountBalanceDecimal|format_price(app.request.locale) }}
+                        <button type="submit" class="btn btn-blue form-btn balance-input">
+                            {{ 'recover.btn'|trans({},'cocorico_contact') }}
+                        </button>
+                    </div>
+                    <div class="alert" style="margin-top: 24px">
+                        <i class="ico icon-info"></i>
+                        <p>{{ 'recover.instruction'|trans }}</p>
+                        <br>
+                        <p>{{ 'form.user.bank_owner_name'|trans({}, 'cocorico_user') }} <strong>{{ app.user.bankOwnerName }}</strong></p>
+                        <p>{{ 'form.user.bank_owner_address'|trans({}, 'cocorico_user') }} <strong>{{ app.user.bankOwnerAddress }}</strong></p>
+                        <p>{{ 'IBAN'|trans({}, 'cocorico_user') }} <strong>{{ app.user.iban }}</strong></p>
+                        <p>{{ 'BIC'|trans({}, 'cocorico_user') }} <strong>{{ app.user.bic }}</strong></p>
+                        <br>
+                        <p>{{ 'recover.warning'|trans({'%edit_url%': path('cocorico_user_dashboard_profile_edit_bank_account') })|raw }}</p>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </fieldset>
+{%- endblock %}

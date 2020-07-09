@@ -1,0 +1,115 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+<!-- payment-method -->
+<div class="form-payment">
+    <fieldset>
+        <legend class="hidden">form-payment</legend>
+        <div class="head">
+            <h2>{{ 'booking.new.cb.title'|trans }} {{ amount_total }}</h2>
+
+            <div class="by">
+                <em class="title">Powered by</em>
+                <ul class="list-inline">
+                    <li><img src="{{ asset('images/mango-pay.png') }}" alt="MangoPay"></li>
+                    <li><img src="{{ asset('images/paypal.png') }}" alt="Payline"></li>
+                </ul>
+            </div>
+        </div>
+
+        <p>{{ 'booking.new.cb.notice'|trans }}</p>
+
+        <div class="card-type">
+            <span class="title">{{ 'booking.new.cb.type.title'|trans }}</span>
+
+            <ul class="cards-list list-inline">
+                <li>
+                    <label for="visa">
+                        <span class="hidden">visa</span>
+                        <img src="{{ asset('images/card-visa.png') }}" alt="visa card"
+                             class="img">
+                    </label>
+                </li>
+                <li>
+                    <label for="master">
+                        <span class="hidden">master card</span>
+                        <img src="{{ asset('images/card-master.png') }}" alt="master card"
+                             class="img">
+                    </label>
+                </li>
+                <li>
+                    <label for="cb">
+                        <span class="hidden">cb card</span>
+                        <img src="{{ asset('images/card-cb.png') }}" alt="visa cb"
+                             class="img">
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="form-holder">
+            <div class="col">
+                {{ form_errors(form.cardNumber) }}
+                <span class="label">
+                    {{ form_label(form.cardNumber) }}
+
+                    {% if app.environment != 'prod' %}
+                        <a href="https://docs.mangopay.com/api-references/test-payment/"
+                           target="_blank">
+                            Test card
+                        </a>
+                    {% endif %}
+                </span>
+
+                <div class="field-holder">
+                    {{ form_widget(form.cardNumber, {
+                        'attr': {
+                            'class': "form-control"
+                        }
+                    }) }}
+                </div>
+            </div>
+
+            <div class="col expiry">
+                {{ form_errors(form.cardExpirationMonth) }}
+                {{ form_errors(form.cardExpirationYear) }}
+                <span class="label">
+                    {{ form_label(form.cardExpirationMonth) }}
+                </span>
+                <div class="field-holder">
+                    {{ form_widget(form.cardExpirationMonth, {
+                        'attr': {
+                            'class': "form-control split-input",
+                            'placeholder': 'booking.new.month'|trans
+                        }
+                    }) }}
+                    {{ form_widget(form.cardExpirationYear, {
+                        'attr': {
+                            'class': "form-control split-input",
+                            'placeholder': 'booking.new.year'|trans
+                        }
+                    }) }}
+                </div>
+            </div>
+
+            <div class="col cvv">
+                {{ form_errors(form.cardCvx) }}
+                <span class="label">
+                    {{ form_label(form.cardCvx) }}
+                    <button title="{{ 'booking.new.cb.cvv.help'|trans }}"
+                            data-placement="right" data-toggle="tooltip"
+                            class="tooltip-button" type="button" data-original-title="">?
+                    </button>
+                </span>
+
+                <div class="field-holder">
+                    {{ form_widget(form.cardCvx, {
+                        'attr': {
+                            'class': "form-control",
+                            'placeholder': '123'
+                        }
+                    }) }}
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="hidden" value="submit">
+    </fieldset>
+</div>

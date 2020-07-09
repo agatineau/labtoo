@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+    <file date="2016-08-25T23:42:17Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+        </header>
+        <body>
+            <trans-unit id="dd18ad0252ed0a3d2b52b9bcdc96b12db03072a3" resname="listing.form.delivery">
+                <source>listing.form.delivery</source>
+                <target state="new">Je propose la livraison</target>
+                <jms:reference-file line="41">DeliveryBundle/Event/ListingFormSubscriber.php</jms:reference-file>
+                <jms:reference-file line="89">DeliveryBundle/Event/ListingFormSubscriber.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="629134e3e99e980fcf07f1f601b6e096fc8f99df" resname="listing.form.kilometerMax">
+                <source>listing.form.kilometerMax</source>
+                <target state="new">Kilomètres max. :</target>
+                <jms:reference-file line="68">DeliveryBundle/Event/ListingFormSubscriber.php</jms:reference-file>
+                <jms:reference-file line="106">DeliveryBundle/Event/ListingFormSubscriber.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="42548bee992fdecbf550ca173b85fe6c32b25d70" resname="listing.form.kilometerMin">
+                <source>listing.form.kilometerMin</source>
+                <target state="new">Gratuit jusqu'à :</target>
+                <jms:reference-file line="59">DeliveryBundle/Event/ListingFormSubscriber.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="4380c16fbc4f11a0ec119e2e800e5f56730e5c22" resname="listing.form.priceDelivery">
+                <source>listing.form.priceDelivery</source>
+                <target state="new">Frais de livraison :</target>
+                <jms:reference-file line="50">DeliveryBundle/Event/ListingFormSubscriber.php</jms:reference-file>
+                <jms:reference-file line="98">DeliveryBundle/Event/ListingFormSubscriber.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="e7ada41ae772cf26b14845baea540b2d52e0f86f" resname="listing.show.delivery">
+                <source>listing.show.delivery</source>
+                <target state="new">Livrable</target>
+                <jms:reference-file line="7">Frontend/Listing/_show_delivery.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="9530346207de38abffd07953c9a42d24adfd23d2" resname="listing_search_result.form.delivery">
+                <source>listing_search_result.form.delivery</source>
+                <target state="new">Livraison</target>
+                <jms:reference-file line="45">DeliveryBundle/Event/ListingSearchFormSubscriber.php</jms:reference-file>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

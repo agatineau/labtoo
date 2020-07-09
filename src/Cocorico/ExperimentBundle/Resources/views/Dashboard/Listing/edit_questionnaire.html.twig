@@ -1,0 +1,82 @@
+{% extends '@CocoricoCore/Dashboard/Listing/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+ {% block nav_side_dashboard -%}
+     {% set nav_side_dashboard_current = 'questionnaire' %}
+     {{ parent() }}
+ {%- endblock %}
+
+{% block content_dashboard -%}
+
+    {{ form_start(form, {'attr': {'id': 'edit-questionnaire-form', 'class': 'form-area'}}) }}
+
+    <fieldset>
+        <legend class="hidden">form area</legend>
+
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
+
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+        {{ form_errors(form) }}
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="questionnaire">
+                <div class="form-holder">
+                    <h2>{{ 'listing.edit.questions.main.title'|trans }}</h2>
+                    <div class="box-border">
+                        <div class="box-inner">
+                            <div class="cols">
+                                <div class="col col-size1" id="category-form-container">
+                                    <h6>{{ 'listing.edit.questions.category.text'|trans }}</h6>
+
+                                    <div class="selection-area">
+                                        <div class="jcf-list">
+                                            <div class="jcf-option"
+                                                 style="cursor: not-allowed">{{ listing.experiment.category.name }}</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col col-size2">
+                                    <h6>{{ 'listing.edit.questions.experience.text'|trans }}</h6>
+
+                                    <div class="form-box">
+                                        <figure>
+                                            <img src="{{ asset('images/cuvette-small.png') }}"/>
+                                        </figure>
+                                        <span class="btn btn-red"
+                                              style="cursor: not-allowed">{{ listing.experiment.title }}</span>
+                                    </div><!-- /.form-box -->
+                                </div><!-- /.col col-size2 -->
+                            </div><!-- /.cols -->
+                        </div>
+                    </div>
+                    <div class="form-holder-inner">
+                        <h6>{{ 'listing.edit.questions.main.text'|trans }}</h6>
+                        <div class="steps steps-block">
+                            {{ form_widget(form.answers) }}
+                        </div>
+                    </div>
+                    <div class="form-holder-actions">
+                        <button type="submit" class="btn btn-blue form-btn">{{ 'listing.save'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+
+    {{ form_end(form) }}
+
+{%- endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {% include '@CocoricoExperiment/Dashboard/Listing/js/_edit_questionnaire_js.html.twig' %}
+
+{% endblock %}

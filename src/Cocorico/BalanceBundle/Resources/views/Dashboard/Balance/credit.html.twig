@@ -1,0 +1,50 @@
+{% extends '@CocoricoBalance/Dashboard/Balance/layout.html.twig' %}
+{% trans_default_domain 'cocorico_balance' %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'balance_credit' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    <fieldset>
+        <legend class="hidden">legend</legend>
+        <div class="tab-content credit-table">
+            <div id="credit-balance" class="tab-pane active" role="tabpanel">
+                <h6>{{ 'credit.head.title'|trans }}</h6>
+                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                <div class="form-options">
+                    {{ form_start(form, {'attr': {'class': 'form-credit'}}) }}
+                    <div class="balance-header">
+                        {{ 'balance.label'|trans }} {{ app.user.amountBalanceDecimal|format_price(app.request.locale) }}
+                    </div>
+                    <div class="field-row">
+                        {{ form_errors(form.balanceMovement.type) }}
+                        <span class="label-holder">{{ form_label(form.balanceMovement.type) }}</span>
+                        {{ form_widget(form.balanceMovement.type) }}
+                    </div>
+                    <div class="field-row">
+                        {{ form_errors(form.balanceMovement.amount) }}
+                        <span class="label-holder">{{ form_label(form.balanceMovement.amount) }}</span>
+                        {{ form_widget(form.balanceMovement.amount, {'attr': {'class': 'form-control numbers-only'}}) }}
+                    </div>
+                    <div class="text-center">
+                        <div class="field-row">
+                            {{ form_errors(form.tac) }}
+                            {{ form_widget(form.tac) }}
+                            <span class="label">
+								{{ form_label(form.tac, null, {'required': false} ) }}
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans({}, 'cocorico_booking') }) }}"
+                                   target="_blank">{{ 'credit.tac.link'|trans }}</a>*
+							</span>
+                        </div>
+                        <button type="submit" class="btn btn-red form-btn">
+                            {{ 'credit.submit'|trans }}
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+{%- endblock %}

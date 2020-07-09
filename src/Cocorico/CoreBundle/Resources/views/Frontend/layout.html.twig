@@ -1,0 +1,26 @@
+{% block layout %}
+    {% block header %}
+        {% include '@CocoricoCore/Frontend/Common/_header.html.twig' with {
+       'header_class': 'header-fixed dashboard'} only %}
+    {% endblock %}
+
+    {% block sub_header %}{% endblock %}
+
+    <!-- contain main informative part of the site -->
+    <main id="main" class="_main {% if main_class is defined %} {{ main_class }} {% endif %}" role="main">
+        {# <div class="container">
+            <div class="row"> #}
+                {% block breadcrumbs %}{% endblock %}
+
+                {% block main %}{% endblock %}
+            {# </div>
+        </div> #}
+        {#popin#}
+        {% block modal %}{% endblock %}
+        
+        {% block footer %}
+            {% include '@CocoricoCore/Frontend/Common/_footer.html.twig' only %}
+        {% endblock %}
+    </main>
+
+{% endblock %}

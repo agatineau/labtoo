@@ -1,0 +1,342 @@
+<script>
+    $(function () {
+        {% if base_title is defined %}
+        const base_title = '{{base_title}}';
+        {% else %}
+        const base_title = null;
+        {% endif %}
+
+        //scroll for first category on search page
+         var isCategorySelect = function () {
+
+            if($("label").hasClass("input-checked")){
+                var isExperimentSelected = $("#experiment-selector input[type='radio']:checked").length > 0;
+                var lable_display_scroll_2 = $("#experiment-selector").offset().top;
+                lable_display_scroll_2 = lable_display_scroll_2 - $('#header').height() - 37;
+
+                if(isExperimentSelected) {
+                    return false;
+                }
+
+                if (typeof callback === 'function') {
+                    callback();
+                } else {
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: lable_display_scroll_2
+                    }, 500);
+                }
+            }else{
+                /*var lable_display_scroll_1 = $("#listing-category").offset().top;
+                lable_display_scroll_1 = lable_display_scroll_1 - $('#header').height() - 37;
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: lable_display_scroll_1
+                }, 500);*/
+            }
+        }
+
+        setTimeout(function(){  isCategorySelect(); }, 500);
+
+
+        var initListingCategory = function () {
+            $('#listing-category .jcf-option + ul').parent().addClass('has-dropdown');
+            if (!$('#listing-category input:checked').val()) return;
+            $('#listing-category input:checked')
+                .closest('.has-dropdown').find('.jcf-option').addClass('expanded')
+                .next().show();
+        };
+
+        var initExperimentSelector = function () {
+            var $input = $('#experiment-selector input:checked');
+            var value = $input.val();
+            if (!value) return;
+            loadExperimentSelector($('#listing-category input:checked'), function(){
+                var $input = $('#experiment-selector input[value='+value+']');
+                $input
+                    .attr('checked', 'checked').prop('checked', true)
+                    .closest('.jcf-radio').addClass('jcf-checked')
+                    .closest('.option').addClass('is-checked')
+                    .find('.option-head').addClass('active')
+                    .next().show();
+
+                // check mode is edit or not
+                var editUrl = [], hash;
+                var q = document.URL.split('?')[1];
+                if(q != undefined) {
+                    q = q.split('&');
+                    for(var i = 0; i < q.length; i++) {
+                        hash = q[i].split('=');
+                        editUrl.push(hash[1]);
+                        editUrl[hash[0]] = hash[1];
+                    }
+                }
+                if(editUrl['mode'] != 'edit') {
+                    loadExperimentDetails($input);
+                } else {
+                    /*$('#listing-search-submit').removeClass('hidden');*/
+                }
+
+            });
+        };
+
+        var loadExperimentSelector = function ($input, callback) {
+            $('#loader').show();
+            $.ajax({
+                type: 'GET',
+                url: '{{ path('cocorico_experiment_selector') }}',
+                data: { 'category_id': $input.val(),'page_type': 'search-page' },
+                success : function(data) {
+                    $('#loader').hide();
+                    $('#search-category-breadcrumb').html($(data).find('#category-details').html());
+                    $('#experiment-selector').html(data);
+                    $('#listing-details').addClass('hidden');
+                    $('#listing-location').addClass('hidden');
+                    /*$('#listing-search-submit').addClass('hidden');*/
+                    refreshStepNumbers();
+                    refreshAnswerNumbers();
+                    jcf.replaceAll();
+                    var titleHeight = $( ".form-cols .form-col .option-head" ).first().outerHeight();
+                    var thisTitleHeight = 0;
+                    $( ".form-cols .form-col .option-head" ).each(function( index ) {
+                        thisTitleHeight = $(this).outerHeight();
+                        if(thisTitleHeight > titleHeight) {
+                            thisTitleHeight = thisTitleHeight;
+                        } else {
+                            thisTitleHeight = titleHeight;
+                        }
+                    });
+                    $( ".form-cols .form-col .option-head" ).each(function( index ) {
+                        $(this).css('height', thisTitleHeight);
+                    });
+                    var lable_display_scroll_2 = $("#experiment-selector").offset().top;
+                    lable_display_scroll_2 = lable_display_scroll_2 - $('#header').height() - 37;
+                    if (typeof callback === 'function') {
+                        callback();
+                    } else {
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: lable_display_scroll_2
+                        }, 500);
+                    }
+                    var highestTitle = 0;
+                    var highestDescription = 0;
+                    $('.experiments-div').each(function(){
+
+                        $('.title', this).each(function(){
+                            // If this title is higher than the cached highest then store it
+                            if($(this).height() > highestTitle) {
+                                highestTitle = $(this).height();
+                            }
+                        });
+                        $('.description', this).each(function(){
+                            // If this description is higher than the cached highest then store it
+                            if($(this).height() > highestDescription) {
+                                highestDescription = $(this).height();
+                            }
+                        });
+                    });
+                    $('.experiments-div .title').height(highestTitle);
+                    $('.experiments-div .description').height(highestDescription);
+                }
+            });
+        };
+
+        var loadExperimentDetails = function ($input) {
+            $('#loader').show();
+            $.ajax({
+                type: 'GET',
+                url: '{{ path('cocorico_experiment_details', {'type': 'asker'}) }}',
+                data: { 'experiment_id': $input.val() },
+                success : function(data) {
+                    $('#loader').hide();
+                    $('#experiment-details').html(data);
+                    $('#listing-details').addClass('hidden');
+                    $('#listing-location').addClass('hidden');
+                    /*$('#listing-search-submit').addClass('hidden');*/
+                    jQuery('.listing-section .form-inner .steps').sameHeight({
+                        elements: 'h6',
+                        skipClass: 'listing-search-answer',
+                        flexible: true,
+                        multiLine: true
+                    });
+                    refreshStepNumbers();
+                    refreshAnswerNumbers();
+                    refreshListingSearchSubmit();
+                    $('#experiment-details .listing-search-answer').addClass('hidden');
+                    $('#experiment-details .hidden:first').removeClass('hidden');
+                    jcf.replaceAll();
+                    setTimeout(function() {
+                        var experimentDetails = $("#experiment-details");
+                        if(experimentDetails.html()) {
+                            var lable_display_scroll_3 = experimentDetails.offset().top;
+                            lable_display_scroll_3 = lable_display_scroll_3 - $('#header').height() - 37;
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: lable_display_scroll_3
+                            }, 500);
+                        }
+                    }, 100);
+
+                }
+            });
+        };
+
+        var refreshStepNumbers = function () {
+            var number = 1;
+            $('.step-number').each(function () {
+                $(this).text(number);
+                number++;
+            });
+        };
+
+        var refreshAnswerNumbers = function ($answers, prefix) {
+            if (typeof $answers !== 'undefined') {
+                prefix = (typeof prefix === 'undefined') ? '' : prefix;
+                var number = 1;
+                $answers.each(function () {
+                    $('> h6 > .question-number', this).text(prefix + number);
+                    var $subAnswers = $('> .form-row > .listing-search-answer:not(.hidden)', this);
+                    refreshAnswerNumbers($subAnswers, prefix + number + '.');
+                    number++;
+                });
+                return;
+            }
+            refreshAnswerNumbers($('#experiment-details .step'));
+        };
+
+        var refreshListingSearchSubmit = function () {
+            if (!$('#experiment-selector').html().trim()) return;
+            /*$('#listing-search-submit').removeClass('hidden');*/
+        };
+
+        var nextQuestionTrigger = function ($step) {
+            var nextQuestion = true;
+            $step.find('.step-field').each(function(){
+                var $answer = $(this).closest('.listing-search-answer');
+                if (!$answer.hasClass('hidden') && !$(this).val()) {
+                    nextQuestion = false;
+                }
+            });
+            nextQuestion && $step.next().removeClass('hidden');
+        };
+
+        initListingCategory();
+        initExperimentSelector();
+        refreshStepNumbers();
+        refreshAnswerNumbers();
+        refreshListingSearchSubmit();
+
+        // Category Selector
+        $(document).on('click', '#listing-category .has-dropdown .jcf-option', function (e) {
+            e.preventDefault();
+            if ($(this).hasClass('expanded')) return;
+            var $this = $(this);
+            $('#listing-category .has-dropdown .jcf-option').each(function () {
+                if ($(this) === $this) return;
+                $(this).removeClass('expanded').next().slideUp(400);
+            });
+            $(this).addClass('expanded').next().slideDown(400);
+            var $scrollBoxes = $(this).closest('.jcf-scrollable');
+            setTimeout(function () {
+                $scrollBoxes.data('jcfInstance').refresh();
+            }, 400);
+        });
+        $(document).on('click', '#listing-category li li', function () {
+            $('#listing-category input')
+                .removeAttr('checked')
+                .prop('checked', false)
+                .closest('li').removeClass('selected');
+            var $input = $(this).find('input');
+            window.history.replaceState(
+                document.title,
+                document.title,
+                $input.data('url')
+            );
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ path('cocorico_language_switch') }}',
+                data: { 'path': $input.data('url') },
+                success : function(data) {
+                    $('li.dropdown.link-flag').replaceWith(data);
+                }
+            });
+            document.title = $(this).text() + ' - ' + base_title;
+            $input
+                .attr('checked', 'checked')
+                .prop('checked', true)
+                .closest('li').addClass('selected');
+            $('#experiment-selector').html('');
+            $('#experiment-details').html('');
+            /*$('#listing-search-submit').addClass('hidden');*/
+            loadExperimentSelector($(this).find('input'));
+        });
+
+        // Experiment Selector
+        $(document).on('click', '#experiment-selector .option-head', function () {
+            $(this).toggleClass('active').next().stop().slideToggle();
+            $(this).next().find('p.eq-height').css('height', 'auto');
+            var thisHeight = $(this).next().find('p.eq-height').height();
+            $( ".form-cols .form-col .option-head.active" ).each(function( index ) {
+                var firstLiHeight = $(this).next().find('p.eq-height').height();
+                if(thisHeight <= firstLiHeight) {
+                    thisHeight = firstLiHeight;
+                }
+            });
+            $( ".form-cols .form-col .eq-height" ).each(function( index ) {
+                $(this).css('height', thisHeight);
+            });
+        });
+        $(document).on('click', '#experiment-selector .option-radio', function () {
+            var $input = $(this).find('input');
+            window.history.replaceState(
+                document.title,
+                document.title,
+                $input.data('url')
+            );
+            if ($input.closest('.option').hasClass('is-checked')) return;
+            $('#experiment-selector input').each(function () {
+                if ($(this).val() === $input.val()) {
+                    $(this).attr('checked', 'checked').prop('checked', true)
+                        .closest('.jcf-radio').addClass('jcf-checked')
+                        .closest('.option').addClass('is-checked')
+                    document.title = $(this).parents('li:first').find('h5:first').text() + ' - ' + base_title;
+                } else {
+                    $(this).removeAttr('checked').prop('checked', false)
+                        .closest('.jcf-radio').removeClass('jcf-checked')
+                        .closest('.option').removeClass('is-checked').find('.option-body').slideUp();
+                }
+            });
+            $('#listing-details').addClass('hidden');
+            $('#listing-location').addClass('hidden');
+            loadExperimentDetails($input);
+        });
+
+        // Experiment Details
+        $(document).on('change keypress', '#experiment-details .step-field', function () {
+            var $answer = $(this).closest('.listing-search-answer');
+            $answer.find('> .form-row > .errors').remove();
+            var value = $(this).val();
+            if (value.trim() === '') return;
+            $answer.find('> .form-row > .listing-search-answer').each(function(){
+                if ($(this).data('value')) {
+                    if ($(this).data('value').toString() === value) {
+                        $(this).removeClass('hidden');
+                    } else {
+                        $(this).addClass('hidden');
+                        $(this).find('.step-field').val('');
+                    }
+                } else {
+                    $(this).removeClass('hidden');
+                }
+            });
+            nextQuestionTrigger($(this).closest('.step'));
+            refreshAnswerNumbers();
+        });
+
+        if($('#category-details').length > 0)
+        {
+            if($('#category-details').html().length > 0)
+            {
+                $('#search-category-breadcrumb').html($('#category-details').html());
+            }
+        }
+    });
+</script>

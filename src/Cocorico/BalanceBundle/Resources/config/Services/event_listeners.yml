@@ -1,0 +1,27 @@
+services:
+    cocorico_balance.event_listener.booking_subscriber:
+        class: Cocorico\BalanceBundle\EventListener\BookingSubscriber
+        arguments:
+            - "@cocorico_balance.manager.transaction"
+        tags:
+            - { name: kernel.event_subscriber}
+
+    cocorico_balance.event_listener.booking_payin_refund_subscriber:
+        class: Cocorico\BalanceBundle\EventListener\BookingPayinRefundSubscriber
+        arguments:
+            - "@cocorico.booking_payin_refund.manager"
+            - "@cocorico_mangopay.payin_refund_manager"
+            - "@cocorico_mangopay.transfer_manager"
+            - "@cocorico_balance.manager.transaction"
+        tags:
+            - { name: kernel.event_subscriber}
+
+    cocorico_balance.event_listener.booking_validate_subscriber:
+        class: Cocorico\BalanceBundle\EventListener\BookingValidateSubscriber
+        arguments:
+            - "@cocorico.booking_bank_wire.manager"
+            - "@cocorico_mangopay.transfer_manager"
+            - "%kernel.bundles%"
+            - "@cocorico_balance.manager.transaction"
+        tags:
+            - { name: kernel.event_subscriber}

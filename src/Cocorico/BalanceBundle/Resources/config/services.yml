@@ -1,0 +1,8 @@
+imports:
+    - { resource: "Services/admin.yml" }
+    - { resource: "Services/event_listeners.yml" }
+    - { resource: "Services/form_handlers.yml" }
+    - { resource: "Services/form_types.yml" }
+    - { resource: "Services/managers.yml" }
+    - { resource: "Services/voters.yml" }
+    - { resource: "Services/validators.yml" }

@@ -1,0 +1,221 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% trans_default_domain 'SonataAdminBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .box kbd {
+            font-size: 1.3em;
+            cursor: pointer;
+            display: inline-block;
+            width: 40px;
+            text-align: center;
+            margin: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if object.image is not null %}
+        <script type="text/html" id="experiment-image-preview">
+            <img src="{{ (object.image.webPath)|imagine_filter('experiment_medium') }}">
+        </script>
+    {% endif %}
+
+    <script src="{{ asset('js/compiled/upload.js') }}"></script>
+    <script>
+        $(function () {
+
+            // Category
+            jcf.replace('#{{ form.category.vars.id }}');
+            var $list = $('#{{ form.category.vars.id }}').next();
+            $list.find('li').css('cursor', 'pointer!important');
+            $list.find('.jcf-optgroup ul').hide();
+            $list.find('.jcf-selected').closest('ul').show();
+            $list.find('.jcf-optgroup-caption').click(function () {
+                $list.find('.jcf-optgroup ul').hide();
+                $(this).next().slideToggle(0);
+            });
+
+            // Image
+            var $image = $('#{{ form.image.vars.id }}');
+            var $imageFile = $('#{{ form.image.file.vars.id }}');
+            var $imageName = $('#{{ form.image.name.vars.id }}');
+            $imageName.hide();
+            if ($('#experiment-image-preview').length) {
+                $image.prepend($('#experiment-image-preview').html());
+            }
+            $imageFile.fileupload({
+                url: '{{ oneup_uploader_endpoint('experiment_images') }}',
+                dataType: 'json',
+                autoUpload: false,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: {{ experiment_img_max_upload_size }}000000,
+                disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
+                previewMaxWidth: {{ experiment_img_preview_w }},
+                previewMaxHeight: {{ experiment_img_preview_h }},
+                previewCrop: true
+            }).on('fileuploadadd', function (e, data) {
+                data.submit();
+            }).on('fileuploadprocessalways', function (e, data) {
+                var $image = $('#{{ form.image.vars.id }}');
+                $image.find('.error').remove();
+                $image.find('canvas').remove();
+                $image.find('img').remove();
+                $image.prepend($(data.files[0].preview));
+            }).on('fileuploaddone', function (e, data) {
+                $imageName.val(data.result.files[0].name);
+            }).on('fileuploadfail', function (e, data) {
+                var $error = $('<span class="error"/>').text('File upload failed.');
+                $image.prepend($error);
+            }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+            // Questions
+            var getNewUid = function () {
+                var $nextUid = $('.next-uid');
+                var uid = $nextUid.val();
+                $nextUid.val(parseInt($nextUid.val()) + 1);
+                return uid;
+            };
+            var refreshQuestionUids = function () {
+                $('.question').each(function () {
+                    !$('.question-uid', this).val() && $('.question-uid', this).val(getNewUid());
+                    $('.question-uid-title', this).text($('.question-uid', this).val());
+                });
+            };
+            var refreshQuestionChoiceUids = function () {
+                $('.question').each(function () {
+                    var questionUid = $('.question-uid', this).val();
+                    $('.question-choice', this).each(function () {
+                        !$('.question-choice-uid', this).val() && $('.question-choice-uid', this).val(getNewUid());
+                        $('.question-choice-uid-title', this).text(questionUid + '.' + $('.question-choice-uid', this).val());
+                    });
+                });
+            };
+            var refreshQuestionTypes = function () {
+                $('.question').each(function () {
+                    var type = $('select.question-type', this).val();
+                    $('.question-choice-collection', this).closest('.form-group').toggle(type === '1');
+                    $('.question-range', this).toggle(type === '2');
+                    $('.question-text', this).closest('.field-row').toggle(type === '3');
+                });
+            };
+            var refreshQuestionChoices = function () {
+                $('.question-choice').each(function () {
+                    var prohibitive = $('.question-choice-prohibitive', this).is(':checked');
+                    $('.question-choice-explanation', this).closest('.field-row').toggle(prohibitive);
+                    $('.question-choice-variable', this).closest('.form-group').toggle(!prohibitive);
+                });
+            };
+            var refreshUidSelectors = function () {
+                var questionData = [], dependencyData = [], formulaQuestionData = [];
+                $('.question').each(function () {
+                    var question = {
+                        id: $('.question-uid', this).val(),
+                        text: (
+                            $('.question-uid-title', this).text() + ' : ' +
+                            $('.question-title-asker', this).val()
+                        )
+                    };
+                    questionData.push(question);
+                    dependencyData.push(question);
+                    if ($('select.question-type', this).val() === '1') {
+                        var title = $('.question-title-asker', this).val();
+                        $('.question-choice', this).each(function () {
+                            if ($('.question-choice-prohibitive', this).is(':checked')) {
+                                return;
+                            }
+                            var questionChoice = {
+                                id: $('.question-choice-uid', this).val(),
+                                text: (
+                                    $('.question-choice-uid-title', this).text() + ' : ' +
+                                    title + ' > ' +
+                                    $('.question-choice-name', this).val()
+                                )
+                            };
+                            dependencyData.push(questionChoice);
+                        });
+                        formulaQuestionData.push(question);
+                    } else if ($('select.question-type', this).val() === '2') {
+                        if ($('.question-range-value', this).is(':checked')) {
+                            formulaQuestionData.push(question);
+                        }
+                    }
+                });
+                $('.question-uid-selector').select2({
+                    placeholder: '{{ 'admin.experiment.question_uid.placeholder'|trans }}',
+                    data: questionData,
+                    allowClear: true
+                });
+                $('.dependency-uid-selector').select2({
+                    placeholder: '{{ 'admin.experiment.dependency_uid.placeholder'|trans }}',
+                    data: dependencyData,
+                    allowClear: true
+                });
+                $('.experiment-formula-question-uid-selector').select2({
+                    placeholder: '{{ 'admin.experiment.question_variable_add.placeholder'|trans }}',
+                    data: formulaQuestionData
+                });
+            };
+
+            refreshQuestionUids();
+            refreshQuestionChoiceUids();
+            refreshQuestionChoices();
+            refreshQuestionTypes();
+            refreshUidSelectors();
+
+            $(document)
+                .on('click', '.sonata-collection-delete', function () {
+                    refreshQuestionUids();
+                    refreshQuestionChoiceUids();
+                    refreshQuestionTypes();
+                    refreshUidSelectors();
+                })
+                .on('click', '.sonata-collection-add', function () {
+                    refreshQuestionUids();
+                    refreshQuestionChoiceUids();
+                    refreshQuestionChoices();
+                    refreshQuestionTypes();
+                    refreshUidSelectors();
+                })
+                .on('change', '.question-title-asker', function () {
+                    refreshUidSelectors();
+                })
+                .on('change', 'select.question-type', function () {
+                    refreshQuestionTypes();
+                    refreshUidSelectors();
+                })
+                .on('change', '.question-choice-name', function () {
+                    refreshUidSelectors();
+                })
+                .on('ifChanged', '.question-choice-prohibitive', function () {
+                    refreshQuestionChoices();
+                    refreshUidSelectors();
+                })
+                .on('ifChanged', '.question-range-value', function () {
+                    refreshUidSelectors();
+                })
+                .on('click', '.experiment-formula-keyboard kbd', function (e) {
+                    var text = $(e.currentTarget).text();
+                    var $formula = $('.experiment-formula');
+                    switch ($(e.currentTarget).data('type')) {
+                        case 'operator':
+                            $formula.val($formula.val() + ' ' + text + ' ');
+                            break;
+                        default:
+                            $formula.val($formula.val() + text);
+                    }
+                })
+                .on('change', '.experiment-formula-question-uid-selector', function (e) {
+                    var $selector = $(e.currentTarget);
+                    var $formula = $('.experiment-formula');
+                    $formula.val($formula.val() + ' [' + $selector.val() + '] ');
+                    $selector.select2('val', '');
+                });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2020-06-18T11:36:22Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="ad33a651e672038c102d40f4e76cfc484630e7a2" resname="form.search.button.text">
+        <source>form.search.button.text</source>
+        <target>Recherche avancée</target>
+        <jms:reference-file line="40">Frontend/Home/index.html.twig</jms:reference-file>
+        <jms:reference-file line="16">Frontend/Home/form_search.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f0a80756385483aa77f5ec396ec9992bb26d6ac2" resname="home.feeds.section.content.link">
+        <source>home.feeds.section.content.link</source>
+        <target>Lire la suite</target>
+        <jms:reference-file line="27">Frontend/Home/rss_feed.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="537c6d941057a83d467aadaf06db30b0a01da6b7" resname="home.feeds.section.header.title">
+        <source>home.feeds.section.header.title</source>
+        <target>Nos dernières Actualités</target>
+        <jms:reference-file line="6">Frontend/Home/rss_feed.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bbe6fc65f9bfea1919683be0ff98c48e51aeef4e" resname="home.infoarea.main.title">
+        <source>home.infoarea.main.title</source>
+        <target><![CDATA[Labtoo accompagne l’externalisation de la R&D]]></target>
+        <jms:reference-file line="47">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="69dae0e635e56304f2c9d821db9402d6448779f7" resname="home.infoarea.section.new.listing.text">
+        <source>home.infoarea.section.new.listing.text</source>
+        <target>Devenez Expert</target>
+        <jms:reference-file line="116">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f112570af65f0928f8607812038223cd80746e06" resname="home.infoarea.section.search.text">
+        <source>home.infoarea.section.search.text</source>
+        <target>Recherchez une prestation</target>
+        <jms:reference-file line="136">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6b03840fa8a0f613e9a8f42051617fc47e91c8fa" resname="home.infoarea.sub.title">
+        <source>home.infoarea.sub.title</source>
+        <target>Notre équipe scientifique et notre réseau de CRO, freelances et plateformes académiques au service de vos projets de Recherche</target>
+        <jms:reference-file line="49">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3af93b9b8cfe074ceff3fff27255261635f40424" resname="home.subinfo.desc1">
+        <source>home.subinfo.desc1</source>
+        <target><![CDATA[qui réunit les meilleures CRO, plateformes académiques et freelances répond aux besoins de vos projets de R&D. Choisissez parmi un catalogue de plus de 300 prestations disponibles sur notre plateforme. Échangez directement avec les prestataires et récupérez des devis.]]></target>
+        <jms:reference-file line="61">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="908e5b384bbeb42623be6a1743cf010dc3b48483" resname="home.subinfo.desc2">
+        <source>home.subinfo.desc2</source>
+        <target><![CDATA[qui vous accompagne dans l’externalisation de vos projets de R&D : recherche de technologies, sourcing, échanges avec les prestataires, rédaction du cahier des charges et analyse des devis. Notre équipe scientifique vous fera gagner un temps précieux dans votre recherche de prestataire et la gestion de projet !]]></target>
+        <jms:reference-file line="74">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ebab0f46f60ef21c52a8bf36f8101816c5705927" resname="home.subinfo.desc3">
+        <source>home.subinfo.desc3</source>
+        <target>à vos besoins. L’utilisation de la plateforme peut se faire directement en ligne ou avec le soutien de notre équipe scientifique dédiée. Nous pouvons répondre à tous les projets de la préclinique à la clinique, sur des prestations standards ou à façon jusqu’au montage complexe de projets long terme.</target>
+        <jms:reference-file line="87">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4c15d8bf2bdf8150e45e9f30b559ea8565a47042" resname="home.subinfo.title1">
+        <source>home.subinfo.title1</source>
+        <target>Un réseau d’experts</target>
+        <jms:reference-file line="58">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="28172413ec09c98bffa9f072e9bd873932e70145" resname="home.subinfo.title2">
+        <source>home.subinfo.title2</source>
+        <target>Une équipe scientifique dédiée</target>
+        <jms:reference-file line="71">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="34f93326a2cd533fae3b8bd53d9e3315059964da" resname="home.subinfo.title3">
+        <source>home.subinfo.title3</source>
+        <target>Un accompagnement adapté</target>
+        <jms:reference-file line="84">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4e27cdfc9f8d05e892664f537ecb5706187ea43b" resname="home.testimonial.desc1">
+        <source>home.testimonial.desc1</source>
+        <target>"La plateforme par laquelle je passe habituellement pour faire mes dosages Elisa Multiplex était indisponible. Grâce à Labtoo, j'ai pu identifier en quelques minutes une autre plateforme avec cette expertise et j'ai pu commander les tests dont j'avais besoin directement en ligne. J'ai échangé avec l'Expert pour valider quelques points du cahier des charges et j'ai reçu mes résultats dans les délais qui étaient indiqués. Les équipes de Labtoo étaient à l'écoute de mes besoins. J'ai vraiment gagné un temps précieux sur mon projet et trouvé un excellent Expert que je ne connaissais pas."
+</target>
+        <jms:reference-file line="170">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2d8d808101b911e0bb690142f1b36e858fa90c40" resname="home.testimonial.desc2">
+        <source>home.testimonial.desc2</source>
+        <target>"Notre équipe de recherche avait besoin d’échantillons humains très spécifiques pour un projet. Les équipes de Labtoo ont su trouver exactement ce que les équipes cherchaient depuis des mois. Notre projet a pu ainsi être débloqué. Les équipes de Labtoo ont été très réactives et ont trouvé les échantillons nécessaires que nous n’arrivions pas à sourcer."</target>
+        <jms:reference-file line="184">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a05d3ff9105031c03e089405bd5a398ea3d3d5ae" resname="home.testimonial.desc3">
+        <source>home.testimonial.desc3</source>
+        <target>“Je cherchais un Expert en biostatistiques pour valider une méthode pour mon projet de recherche. En utilisant Labtoo, j’ai pu identifier un chercheur en quelques minutes sur la plateforme, discuter avec lui et lui commander une mission. Et j’ai pu avancer sur mon projet avec une méthode validée par cet expert et bien acceptée par les éditeurs des revues scientifiques.”</target>
+        <jms:reference-file line="198">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0a961bafe85fe774968ee43b72db272d60fba5e9" resname="home.testimonial.main.title">
+        <source>home.testimonial.main.title</source>
+        <target>Ils utilisent Labtoo</target>
+        <jms:reference-file line="150">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3a9a8011ef4c3d71d7f285623b52f5700b186be0" resname="home.testimonial.sub.title">
+        <source>home.testimonial.sub.title</source>
+        <target>Nos clients parlent de leur expérience de la plateforme</target>
+        <jms:reference-file line="152">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d10d330d4b0d219c1b00715440691ed921a105e1" resname="home.testimonial.title1">
+        <source>home.testimonial.title1</source>
+        <target><![CDATA[Alice, Responsable R&D, Biotech]]></target>
+        <jms:reference-file line="167">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="03606003f9df90b38d426a061f104671bfc54c36" resname="home.testimonial.title2">
+        <source>home.testimonial.title2</source>
+        <target><![CDATA[Sébastien, Chef de projet R&D, Biotech]]></target>
+        <jms:reference-file line="182">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="93fb66a805e6cfbdb163a4e639ed4c5ab2bba39a" resname="home.testimonial.title3">
+        <source>home.testimonial.title3</source>
+        <target>Michael, Professeur, Directeur de Laboratoire</target>
+        <jms:reference-file line="196">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c71f41ba55a6fef0e635a068a6d4f515625ee62f" resname="home.title.main">
+        <source>home.title.main</source>
+        <target><![CDATA[Les meilleurs prestataires R&D en France et en Europe]]></target>
+        <jms:reference-file line="34">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e2fcc74b8748189e17cd738f54b976b71b242d00" resname="home.title.sub">
+        <source>home.title.sub</source>
+        <target>Labtoo accélère vos projets Biotech et Pharma</target>
+        <jms:reference-file line="35">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a927261986e5a330d797d957b86a5d8bc36b5fff" resname="infoarea.section.desc1">
+        <source>infoarea.section.desc1</source>
+        <target><![CDATA[Vous souhaitez augmenter la visibilité de vos prestations ? Vous êtes une CRO, une plateforme académique ou un consultant ? Vous pouvez créer un compte gratuitement et ajouter vos services à votre profil afin de les répertorier dans notre catalogue de prestations biotech. Rejoignez un réseau de plus de 500 prestataires R&D en France et en Europe en devenant Expert sur Labtoo. Nous vous permettons d'être visible auprès de nouveaux clients. Mettez en avant votre offre sur notre plateforme et recevez des demandes de prestations en lien avec votre expertise en biotechnologies. Proposez des devis à vos clients et contractualisez grâce à Labtoo. Une nouvelle source de revenus pour votre structure.]]></target>
+        <jms:reference-file line="112">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="38083385504d806b0d75b42549a7c87ad8e855ff" resname="infoarea.section.desc2">
+        <source>infoarea.section.desc2</source>
+        <target><![CDATA[Vous êtes une biotech, un porteur de projet innovant, un laboratoire ? Vous souhaitez mettre en place un projet de recherche préclinique, trouver des échantillons ou faire appel à un expert pour une mission de conseil ? Labtoo vous accompagne tout au long des différentes étapes de votre projet. Externalisez avec la plateforme Labtoo. Parcourez notre catalogue de prestations biotech et choisissez les prestataires R&D qui répondent à vos besoins. Discutez directement avec les prestataires et contractualisez plus rapidement avec les meilleurs experts ! Profitez de notre réseau de CRO , freelances et plateformes académiques dès maintenant. Notre équipe scientifique est à votre écoute pour vous accompagner dans vos démarches.]]></target>
+        <jms:reference-file line="132">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6693b31735d7a0916dfe0c223d3ea2f364517451" resname="infoarea.section.sub.title">
+        <source>infoarea.section.sub.title</source>
+        <target>Retrouvez les meilleurs prestataires sur la plateforme Labtoo</target>
+        <jms:reference-file line="98">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6cb866c22253407adc6b8333c5019560cf8cbfb7" resname="infoarea.section.title">
+        <source>infoarea.section.title</source>
+        <target>Accédez à notre catalogue de prestations biotech</target>
+        <jms:reference-file line="96">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f7d81bb7cfb414db3a97fa6e0efda4cc7e5249dd" resname="infoarea.section.title1">
+        <source>infoarea.section.title1</source>
+        <target>Vous voulez mettre en avant vos prestations?</target>
+        <jms:reference-file line="110">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3672b53a3a11568640dac90901504e4c70ccb5f0" resname="infoarea.section.title2">
+        <source>infoarea.section.title2</source>
+        <target><![CDATA[Vous souhaitez sous-traiter une partie de votre R&D?]]></target>
+        <jms:reference-file line="130">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

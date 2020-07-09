@@ -1,0 +1,14 @@
+{% trans_default_domain 'cocorico_dispute' %}
+{% if type == 'defer' %}
+    {% include '@CocoricoCore/Dashboard/Booking/edit.html.twig' with {
+        'title': 'booking_dispute.modal.defer.title'|trans,
+        'action_title': 'booking_dispute.modal.action.defer'|trans
+    } %}
+{% elseif type == 'dispute' %}
+    {% include '@CocoricoCore/Dashboard/Booking/edit.html.twig' with {
+    'title': 'booking_dispute.modal.dispute.title'|trans,
+    'action_title': 'booking_dispute.modal.action.dispute'|trans
+    } %}
+{% else %}
+    <script> window.location = "{{ path('cocorico_dashboard_booking_show_asker', {'id': booking.id}) }}"; </script>
+{% endif %}

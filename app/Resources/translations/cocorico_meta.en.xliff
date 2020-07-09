@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2020-06-18T11:36:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="46fdda4a5d3126614388f58a8f228edfa57b2b51" resname="booking.new.meta_desc">
+        <source>booking.new.meta_desc</source>
+        <target>Validate your booking for a service on Labtoo. Summary of the service, the deliverables, the information that will be requested from the expert and the price of the service.</target>
+        <jms:reference-file line="43">Frontend/Booking/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="14b6b218dbec12074bce69744dee7aa0ddf72dc0" resname="booking.new.meta_title">
+        <source>booking.new.meta_title</source>
+        <target>Validation - </target>
+        <jms:reference-file line="39">Frontend/Booking/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="17cb48026a0a70249cfb5dc5fc89888b4272e075" resname="booking.payment.meta_desc">
+        <source>booking.payment.meta_desc</source>
+        <target>Finalization of the service booking. Select the payment method: using Labtoo credits or a bank card.</target>
+        <jms:reference-file line="30">Frontend/BookingPayment/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c471d7138d12a8f617ec4edfb6f49ccccc5a9254" resname="booking.payment.meta_title">
+        <source>booking.payment.meta_title</source>
+        <target>Finalize your order - </target>
+        <jms:reference-file line="26">Frontend/BookingPayment/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="855475bb058132617c6e3b515401462f03154acc" resname="contact.meta_desc">
+        <source>contact.meta_desc</source>
+        <target>Contact the Labtoo team for any question, inquiry, suggestion or concerns you may have. Thank you for using Labtoo!</target>
+        <jms:reference-file line="8">views/Frontend/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="397d5c85a1b2d7d21c155bcd6bfe7077be53db81" resname="contact.meta_title">
+        <source>contact.meta_title</source>
+        <target>Contact us</target>
+        <jms:reference-file line="4">views/Frontend/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d81e8518ab4f4f477d67cc1d3b3a48a3bb4a2399" resname="home.meta_desc">
+        <source>home.meta_desc</source>
+        <target>Order contract services and biosamples from the best labs. Find reliable providers from CROs, academic labs and freelancers on Labtoo. Register today for free!</target>
+        <jms:reference-file line="8">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ee783c2c9945290c13eaf585fc77fdc76fdbf480" resname="home.meta_title">
+        <source>home.meta_title</source>
+        <target><![CDATA[Labtoo - the accelerating platform for Biotech and Pharma R&D projects]]></target>
+        <jms:reference-file line="4">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="88ffac5dee603e0faf426aa6a302b5fc9bac7459" resname="listing.new.first_meta_desc">
+        <source>listing.new.first_meta_desc</source>
+        <target state="new">Get Started</target>
+        <jms:reference-file line="10">Frontend/ListingSearch/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9d580921346f905cf81bf0d57d23495b3b20810e" resname="listing.new.first_meta_title">
+        <source>listing.new.first_meta_title</source>
+        <target state="new">Get Started</target>
+        <jms:reference-file line="9">Frontend/ListingSearch/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f15455afcd64e0b4a8bf6355d15b3ecbfeb4db88" resname="listing.new.meta_desc">
+        <source>listing.new.meta_desc</source>
+        <target>%search_fragment% | Select your service and Labtoo will automatically match Experts with customers! Answer a few questions to automatically match with Experts from private labs and academia.</target>
+        <jms:reference-file line="10">Frontend/Listing/new.html.twig</jms:reference-file>
+        <jms:reference-file line="23">Frontend/ListingSearch/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1af47cb7296360750f4aaeb31665d5a098257031" resname="listing.new.meta_title">
+        <source>listing.new.meta_title</source>
+        <target>The services</target>
+        <jms:reference-file line="6">Frontend/Listing/new.html.twig</jms:reference-file>
+        <jms:reference-file line="5">Frontend/ListingSearch/new.html.twig</jms:reference-file>
+        <jms:reference-file line="4">Frontend/Experiment/details_view_asker.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="732e431d2f098856d20a018fd4493e3b4bab0796" resname="listing.search.category.meta_desc">
+        <source>listing.search.category.meta_desc</source>
+        <target>%search_fragment% | The service categories refer to the different services offered on Labtoo. The services offered on Labtoo are provided by private or academic providers.</target>
+        <jms:reference-file line="18">Frontend/ListingSearch/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1cf061799b08b9d23db78a7def7e63c251536409" resname="listing.search.experiment.meta_desc">
+        <source>listing.search.experiment.meta_desc</source>
+        <target><![CDATA[%search_fragment% | The services offered on Labtoo are provided by private or academic providers. Labtoo supports R&D project leaders in their search for external service providers.]]></target>
+        <jms:reference-file line="20">Frontend/ListingSearch/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="34f832a40f3b2312b5edf3fa0a87ef166bd6e803" resname="listing.search.result.meta_desc">
+        <source>listing.search.result.meta_desc</source>
+        <target>Results of the search for an expert when booking a service on Labtoo</target>
+        <jms:reference-file line="11">Frontend/ListingResult/result.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="dbbb7d367ca632260337d44bfdae11156d2c45d4" resname="listing.search.result.meta_title">
+        <source>listing.search.result.meta_title</source>
+        <target>Your Experts</target>
+        <jms:reference-file line="10">Frontend/ListingResult/result.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3f11654f44b4d7474b2d72bbfcd8ae3731d008da" resname="listing.show.meta_desc">
+        <source>listing.show.meta_desc</source>
+        <target>Select your Expert -</target>
+        <jms:reference-file line="19">Frontend/Listing/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a4fd7303cb88d69db08ef2cfb032bc86fe7920be" resname="listing.show.meta_title">
+        <source>listing.show.meta_title</source>
+        <target>Your Expert in </target>
+        <jms:reference-file line="15">Frontend/Listing/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cef7f7664df32c16d7d83292e534f62dddee5bdd" resname="login.page.meta_desc">
+        <source>login.page.meta_desc</source>
+        <target>Log into your account on Labtoo to start looking for services or register your expertise</target>
+        <jms:reference-file line="8">Frontend/Security/login.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aeacb1ce7b253d8959f15ad8ba80a4c366656cf7" resname="login.page.meta_title">
+        <source>login.page.meta_title</source>
+        <target>Sign in</target>
+        <jms:reference-file line="4">Frontend/Security/login.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="447f33ba95a46e667174aa3fc09cf53f0aafa35b" resname="registration.page.meta_desc">
+        <source>registration.page.meta_desc</source>
+        <target>Create an account on Labtoo to start looking for services and register your expertise.</target>
+        <jms:reference-file line="8">Frontend/Registration/register.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d290bf175e0f12d8ae8fb9b8e5a34927d1f8307e" resname="registration.page.meta_title">
+        <source>registration.page.meta_title</source>
+        <target>Create an account</target>
+        <jms:reference-file line="4">Frontend/Registration/register.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bcc8420d0ad711f898edbf7ad82116ef5a1e45e6" resname="user.show.meta_desc">
+        <source>user.show.meta_desc</source>
+        <target>Description of the user profile with comments and general information.</target>
+        <jms:reference-file line="16">Frontend/Profile/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5f6e3b950fe53c98fa64b5bc47a5d6cfde82c719" resname="user.show.meta_title">
+        <source>user.show.meta_title</source>
+        <target>My profile</target>
+        <jms:reference-file line="12">Frontend/Profile/show.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

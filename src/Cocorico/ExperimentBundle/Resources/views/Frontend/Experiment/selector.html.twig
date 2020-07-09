@@ -1,0 +1,20 @@
+{% if page_type == 'search-page' %}
+	<div id="loader" class="text-center" style="display: none;">
+        <i class="fa fa-2x fa-refresh fa-spin"></i>
+    </div>
+	<div id="experiment-selector" class="experiment-section">
+    	{% form_theme form 'CocoricoExperimentBundle:Frontend/Form:search_fields.html.twig' %}
+    	{% if form.experiment.vars.value is not null %}
+	        {{ form_errors(form.experiment) }}
+	        {{ form_widget(form.experiment) }}
+	    {% endif %}
+	</div>
+{% else %}
+	<div id="experiment-selector">
+    	{% if form.experiment.vars.value is not null %}
+	        {{ form_errors(form.experiment) }}
+	        {{ form_widget(form.experiment) }}
+	    {% endif %}
+    </div>
+{% endif %}
+

@@ -1,0 +1,159 @@
+services:
+
+    cocorico_experiment.form.extension.model_transformer:
+        class: Cocorico\ExperimentBundle\Form\Extension\ModelTransformerExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    cocorico_experiment.form.type.admin_experiment_category:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\ExperimentCategoryType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%cocorico.locale%"
+            - "@request_stack"
+        tags:
+            - { name: form.type, alias: admin_experiment_category }
+
+    cocorico_experiment.form.type.admin_experiment_formula:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\ExperimentFormulaType
+        tags:
+            - { name: form.type, alias: admin_experiment_formula }
+
+    cocorico_experiment.form.type.admin_experiment_image:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\ExperimentImageType
+        tags:
+            - { name: form.type, alias: admin_experiment_image }
+
+    cocorico_experiment.form.type.admin_question_collection:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionCollectionType
+        tags:
+            - { name: form.type, alias: admin_question_collection }
+
+    cocorico_experiment.form.type.admin_question:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionType
+        arguments:
+            - "%cocorico.locales%"
+        tags:
+            - { name: form.type, alias: admin_question }
+
+    cocorico_experiment.form.type.admin_question_choice_collection:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionChoiceCollectionType
+        tags:
+            - { name: form.type, alias: admin_question_choice_collection }
+
+    cocorico_experiment.form.type.admin_question_choice:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionChoiceType
+        arguments:
+            - "%cocorico.locales%"
+        tags:
+            - { name: form.type, alias: admin_question_choice }
+
+    cocorico_experiment.form.type.admin_question_range:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionRangeType
+        tags:
+            - { name: form.type, alias: admin_question_range }
+
+    cocorico_experiment.form.type.admin_questionnaire:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionnaireType
+        tags:
+            - { name: form.type, alias: admin_questionnaire }
+
+    cocorico_experiment.form.type.admin_questionnaire_entry_collection:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionnaireEntryCollectionType
+        tags:
+            - { name: form.type, alias: admin_questionnaire_entry_collection }
+
+    cocorico_experiment.form.type.admin_questionnaire_entry:
+        class: Cocorico\ExperimentBundle\Form\Type\Admin\QuestionnaireEntryType
+        tags:
+            - { name: form.type, alias: admin_questionnaire_entry }
+
+    cocorico_experiment.form.type.listing_edit_answers:
+        class: Cocorico\ExperimentBundle\Form\Type\Dashboard\ListingEditAnswersType
+        arguments:
+            - "@event_dispatcher"
+        tags:
+            - { name: form.type, alias: listing_edit_answers }
+
+    cocorico_experiment.form.type.experiment:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ExperimentType
+        arguments:
+            - "@router"
+        tags:
+            - { name: form.type, alias: experiment }
+
+    cocorico_experiment.form.type.experiment_selector:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ExperimentSelectorType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@request_stack"
+        tags:
+            - { name: form.type, alias: experiment_selector }
+
+    cocorico_experiment.form.type.experiment_details_offerer:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ExperimentDetailsOffererType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@request_stack"
+        tags:
+            - { name: form.type, alias: experiment_details_offerer }
+
+    cocorico_experiment.form.type.experiment_details_asker:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ExperimentDetailsAskerType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@request_stack"
+        tags:
+            - { name: form.type, alias: experiment_details_asker }
+
+    cocorico_experiment.form.type.question_choice:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\QuestionChoiceType
+        tags:
+            - { name: form.type, alias: question_choice }
+
+    cocorico_experiment.form.type.question_range:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\QuestionRangeType
+        tags:
+            - { name: form.type, alias: question_range }
+
+    cocorico_experiment.form.type.question_text:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\QuestionTextType
+        tags:
+            - { name: form.type, alias: question_text }
+
+    cocorico_experiment.form.type.listing_answer_collection:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ListingAnswerCollectionType
+        tags:
+            - { name: form.type, alias: listing_answer_collection }
+
+    cocorico_experiment.form.type.listing_answer:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ListingAnswerType
+        tags:
+            - { name: form.type, alias: listing_answer }
+
+    cocorico_experiment.form.type.listing_search_answer_collection:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ListingSearchAnswerCollectionType
+        tags:
+            - { name: form.type, alias: listing_search_answer_collection }
+
+    cocorico_experiment.form.type.listing_search_answer:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ListingSearchAnswerType
+        tags:
+            - { name: form.type, alias: listing_search_answer }
+
+    cocorico_experiment.form.type.listing_search_sub_answer_collection:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ListingSearchSubAnswerCollectionType
+        tags:
+            - { name: form.type, alias: listing_search_sub_answer_collection }
+
+    cocorico_experiment.form.type.listing_search_sub_answer:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ListingSearchSubAnswerType
+        tags:
+            - { name: form.type, alias: listing_search_sub_answer }
+
+    cocorico_experiment.form.type.listing_search_new:
+        class: Cocorico\ExperimentBundle\Form\Type\Frontend\ListingSearchNewType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: form.type, alias: listing_search_new }

@@ -1,0 +1,170 @@
+{% trans_default_domain 'cocorico' %}
+    <div class="bottom-container">
+        <!-- footer-aside -->
+        <aside class="aside-footer footer-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="pull-right socials-link-section">
+                            <ul class="list-links hidden">
+                                <li>
+                                    <div>
+                                        <span>
+                                            <i class="sprite-ico-card"></i>
+                                        </span>
+
+                                        {{ 'footer.payment-secure.title'|trans }}
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div>
+                                        <span>
+                                            <i class="sprite-ico-list"></i>
+                                        </span>
+
+                                        {{ 'footer.assistance.title'|trans }}
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div>
+                                        <span>
+                                            <i class="sprite-ico-umbrella"></i>
+                                        </span>
+
+                                        {{ 'footer.secure-results.title'|trans }}
+                                    </div>
+                                </li>
+                            </ul><!-- /.list-links -->
+
+                            <h6 class="socials-link-title">{# Nous suivre sur <br />les réseaux sociaux #}
+                                {{ 'footer.socials.title'|trans|raw }}
+                            </h6>
+
+                            <div class="socials">
+                                <ul>
+                                    <li>
+                                        <a href="https://www.facebook.com/teamlabtoo/" target="_blank">
+                                            <i class="sprite-ico-facebook"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="https://twitter.com/labtoo" target="_blank">
+                                            <i class="sprite-ico-twitter"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="https://www.linkedin.com/company/labtoo/" class="linkedin" target="_blank">
+                                            <img src="{{ asset('images/Group2.png') }}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><!-- /.socials -->
+                        </div>
+
+                        <!-- navarea -->
+                        <nav class="navarea">
+                            <ul class="list-unstyled pull-left">
+                                <li>
+                                    <h6 class="m-0">{{ 'footer.about.title'|trans }}</h6>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.how_it_works.slug'|trans }) }}">
+                                        {{ 'footer.how_it_works.link'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.the_team.slug'|trans }) }}">
+                                        {{ 'footer.the_team.link'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.labtoo_events.slug'|trans }) }}">
+                                        {{ 'footer.labtoo_events.link'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.job_and_training.slug'|trans }) }}">
+                                        {{ 'footer.job_and_training.link'|trans }}
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="list-unstyled pull-left">
+                                <li>
+                                    <h6 class="m-0">{# AIDE &amp; CONTACT #}
+                                        {{ 'footer.help.title'|trans }}
+                                    </h6>
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}">
+                                        {{ 'footer.faq.link'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_contact_new') }}">
+                                        {{ 'footer.contact_us.link'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'footer.who_we_are.slug'|trans }) }}">
+                                        {{ 'footer.who_we_are.link'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.pricing.slug'|trans }) }}">
+                                        {{ 'footer.pricing.link'|trans }}
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="list-unstyled pull-left legal-notices-section hidden">
+                                <li>
+                                    <h6 class="m-0">
+                                        {{ 'footer.legal_notices.title'|trans }}
+                                    </h6>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}">{{ 'footer.legal_notices.link'|trans }}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_home') }}" class="footer_site_name">{{ cocorico_site_name }}</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.cocolabs.io" target="_blank">
+                                        <img src="{{ asset('images/marketplace_solution.png') }}" style="height: 17px;" alt="marketplace solution" title="marketplace solution" >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>&copy; {{ "now"|date("Y") }} {{ 'footer.all_right_reserved'|trans }}</a>
+                                </li>
+                            </ul>
+
+                        </nav>
+                    </div>
+                </div>
+
+                {# {{ render(controller('CocoricoCMSBundle:Frontend/Footer:index',{
+                    request: app.request
+                })) }} #}
+
+            </div>
+        </aside>
+
+        <!-- footer of the page -->
+        <footer id="footer" class="container text-center">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>&copy; {{ "now"|date("Y") }} {{ 'footer.all_right_reserved'|trans }}
+                        <a href="{{ path('cocorico_home') }}" class="footer_site_name">{{ cocorico_site_name }}</a>
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}">{{ 'footer.legal_notices.link'|trans }}</a>
+                        <a href="http://www.cocolabs.io" target="_blank"> <img src="{{ asset('images/marketplace_solution.png') }}" style="height: 17px;" alt="marketplace solution" title="marketplace solution" ></a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>

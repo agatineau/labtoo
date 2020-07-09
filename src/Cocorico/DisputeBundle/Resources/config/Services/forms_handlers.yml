@@ -1,0 +1,6 @@
+services:
+    cocorico_dispute.form.handler.booking.asker.dashboard:
+        class: Cocorico\DisputeBundle\Form\Handler\Dashboard\BookingAskerFormHandler
+        parent: cocorico.form.handler.booking.dashboard
+        calls:
+            - [setBookingDisputeManager, ["@cocorico_dispute.booking_dispute.manager"]]

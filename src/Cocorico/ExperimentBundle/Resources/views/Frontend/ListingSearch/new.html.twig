@@ -1,0 +1,152 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{% set base_title = 'listing.new.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name %}
+
+{% if search_fragment is not defined %}
+    {% set search_fragment = '' %}
+    {% set default_title = 'listing.new.first_meta_title'|trans({}, 'cocorico_meta') %}
+    {% set default_meta_desc = 'listing.new.first_meta_desc'|trans({}, 'cocorico_meta') %}
+{% else %}
+    {% set default_title = search_fragment %}
+    {% set default_meta_desc = search_fragment %}
+{% endif %}
+
+{% if type is defined %}
+    {% if type == 'category' %}
+        {% set meta_description = 'listing.search.category.meta_desc'|trans({'%search_fragment%': search_fragment}, 'cocorico_meta') %}
+    {% elseif type == 'experiment' %}
+        {% set meta_description = 'listing.search.experiment.meta_desc'|trans({'%search_fragment%': search_fragment}, 'cocorico_meta') %}
+    {% endif %}
+{% else %}
+    {% set meta_description = 'listing.new.meta_desc'|trans({'%search_fragment%': default_meta_desc}, 'cocorico_meta') %}
+{% endif %}
+
+{%- block meta_title -%}
+    {{ (default_title ~ ' - ' ~ base_title)|raw }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{meta_description|raw}}
+{%- endblock -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' with {
+       'main_class': 'main_profile'} %}
+
+        {% trans_default_domain 'cocorico_listing' %}
+
+        {% block breadcrumbs %}{% endblock %}
+
+        {% block main %}
+            <div class="intro intro-medium search-header category-search-header">
+                <div class="intro-caption">
+                    <div class="container">
+                        <div class="col-md-4 p-0">
+                            <h1 class="main-title">
+                                {{ 'launching.search.title'|trans }}
+                            </h1>
+                        </div>
+                        <div class="col-md-8 p-0 breadcrumb-links" id="search-category-breadcrumb">
+                            <span class="sub-title"><u>{{ 'launching.search.sub.title'|trans }}</u></span>
+                            <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 dashboard-search">
+                        {{ form_start(form, {'attr':{'class': 'listing-section'}}) }}
+                        <fieldset>
+                            <legend class="hidden">listing-section</legend>
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                            <div class="col-md-4 p-0 category-experiment">
+                                {% include '@CocoricoExperiment/Frontend/ListingCategory/selector.html.twig' %}
+                            </div>
+                            <div class="col-md-8 p-0 category-experiment">
+                                {% include '@CocoricoExperiment/Frontend/Experiment/selector.html.twig' with { 'page_type' : 'search-page' }  %}
+                                {# {% include '@CocoricoExperiment/Frontend/Experiment/details_asker.html.twig' %} #}
+                            </div>
+                            <div class="clearfix"></div>
+                            {# <div id="listing-search-submit" class="hidden">
+                                <div class="btns-area">
+                                    <input type="submit" class="btn btn-red btn-small form-btn"
+                                           value="{{ 'listing.search.new.save'|trans }}">
+                                </div>
+                            </div> #}
+                        </fieldset>
+                        {{ form_widget(form._token) }}
+                        {{ form_end(form, {'render_rest': false}) }}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include '@CocoricoExperiment/Frontend/ListingSearch/js/_new_js.html.twig' with {
+        'base_title': base_title
+    } %}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/Listing/js/_geocoding_js.html.twig' with {
+    'map_elt': '#map-listing',
+    'marker_draggable': true
+    } only %}
+
+    <script>
+        $(function () {
+            {#Currency conversion#}
+            currencyConversionHandler('#convert_amount_one', '#convert_amount_two', '#convert_currency_two');
+
+            //Disable submit button on click
+            $("[type=submit]").click(function (e) {
+                $(this).prop('disabled', true);
+                $(this).closest('form').submit();
+            });
+            experimentsDivHeightSet();
+        });
+        function experimentsDivHeightSet()
+        {
+            var highestTitle = 0;
+            var highestDescription = 0;
+            $('.experiments-div').each(function(){
+
+                $('.title', this).each(function(){
+                    // If this title is higher than the cached highest then store it
+                    if($(this).height() > highestTitle) {
+                        highestTitle = $(this).height();
+                    }
+                });
+                $('.description', this).each(function(){
+                    // If this description is higher than the cached highest then store it
+                    if($(this).height() > highestDescription) {
+                        highestDescription = $(this).height();
+                    }
+                });
+            });
+            $('.experiments-div .title').height(highestTitle);
+            $('.experiments-div .description').height(highestDescription);
+        }
+        $(window).on('load resize', function () {
+            $('.experiments-div .title').css('height','');
+            $('.experiments-div .description').css('height','');
+            setTimeout(function () {
+                experimentsDivHeightSet();
+            }, 100);
+        });
+    </script>
+
+{% endblock %}

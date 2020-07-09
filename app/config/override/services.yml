@@ -1,0 +1,21 @@
+#Define here services you want to add
+services:
+    cocorico_elasticsearch.listing_indexer:
+        class: Override\ElasticsearchBundle\Indexer\ListingIndexer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: cocorico_elasticsearch.indexer, alias: listing }
+
+    cocorico_elasticsearch.listing_repository:
+        class: Override\ElasticsearchBundle\Repository\ListingRepository
+        arguments:
+            - "@cocorico_elasticsearch.listing_indexer"
+            - "@fos_elastica.finder.cocorico.listing"
+            - "%cocorico.locales%"
+        calls:
+            -   method: setConfig
+                arguments:
+                    -   { limit: '%cocorico_elasticsearch.limit_results%' }
+        tags:
+            - { name: cocorico_elasticsearch.repository}

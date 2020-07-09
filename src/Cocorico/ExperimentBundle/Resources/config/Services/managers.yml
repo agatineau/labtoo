@@ -1,0 +1,17 @@
+services:
+
+    cocorico_experiment.manager.experiment:
+        class: Cocorico\ExperimentBundle\Manager\ExperimentManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    cocorico_experiment.manager.experiment_search:
+        class: Cocorico\ExperimentBundle\Manager\ExperimentSearchManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@session"
+
+    cocorico_experiment.manager.listing_search:
+        class: Cocorico\ExperimentBundle\Manager\ListingSearchManager
+        arguments:
+            - "@doctrine.orm.entity_manager"

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2018-10-12T16:10:16Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="8689776af722a69f88c8eefde3d1babb13877c89" resname="booking_accepted_asker.sms.message">
+        <source>booking_accepted_asker.sms.message</source>
+        <target>Votre demande de commande a été acceptée par %offerer_firstname%! Vous pouvez voir le détail de cette commande ici : %booking_url%</target>
+        <jms:reference-file line="6">SMS/Asker/booking_accepted_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4ba35707aaa5b7d35580abd91f4be7c9a7f2ee1f" resname="booking_request_expired_asker.sms.message">
+        <source>booking_request_expired_asker.sms.message</source>
+        <target>Votre demande de commande a expirée car nous n'avons pas recu de confirmation de %offerer_firstname%. Aucune somme ne vous a été débitée.</target>
+        <jms:reference-file line="6">SMS/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="729b9f5579c75c61321df544453fed647e6ddf32" resname="booking_request_expired_offerer.sms.message">
+        <source>booking_request_expired_offerer.sms.message</source>
+        <target>Vous avez une demande de commande qui vient d'expirer. Vous pouvez encore contacter %asker_firstname% ici : %booking_url%</target>
+        <jms:reference-file line="6">SMS/Offerer/booking_request_expired_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="27626bf9da75848d5ecd9d460ea02716988152a6" resname="booking_request_offerer.sms.message">
+        <source>booking_request_offerer.sms.message</source>
+        <target>Vous avez recu une demande de commande de %asker_firstname%. Répondez Oui ou Non pour l'accepter ou la refuser.</target>
+        <jms:reference-file line="6">SMS/Offerer/booking_request_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ba284ff15b094ab234db2353f3132fda63c864ed" resname="canceled_by_asker_offerer.sms.message">
+        <source>canceled_by_asker_offerer.sms.message</source>
+        <target>Désolé, %asker_firstname% a annulé sa commande. Vous pouvez voir la commande ici: %booking_url%.</target>
+        <jms:reference-file line="6">SMS/Offerer/booking_canceled_by_asker_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="03b376f651c459d8583a0fbb94323424c9ba1cea" resname="check_phone_user.sms.message">
+        <source>check_phone_user.sms.message</source>
+        <target state="new">Pour valider votre téléphone %phone% répondez Oui</target>
+        <jms:reference-file line="6">views/SMS/check_phone_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="67dc82d20e95c50009564f86d441d1733e9616f6" resname="expiration_alert_offerer.sms.message">
+        <source>expiration_alert_offerer.sms.message</source>
+        <target>Vous avez une commande qui arrive à expiration. Vous pouvez accepter ou refuser cette demande en suivant ce lien: %booking_url%</target>
+        <jms:reference-file line="6">SMS/Offerer/booking_request_expiration_alert_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="335dc3b1197620ef4e2f50dfa714ef4512c51919" resname="imminent_booking_asker.sms.message">
+        <source>imminent_booking_asker.sms.message</source>
+        <target>Bonjour %asker_firstname%, ceci est un rappel que votre commande va commencer : %booking_url%</target>
+        <jms:reference-file line="6">SMS/Asker/booking_imminent_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d30342a2859b32f131ccf7bb661cce1e8ee03cb8" resname="imminent_booking_offerer.sms.message">
+        <source>imminent_booking_offerer.sms.message</source>
+        <target>Bonjour %offerer_firstname%, ceci est un rappel pour votre commande : %booking_url%</target>
+        <jms:reference-file line="6">SMS/Offerer/booking_imminent_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0d7505680c928b31dcffc4fde767145257c6d862" resname="new_thread_message_user.sms.message">
+        <source>new_thread_message_user.sms.message</source>
+        <target>Vous avez recu un nouveau message de la part de %sender_firstname% sur la plateforme %site_name%. Cliquez ici %thread_url% pour le consulter.</target>
+        <jms:reference-file line="6">views/SMS/new_thread_message_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8d4398c7aca41630bb0c5b6bf73d87a650a0f771" resname="refused_booking_asker.sms.message">
+        <source>refused_booking_asker.sms.message</source>
+        <target>Votre demande de commande a été refusée par %offerer_firstname%. Aucune somme ne vous a été débitée.</target>
+        <jms:reference-file line="6">SMS/Asker/booking_refused_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9f49e06c2ef79c9ec97a6500ea3556c2fc9e9997" resname="user.phone_checked.success">
+        <source>user.phone_checked.success</source>
+        <target state="new">Un SMS vous a été envoyé pour que nous puissions valider votre téléphone.</target>
+        <jms:reference-file line="45">SMSBundle/Event/UserSubscriber.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

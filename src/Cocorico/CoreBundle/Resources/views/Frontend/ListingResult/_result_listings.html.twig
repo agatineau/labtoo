@@ -1,0 +1,62 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<!-- post -->
+{%- for listingTmp in listings -%}
+    {% set listing = listingTmp[0] %}
+    {% set listing_translation = listing.translations[app.request.locale] %}
+    {% set listing_user = listing.user %}
+    {# {% set listing_user_name = listing.user.firstName ~ listing.user.lastName[1] ~ '.' %} #}
+    {% set user_image = listing_user.images|length ? listing_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+
+    <article class="listing-post col-sm-4 listing-pr col-xs-12 {% if loop.index % 3 == 0 %}remove-pr{% endif %}">
+        <div class="listing-box {% if  listing.certified %} listing-certified {% endif %}">
+            {% if  listing.certified %}
+                <div class="certified-icon">
+                    <img src="{{ asset('images/certified-stars.svg') }}" />
+                </div>
+                <div class="certified-corner-icon"></div>
+            {% endif %}
+            <div class="frame p-0">
+                <div class="post-info">
+                    <div class="box">
+                        <div class="box-holder">
+                            <div class="head p-0">
+                                {# <figure class="head-image"> #}
+                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('cocorico_search_result_image') }}" alt="" />
+                                {# </figure><!-- /.head-image --> #}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-content p-0">
+                    <div class="head-image-badge tooltip-holder hidden">
+                        <div class="tooltip-alt">{{ 'lisitng.search.certificate.tooltip'|trans }}</div><!-- /.tooltip-alt -->
+
+                        {% if listing.averageRating %}
+                            {{ listing.averageRating | cocorico_star_rating }}
+                        {% endif %}
+
+                        <p>{{'lisitng.booking.duration.text'|trans({}, 'cocorico_booking')}} : {{listing.duration}} {{ 'listing.booking.duration.unit.text'|trans({}, 'cocorico_booking') }}</p>
+                    </div><!-- /.head-image-badge -->
+
+                    <p class="box-title">{{listing.user.firstName}} {{ listing.user.lastName|user_name }}{{ '.' }}</p>
+                    <div class="box-other-info">
+                        <p class="hidden">{{'listing.offerer.experience.text'|trans}} :</p>
+                        <p class="box-description">{{- listing_translation.informativeDescription|truncate(185, true)|replace({'\r\n':' '}) }}</p>
+                        
+                        <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}" class="btn btn-red btn-block btn-small view-listing">{{ 'listing.search.select.btn.link.text'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.listing-box -->
+    </article>
+    {# {% if loop.index % 3 == 0 %}
+        <div class="clearfix"></div>
+    {% endif %} #}
+{%- else -%}
+    {{ 'listing.search.result.no_results'|trans|nl2br }}
+{%- endfor -%}
+
+<div data-id="nb-result-map-drag"
+     style="color: transparent">{{ 'listing.search.result.results'|trans({'%nb_results%': nb_listings}) }}</div>

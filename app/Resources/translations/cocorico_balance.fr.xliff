@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2020-06-18T11:36:22Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="be70c2e7e067b7e8e717a1de17d5501e3b0ca0dd" resname="admin.recover_bank_wire.status.label">
+        <source>admin.recover_bank_wire.status.label</source>
+        <target>Statut</target>
+        <jms:reference-file line="78">BalanceBundle/Admin/RecoverAdmin.php</jms:reference-file>
+        <jms:reference-file line="184">BalanceBundle/Admin/RecoverAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="66d573909dc5fc5b0e1eed8b7bb33eb74cfdb18e" resname="amount_to_credit">
+        <source>amount_to_credit</source>
+        <target>Montant à créditer :</target>
+        <jms:reference-file line="19">Dashboard/Balance/credit_card.html.twig</jms:reference-file>
+        <jms:reference-file line="19">Dashboard/Balance/credit_bank_wire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1ea03107f26e3ffe90ad94557dad2da84a075514" resname="balance.head.title">
+        <source>balance.head.title</source>
+        <target>Informations sur le solde actuel</target>
+        <jms:reference-file line="13">Dashboard/Balance/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b5acd4bfd7df50ac03f0ce303309a00153980f75" resname="balance.label">
+        <source>balance.label</source>
+        <target>Solde actuel :</target>
+        <jms:reference-file line="17">Dashboard/Balance/credit_card.html.twig</jms:reference-file>
+        <jms:reference-file line="17">Dashboard/Balance/credit_bank_wire.html.twig</jms:reference-file>
+        <jms:reference-file line="19">Dashboard/Balance/credit.html.twig</jms:reference-file>
+        <jms:reference-file line="18">Dashboard/Balance/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7ea72804813ede586e70a539da0e654c184d50a8" resname="balance.transfer_amount.col">
+        <source>balance.transfer_amount.col</source>
+        <target>Montant des mouvements</target>
+        <jms:reference-file line="27">Dashboard/Balance/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="910079b94e03411e6691fc9068ea942de4692136" resname="balance.transfer_date.col">
+        <source>balance.transfer_date.col</source>
+        <target>Date</target>
+        <jms:reference-file line="28">Dashboard/Balance/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7db4fdc7471e4e6671c772a05e128d0425606e15" resname="balance.transfer_status.col">
+        <source>balance.transfer_status.col</source>
+        <target>Statut</target>
+        <jms:reference-file line="25">Dashboard/Balance/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3393f603fc91e15b4380b31d7db4038180e557a5" resname="balance.transfer_type.col">
+        <source>balance.transfer_type.col</source>
+        <target>Type de mouvement</target>
+        <jms:reference-file line="26">Dashboard/Balance/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9ec65407f921f41e90308f83763c836f025d7cbd" resname="booking.new.cb.title">
+        <source>booking.new.cb.title</source>
+        <target>Prix :</target>
+        <jms:reference-file line="26">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="07805200fc231ae96dedea18f97e7208543e2418" resname="booking.new.pay.submit">
+        <source>booking.new.pay.submit</source>
+        <target>Payer</target>
+        <jms:reference-file line="6">Frontend/Debit/_new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3d061f6aa3ca153ef589f28ccd1e72901b45ca70" resname="booking.new.payment.balance_simulation">
+        <source>booking.new.payment.balance_simulation</source>
+        <target><![CDATA[Crédits restants après la commande : <strong>%amount% de crédits</strong>]]></target>
+        <jms:reference-file line="30">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a27db05ad23d6c02520b2cf39a6673ca08a75742" resname="booking.new.payment.header">
+        <source>booking.new.payment.header</source>
+        <target>Choisissez votre moyen de paiement</target>
+        <jms:reference-file line="4">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6b948e36e9d6c1eba5b2d551081e81b5f5fe4243" resname="booking.new.payment.insufficient_balance">
+        <source>booking.new.payment.insufficient_balance</source>
+        <target>Crédits insuffisants. Vous pouvez ajouter des crédits par virement bancaire dans votre espace à l'onglet "Mes crédits", ou utiliser une carte de paiement.</target>
+        <jms:reference-file line="28">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9fa65b204d3178123e67e40be9908b93557c543f" resname="booking.new.payment.payment_method_balance">
+        <source>booking.new.payment.payment_method_balance</source>
+        <target>Utiliser mes crédits labtoo</target>
+        <jms:reference-file line="9">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b7d250e8f7bf74849ef2cbfd7154775876e94ee0" resname="booking.new.payment.payment_method_balance.help">
+        <source>booking.new.payment.payment_method_balance.help</source>
+        <target>(Vous avez %amount% de crédits)</target>
+        <jms:reference-file line="10">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fb3a4a4915b050be01fc87c97677a6d08c92a26e" resname="booking.new.payment.payment_method_card.help">
+        <source>booking.new.payment.payment_method_card.help</source>
+        <target></target>
+        <jms:reference-file line="21">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="41b59b9dd852a722336c16c8ba7a4f85fae76dfa" resname="credit.amount.error">
+        <source>credit.amount.error</source>
+        <target>Le montant à créditer doit être supérieur à 0 €.</target>
+      </trans-unit>
+      <trans-unit id="04923cfa9699d7f0aea16414108a797bf2e9f2e0" resname="credit.amount.label">
+        <source>credit.amount.label</source>
+        <target>Montant à créditer :</target>
+        <jms:reference-file line="44">Type/Dashboard/CreditBalanceMovementFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="79308fa949b25d8dbd02888f6ea7e6000a92dfba" resname="credit.head.title">
+        <source>credit.head.title</source>
+        <target>Créditer mon solde</target>
+        <jms:reference-file line="14">Dashboard/Balance/credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cf29299e9ed68ce36b92380f10ca3a3812599823" resname="credit.submit">
+        <source>credit.submit</source>
+        <target>Valider</target>
+        <jms:reference-file line="42">Dashboard/Balance/credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="886c315dd9c902c00b58d6d25882a83a8da7c3d8" resname="credit.tac.label">
+        <source>credit.tac.label</source>
+        <target>J'accepte les</target>
+        <jms:reference-file line="37">Type/Dashboard/CreditFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f447e09da0f154c6d5993eadd7739dd62558023b" resname="credit.tac.link">
+        <source>credit.tac.link</source>
+        <target>conditions générales d'utilisation</target>
+        <jms:reference-file line="38">Dashboard/Balance/credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="441bf36d30187612374032934041e16bc9d025da" resname="credit.type.error">
+        <source>credit.type.error</source>
+        <target>Veuillez préciser un moyen de paiement.</target>
+      </trans-unit>
+      <trans-unit id="f1214fa2c9dabf57775ce517d97258a0ab673b15" resname="credit.type.label">
+        <source>credit.type.label</source>
+        <target>Créditer son solde par :</target>
+        <jms:reference-file line="32">Type/Dashboard/CreditBalanceMovementFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aaec91406d79fb63f7a5146bee2548b97a38435b" resname="credit_bank_wire.amount">
+        <source>credit_bank_wire.amount</source>
+        <target>Montant du virement :</target>
+        <jms:reference-file line="28">Dashboard/Balance/credit_bank_wire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="316fc0ec969bdb1b58542b5cee78bbcfebc68586" resname="credit_bank_wire.head.title">
+        <source>credit_bank_wire.head.title</source>
+        <target>Créditer mon solde par virement</target>
+        <jms:reference-file line="14">Dashboard/Balance/credit_bank_wire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="87052f23634e3a8e31d444609f098f942e1607e2" resname="credit_bank_wire.instruction">
+        <source>credit_bank_wire.instruction</source>
+        <target>Veuillez réaliser un virement en précisant les informations suivantes :</target>
+        <jms:reference-file line="24">Dashboard/Balance/credit_bank_wire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ef27add3c98feaba38f12360e029f80c6e9ebdd3" resname="credit_bank_wire.warning">
+        <source>credit_bank_wire.warning</source>
+        <target>Dans le cas où l'une de ces informations n'est pas précisée ou erronée, le montant correspondant ne vous sera pas crédité.</target>
+        <jms:reference-file line="30">Dashboard/Balance/credit_bank_wire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e30cf0741f8be8dd8965772b7721706e8e78adc5" resname="credit_bank_wire.wire_reference">
+        <source>credit_bank_wire.wire_reference</source>
+        <target>Libellé du virement :</target>
+        <jms:reference-file line="27">Dashboard/Balance/credit_bank_wire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="022f886f262cbb29b2ad2c48f64991ef71beea78" resname="credit_card.head.title">
+        <source>credit_card.head.title</source>
+        <target>Créditer mon solde par carte bancaire</target>
+        <jms:reference-file line="14">Dashboard/Balance/credit_card.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="386fa321c1f15b4b51e53cca0b67f2fd0b4d1236" resname="credit_card.submit">
+        <source>credit_card.submit</source>
+        <target>Créditer</target>
+        <jms:reference-file line="24">Dashboard/Balance/credit_card.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b4917dfd786fda332c222096ad2a6ead451df44d" resname="credit_card_success">
+        <source>credit_card_success</source>
+        <target>Votre solde a bien été crédité.</target>
+      </trans-unit>
+      <trans-unit id="3461a7699d8ae5939f9d0263b7eb40756bc8e70a" resname="debit.already_done.exception">
+        <source>debit.already_done.exception</source>
+        <target>Un débit a déjà été réalisé pour cette commande.</target>
+      </trans-unit>
+      <trans-unit id="c394364a3bd7dcf94deb8d66f9f302b5b5883929" resname="debit.form_not_submit.exception">
+        <source>debit.form_not_submit.exception</source>
+        <target>Erreur lors de la soumission du formulaire</target>
+      </trans-unit>
+      <trans-unit id="caedc5bb6052d6fce57f54c7a807ad5b1ef90735" resname="debit.insufficient_amount.exception">
+        <source>debit.insufficient_amount.exception</source>
+        <target>Vos fonds ne sont pas suffisants.</target>
+      </trans-unit>
+      <trans-unit id="f12438babaab552291f1a92aff262c0aceb23828" resname="debit.transfer.exception">
+        <source>debit.transfer.exception</source>
+        <target>Erreur lors du transfert d'argent</target>
+      </trans-unit>
+      <trans-unit id="bba71736ee0c1e09d508727e9c81f138ecfa350e" resname="entity.balance_movement.status.invalidate">
+        <source>entity.balance_movement.status.invalidate</source>
+        <target>Invalidé</target>
+      </trans-unit>
+      <trans-unit id="6e687268aea748d8a4d64ea146d8ab7cdec115a9" resname="entity.balance_movement.status.validate">
+        <source>entity.balance_movement.status.validate</source>
+        <target>Validé</target>
+      </trans-unit>
+      <trans-unit id="e71d57ba10309d43cde3ff1b878fd9a5fd73361d" resname="entity.balance_movement.status.waiting">
+        <source>entity.balance_movement.status.waiting</source>
+        <target>En attente</target>
+      </trans-unit>
+      <trans-unit id="5580bd7c8e7921e777e69d56cecfdbedb493387d" resname="entity.balance_movement.type.credit">
+        <source>entity.balance_movement.type.credit</source>
+        <target>Encaissement (commande)</target>
+      </trans-unit>
+      <trans-unit id="e6815fb6e6006356623f96c72c7e8d1fd787b3d3" resname="entity.balance_movement.type.credit_bank_wire">
+        <source>entity.balance_movement.type.credit_bank_wire</source>
+        <target>Encaissement (Virement)</target>
+      </trans-unit>
+      <trans-unit id="0b8b91f379ee1a140660521cefb2914320b869c2" resname="entity.balance_movement.type.credit_card">
+        <source>entity.balance_movement.type.credit_card</source>
+        <target>Encaissement (Carte bancaire)</target>
+      </trans-unit>
+      <trans-unit id="dc9a05fc96595f289b4435ece96a1e12e8b130a4" resname="entity.balance_movement.type.creditable.credit_bank_wire">
+        <source>entity.balance_movement.type.creditable.credit_bank_wire</source>
+        <target>Virement</target>
+      </trans-unit>
+      <trans-unit id="c80cd979cc8d5ac17d63b9dfcecd1b85488d408c" resname="entity.balance_movement.type.creditable.credit_card">
+        <source>entity.balance_movement.type.creditable.credit_card</source>
+        <target>Carte bancaire</target>
+      </trans-unit>
+      <trans-unit id="e6a83c14d76ef72c7d9adc8e81667a486c9953f7" resname="entity.balance_movement.type.debit">
+        <source>entity.balance_movement.type.debit</source>
+        <target>Décaissement (commande)</target>
+      </trans-unit>
+      <trans-unit id="7e5b87e15fda0e81aeb9d314571ff2b8d7fdbc92" resname="entity.balance_movement.type.recover">
+        <source>entity.balance_movement.type.recover</source>
+        <target>Décaissement</target>
+      </trans-unit>
+      <trans-unit id="052143f0c8393f8cea36cb28e8e4cadd9949be2f" resname="entity.balance_movement.type.refund">
+        <source>entity.balance_movement.type.refund</source>
+        <target>Décaissement (Remboursement)</target>
+      </trans-unit>
+      <trans-unit id="3f2300d2a32080fe482c2c1d2623e44969a12f20" resname="nav.balance.credit.link">
+        <source>nav.balance.credit.link</source>
+        <target>Créditer mon solde</target>
+        <jms:reference-file line="24">Dashboard/Balance/_nav_side.html.twig</jms:reference-file>
+        <jms:reference-file line="25">Dashboard/Balance/_nav_side.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b9e41611fa4faba6af38ef9aebea4db9b65f4aad" resname="nav.balance.recover.link">
+        <source>nav.balance.recover.link</source>
+        <target>Récupérer mon solde</target>
+        <jms:reference-file line="18">Dashboard/Balance/_nav_side.html.twig</jms:reference-file>
+        <jms:reference-file line="19">Dashboard/Balance/_nav_side.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b767b2556f6ef122afc58a2a7170a562301b5579" resname="nav.balance.show.link">
+        <source>nav.balance.show.link</source>
+        <target>Consulter mon solde</target>
+        <jms:reference-file line="12">Dashboard/Balance/_nav_side.html.twig</jms:reference-file>
+        <jms:reference-file line="13">Dashboard/Balance/_nav_side.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="eaff0e7d9ee643a8cfcb9678ccf0834e6db2a761" resname="recover.bank_account.exception">
+        <source>recover.bank_account.exception</source>
+        <target>Veuillez renseigner les données relatives à vos coordonnées bancaire.</target>
+      </trans-unit>
+      <trans-unit id="f6e97e1cc67c1058fd6186a71f2672a279462d19" resname="recover.head.title">
+        <source>recover.head.title</source>
+        <target>Récupérer mon solde - Confirmation</target>
+        <jms:reference-file line="13">Dashboard/Balance/recover.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="eeac30c7928e653d9224bf5387cc779819d8af24" resname="recover.instruction">
+        <source>recover.instruction</source>
+        <target>Merci de bien vouloir vérifier au préalable les coordonnées bancaire ci-dessous.</target>
+        <jms:reference-file line="26">Dashboard/Balance/recover.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f7489d4b540deeba5a59d0dc60523a6f9f79298a" resname="recover.insufficient_amount.exception">
+        <source>recover.insufficient_amount.exception</source>
+        <target>Le montant à récupérer est insuffisant.</target>
+      </trans-unit>
+      <trans-unit id="c8d9fc0a90c54c98b68f9b5313335ea178d105f0" resname="recover.label">
+        <source>recover.label</source>
+        <target>Solde actuel :</target>
+        <jms:reference-file line="19">Dashboard/Balance/recover.html.twig</jms:reference-file>
+        <jms:reference-file line="18">Dashboard/Balance/recover_check.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cca0fe4516207304940dfe73749aff6671b2d6dd" resname="recover.not_check.exception">
+        <source>recover.not_check.exception</source>
+        <target>Nous souhaitons vérifier votre identité avant de vous permettre de réaliser le virement.</target>
+      </trans-unit>
+      <trans-unit id="63faa0a0afebab72ae3b91c1b9b211127a7fbcaf" resname="recover.warning">
+        <source>recover.warning</source>
+        <target><![CDATA[Si ces coordonnées s'avèrent obsolètes ou erronés, vous pouvez les mettre à jour en <a href="%edit_url%">cliquant ici</a>.]]></target>
+        <jms:reference-file line="33">Dashboard/Balance/recover.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="38e1383ccb696a466abe06bb332fd89bf07bd7d2" resname="recover_check.head.title">
+        <source>recover_check.head.title</source>
+        <target>Récupérer mon solde - Vérification</target>
+        <jms:reference-file line="13">Dashboard/Balance/recover_check.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bd78fd3cacd4d0ca3266b9a2625500b97efbb13b" resname="recover_check.password.error">
+        <source>recover_check.password.error</source>
+        <target>Le mot de passe est incorrect.</target>
+      </trans-unit>
+      <trans-unit id="eea707547ef9654cbeca1ee48e5cd5826c8a5cc7" resname="recover_check.password.label">
+        <source>recover_check.password.label</source>
+        <target>Vérification du mot de passe :</target>
+        <jms:reference-file line="33">Type/Dashboard/RecoverCheckFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5ac52d77e1aba5ddd713f8279a0edf0483439ffe" resname="recover_check.submit.btn">
+        <source>recover_check.submit.btn</source>
+        <target>Vérifier</target>
+        <jms:reference-file line="41">Dashboard/Balance/recover_check.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f294cd1c8915d7fd431fe6f44e44004e90d534c6" resname="recover_check.tac.label">
+        <source>recover_check.tac.label</source>
+        <target>J'accepte les</target>
+        <jms:reference-file line="40">Type/Dashboard/RecoverCheckFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="757146aaa21b1860e776f205cd8076981f0ecf0d" resname="recover_check.tac.link">
+        <source>recover_check.tac.link</source>
+        <target>conditions générales d'utilisation</target>
+        <jms:reference-file line="36">Dashboard/Balance/recover_check.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f2e63fc23782c2a3fcfcb064eb0f4fcb53c384ac" resname="recover_success">
+        <source>recover_success</source>
+        <target>La demande de récupération de solde a bien été soumise.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

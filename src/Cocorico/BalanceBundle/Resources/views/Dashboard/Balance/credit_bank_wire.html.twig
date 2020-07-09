@@ -1,0 +1,35 @@
+{% extends '@CocoricoBalance/Dashboard/Balance/layout.html.twig' %}
+{% trans_default_domain 'cocorico_balance' %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'balance_credit' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    <fieldset>
+        <legend class="hidden">legend</legend>
+        <div class="tab-content credit-table">
+            <div id="credit-balance" class="tab-pane active" role="tabpanel">
+                <h6>{{ 'credit_bank_wire.head.title'|trans }}</h6>
+                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                <div class="balance-header">
+                    {{ 'balance.label'|trans }} {{ app.user.amountBalanceDecimal|format_price(app.request.locale) }}
+                    <br>
+                    {{ 'amount_to_credit'|trans }} {{ balanceMovement.amountDecimal|format_price(app.request.locale) }}
+                </div>
+
+                <div class="alert" style="margin-top: 24px">
+                    <i class="ico icon-warning"></i>
+                    <p>{{ 'credit_bank_wire.instruction'|trans }}</p>
+                    <br>
+                    <p>{{ 'IBAN'|trans({}, 'cocorico_user') }} <strong>{{ iban }}</strong></p>
+                    <p>{{ 'credit_bank_wire.wire_reference'|trans }} <strong>{{ wire_reference }}</strong></p>
+                    <p>{{ 'credit_bank_wire.amount'|trans }} <strong>{{ balanceMovement.amountDecimal|format_price(app.request.locale) }}</strong></p>
+                    <br>
+                    <p><strong>{{ 'credit_bank_wire.warning'|trans }}</strong></p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+{%- endblock %}

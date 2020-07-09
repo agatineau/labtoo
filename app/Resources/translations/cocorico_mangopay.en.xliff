@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2020-06-18T11:36:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="e53db87a04cae4ec702d9ce6b1557d5fe416af86" resname="booking.new.card.error">
+        <source>booking.new.card.error</source>
+        <target state="new">An error has occurred while registering card</target>
+      </trans-unit>
+      <trans-unit id="9ec65407f921f41e90308f83763c836f025d7cbd" resname="booking.new.cb.title">
+        <source>booking.new.cb.title</source>
+        <target>Credit Card</target>
+        <jms:reference-file line="20">Frontend/BookingPayment/_form.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

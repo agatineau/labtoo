@@ -1,0 +1,6 @@
+services:
+    cocorico_balance.security.balance_movement_voter:
+        class: Cocorico\BalanceBundle\Security\BalanceMovementVoter
+        public: false
+        tags:
+           - { name: security.voter }

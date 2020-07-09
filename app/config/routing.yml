@@ -1,0 +1,34 @@
+cocorico_core:
+    resource: "@CocoricoCoreBundle/Resources/config/routing.yml"
+
+cocorico_user:
+    resource: "@CocoricoUserBundle/Resources/config/routing.yml"
+
+cocorico_page:
+    resource: "@CocoricoPageBundle/Resources/config/routing.yml"
+
+cocorico_message:
+    resource: "@CocoricoMessageBundle/Resources/config/routing.yml"
+
+cocorico_review:
+    resource: "@CocoricoReviewBundle/Resources/config/routing.yml"
+
+cocorico_experiment:
+    resource: "@CocoricoExperimentBundle/Resources/config/routing.yml"
+
+cocorico_dispute:
+    resource: "@CocoricoDisputeBundle/Resources/config/routing.yml"
+
+cocorico_balance:
+    resource: "@CocoricoBalanceBundle/Resources/config/routing.yml"
+
+cocorico_contact:
+    resource: "@CocoricoContactBundle/Resources/config/routing.yml"
+    prefix:   /
+
+cocorico_geo:
+    resource: "@CocoricoGeoBundle/Resources/config/routing.yml"
+
+cocorico_extra_bundle:
+    resource: .
+    type: extra_bundle

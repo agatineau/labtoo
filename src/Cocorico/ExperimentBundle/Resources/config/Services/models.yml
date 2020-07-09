@@ -1,0 +1,8 @@
+services:
+
+    cocorico_experiment.model.listing_search_session:
+        class: Cocorico\ExperimentBundle\Model\ListingSearchSession
+        arguments:
+            - "@session"
+            - "@doctrine.orm.entity_manager"
+            - "%cocorico.fee_as_asker%"

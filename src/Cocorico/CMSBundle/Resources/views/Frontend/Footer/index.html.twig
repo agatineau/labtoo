@@ -1,0 +1,57 @@
+{% if footers|length %}
+    {% if linksFlag %}
+        <li class="dropdown link-experimentations">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                {{ 'nav.experimentations_link.label'|trans }}
+                <span class="icon-down-open-mini"></span>
+            </a>
+            <ul class="dropdown-menu experimentations-list m-0" role="menu">
+                {% for footer in footers %}
+                    <li>
+                        <a href="{{ footer.link }}">
+                            {{ footer.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% else %}
+        <div class="row footer-nav">
+            <h6 class="col-xs-12 cms-page-title">{{ 'footer.title.various'|trans({}, 'cocorico') }}</h6>
+            <ul class="col-sm-3 col-xs-6 col-lg-2 list-simple-links">
+                {% for footer in footers %}
+                    <li>
+                        <a href="{{ footer.link }}">{{ footer.title }}</a>
+                    </li>
+                    {% if loop.index is divisible by(3) and not loop.last %}
+                        {{ '</ul>' }}
+                        {{ '<ul class="col-sm-3 col-xs-6 col-lg-2 list-simple-links">' }}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {# <aside class="aside-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <nav class="navarea">
+                            <ul class="list-unstyled pull-left">
+                                <li class="title">{{ 'footer.title.various'|trans({}, 'cocorico') }}</li>
+                                {% for footer in footers %}
+                                    <li>
+                                        <a href="{{ footer.link }}">{{ footer.title }}</a>
+                                    </li>
+                                    {% if loop.index is divisible by(3) and not loop.last %}
+                                        {{ '</ul>' }}
+                                        {{ '<ul class="list-unstyled pull-left">' }}
+                                        {{ '<li class="title">&nbsp;</li>' }}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </aside> #}
+    {% endif %}
+{% endif %}

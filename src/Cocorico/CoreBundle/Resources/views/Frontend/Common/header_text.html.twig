@@ -1,0 +1,15 @@
+{% if headerText|length > 0 %}
+    <div class="sub-header-info">
+        <a href="{{headerText.url}}" class="text-white" target="_blank">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p class="info-text-sub-header">
+                            {{ headerText.description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endif %}

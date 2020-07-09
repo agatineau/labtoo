@@ -1,0 +1,190 @@
+#!/usr/bin/env bash
+
+# Make an archive
+# Copyright: Cocolabs 2019
+#
+# Important Note: MUST BE EXECUTED in releases/xxx bin folder
+#
+# Usage:
+# cd bin && ./archive -u=[USER] -e=[ENV] -h=[HOST] -url=[URL]
+#
+# Password prompts:
+# first: pwd of project mysql dabase
+# second: pwd of ssh user of scp destination host
+#
+# OPTIONS
+#       -u    system user on prod server or name of the project on staging server
+#       -e    envirnoment (prod or staging)
+#       -r    source folder  (ex: /var/www/cocorico/release/20200518012522 or /var/www/xxx/Symfony)
+#       -h    scp destination host path
+#       -url  archives based url
+#       -sudo needs sudo
+#
+# Examples:
+# bash ./archive -u=cocochef -e=prod -r=/var/www/cocorico/release/20200518012522 -h=filesuser@files.xxx.com:/var/www/vhosts/files.xxx.com/httpdocs/_exports -url=http://files.xxx.com/_exports/ -sudo=true
+
+
+#####Check current working directory
+CWD=${PWD##*/}
+if [ "${CWD}" != "bin" ] ; then
+  echo "MUST BE EXECUTED in current bin folder"
+  exit 1
+fi
+
+#####Check if parameters.yml file exists
+PARAMETERS="../app/config/parameters.yml"
+if [ ! -f "${PARAMETERS}" ]; then
+  echo "File ${PARAMETERS} does not exist."
+  exit 1
+fi
+
+#####Variables
+DATE=$(date +%Y%m%d%H%M)
+
+SECRET=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+
+DB=$(sed -n 's/\bdatabase_name:\(.*\)/\1/p' <${PARAMETERS})
+DB="${DB// /}"
+
+DB_USER=$(sed -n 's/\bdatabase_user:\(.*\)/\1/p' <${PARAMETERS})
+DB_USER="${DB_USER// /}"
+
+
+MONGODB=$(sed -n 's/\bmongodb_database_name:\(.*\)/\1/p' <${PARAMETERS})
+MONGODB="${MONGODB// /}"
+
+SUDO=''
+
+for i in "$@"; do
+  case $i in
+  -u=* | --user=*)
+    USER="${i#*=}"
+    shift # past argument=value
+    ;;
+  -e=* | --env=*)
+    ENV="${i#*=}"
+    shift
+    ;;
+  -r=* | --release=*)
+    RELEASE="${i#*=}"
+    shift
+    ;;
+  -h=* | --host=*)
+    HOST="${i#*=}"
+    shift
+    ;;
+  -url=*)
+    URL="${i#*=}"
+    shift
+    ;;
+  -sudo=*)
+    SUDO="${i#*=}"
+    shift
+    ;;
+  *)
+    # unknown option
+    ;;
+  esac
+done
+
+if [ "${USER}" = "" ] || [ "${ENV}" = "" ] || [ "${RELEASE}" = "" ]  || [ "${SECRET}" = "" ] || [ "${DB}" = "" ] || [ "${DB_USER}" = "" ] || [ "${MONGODB}" = "" ] || [ "${HOST}" = "" ] || [ "${DATE}" = "" ] || [ "${URL}" = "" ] ; then
+  echo "Missing argurment(s)"
+  echo "Usage ./bin/archive -u=[USER] -e=[ENV] -r=[RELEASE] -h=[HOST] -url=[URL]"
+  exit 1
+fi
+
+if [ "${SUDO}" != "" ] ; then
+ SUDO='sudo '
+fi
+
+SRC_DIR="$(basename ${RELEASE})"
+
+echo "DATE=${DATE}"
+echo "SECRET=${SECRET}"
+echo "USER=${USER}"
+echo "ENV=${ENV}"
+echo "RELEASE=${RELEASE}"
+echo "SRC_DIR=${SRC_DIR}"
+echo "DB=${DB}"
+echo "DB_USER=${DB_USER}"
+echo "MONGODB=${MONGODB}"
+echo "HOST=${HOST}"
+echo "URL=${URL}"
+echo "SUDO=${SUDO}"
+
+#####Archive
+A_SOURCES="bu-${USER}-${DATE}-src-${ENV}-${SECRET}.tgz"
+A_SQL="bu-${USER}-${DATE}-db-${ENV}-${SECRET}.tgz"
+A_NOSQL="bu-${USER}-${DATE}-mongodb-${ENV}-${SECRET}.tgz"
+A_CRON="bu-${USER}-${DATE}-cron-${ENV}-${SECRET}.tgz"
+
+#Sources
+echo "Archiving sources"
+cd ${RELEASE}/.. || exit
+
+${SUDO} tar cfvz ${A_SOURCES}  \
+        --exclude=${SRC_DIR}/.git --exclude=${SRC_DIR}/vendor --exclude=${SRC_DIR}/app/cache --exclude=${SRC_DIR}/app/logs \
+        --exclude=${SRC_DIR}/web/media/cache --exclude=${SRC_DIR}/web/uploads/.tmb --exclude=${SRC_DIR}/web/assets --exclude=${SRC_DIR}/web/css/compiled \
+        --exclude=${SRC_DIR}/web/css/compiled --exclude=${SRC_DIR}/web/js/compiled --exclude=${SRC_DIR}/app/config/parameters.yml \
+        --exclude=${SRC_DIR}/public/media/cache --exclude=${SRC_DIR}/public/css/compiled --exclude=${SRC_DIR}/public/js/compiled  \
+        --exclude=${SRC_DIR}/var  --exclude=${SRC_DIR}/auth.json  \
+        --exclude=${SRC_DIR}/node_modules --exclude=${SRC_DIR}/web/.well-known ${SRC_DIR}
+
+#SQL (mysql)
+echo "Archiving DB"
+${SUDO} /bin/bash -c "mysqldump --skip-comments -u ${DB_USER} -p ${DB} >${DB}.sql"
+${SUDO} tar cvfz ${A_SQL} ${DB}.sql && rm ${DB}.sql
+
+#NOSQL (mongo)
+echo "Archiving MongoDB"
+${SUDO} mongodump -d ${MONGODB} -o ${MONGODB}-mongodb-export
+${SUDO} tar cvfz ${A_NOSQL} ${MONGODB}-mongodb-export && ${SUDO} rm -Rf ${MONGODB}-mongodb-export
+
+#Cron
+echo "Archiving Cron"
+if [ "${ENV}" = "prod" ]; then
+  if [ "${SUDO}" != "" ] ; then
+    ${SUDO} /bin/bash -c "crontab -u www-data -l >crons-${USER}"
+  else
+    crontab -l >crons-${USER}
+  fi
+  ${SUDO} tar cvfz ${A_CRON} crons-${USER} && ${SUDO} rm crons-${USER}
+fi
+
+#####Tranfer archive
+echo "Transferring archives"
+${SUDO} scp bu-${USER}-${DATE}-*.tgz ${HOST}
+if [ $? -eq 0 ];
+then
+    echo "Archive completed"
+else
+    echo "Error while transferring archive"
+    exit
+fi
+
+
+cat << EOF
+
+Message to add to the task:
+----------------------------------------
+Here are the archives:
+- ${URL}${A_SOURCES}
+- ${URL}${A_SQL}
+- ${URL}${A_NOSQL}
+- ${URL}${A_CRON} (For prod only)
+
+Here are the checksum to verify files integrity:
+EOF
+#####Checksum
+${SUDO} md5sum bu-${USER}-${DATE}-*.tgz
+cat << EOF
+
+Here is the isntallation doc:
+https://github.com/Cocolabs-SAS/cocorico/blob/master/doc/installation.md
+----------------------------------------
+
+Note: Don't forget to communicate also the http auth account
+EOF
+
+#####Cleanup
+${SUDO} rm bu-${USER}-${DATE}-*.tgz

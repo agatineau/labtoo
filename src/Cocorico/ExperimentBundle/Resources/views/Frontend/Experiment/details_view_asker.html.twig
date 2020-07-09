@@ -1,0 +1,130 @@
+{% extends '::base.html.twig' %}
+{% form_theme form 'CocoricoExperimentBundle:Frontend/Form:search_fields.html.twig' %}
+{% trans_default_domain 'cocorico_listing' %}
+{% set base_title = 'listing.new.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name %}
+
+{%- block meta_title -%}
+    {{ (experiment.title|strip_private_info ~ ' - ' ~ experiment.category ~ ' - ' ~ cocorico_site_name)|raw }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ (experiment.description|strip_private_info|truncate(160))|raw }}
+{%- endblock -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' with {
+       'main_class': 'main_profile'} %}
+
+        {% trans_default_domain 'cocorico_listing' %}
+
+        {% block main %}
+            <div class="intro intro-medium search-header search-header-section">
+                <div class="intro-caption">
+                    <div class="container">
+                        <div class="col-md-12 p-0">
+                            <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}" class="m-0">
+                                <div class="section-back">
+                                    <p class="icon-back">
+                                        <span class="arrow-left-link"></span>
+                                    </p>
+                                    <h1 class="main-title">
+                                        {{ experiment.title|strip_private_info }}
+                                    </h1>
+                                </div>
+                            </a>
+                            <p class="breadcrumb-links">
+                                {# Main category link #}
+                                <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}">
+                                    {{ experiment.category.parent }}
+                                </a>
+                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                {# Sub category link #}
+                                <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}">
+                                    {{ experiment.category }}
+                                </a>
+                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                <span>{{ experiment.title|strip_private_info }}</span>
+                            </p>
+                        </div>
+                        {% block breadcrumbs %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 dashboard-search">
+                        {{ form_start(form_search, {'attr':{'class': 'listing-section'}}) }}
+                        <input type="hidden" name="listing[listingCategory]" value="{{ experiment.category.id }}">
+                        <input type="hidden" name="listing[experiment]" value="{{ experiment.id }}">
+                        <input type="hidden" name="searchAnswersFormSubmitFlag" value="1">
+                        <div id="experiment-details" class="view-details-experiment">
+                            <div class="section-one">
+                                <div class="img-section">
+                                    {% set experimentsDetailsImageName = 'default-experiment.png' %}
+                                    {% if experiment.image.name|length > 0 %}
+                                        {% set experimentsDetailsImageName = experiment.image.name %}
+                                    {% endif %}
+                                    <img src="{{('uploads/experiments/images/' ~ experimentsDetailsImageName) | imagine_filter('cocorico_experiments_details_image')}}" class="experiments-img" />
+                                </div>
+                                <div class="description-section">
+                                    <h2>{{ 'listing.experiment.details.description.title'|trans }}</h2>
+                                    <p class="m-0">{{ experiment.description|strip_private_info }}</p>
+                                </div>
+                                <div class="material-section">
+                                    <h2>{{ 'listing.experiment.details.material.title'|trans }}</h2>
+                                    <p class="m-0">{{ experiment.material|nl2br }}</p>
+                                </div>
+                            </div>
+                            {% if experiment is defined and experiment.deliverables|length %}
+                                <div class="section-two">
+                                    <div class="deliverables-section">
+                                        <h2>{{ 'listing.experiment.details.deliverables.title'|trans }}</h2>
+                                        <ul>
+                                            {% for deliverable in  experiment.deliverables %}
+                                                <li>{{ deliverable }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if form.answers|length %}
+                                <div class="section-three">
+                                    <div class="answers-section">
+                                        <h2>{{ 'listing.experiment.details.answers.title'|trans }}</h2>
+                                        <p class="sub-title">{{ 'listing.experiment.details.answers.subtitle'|trans }}</p>
+                                        <div class="steps p-0 m-0">
+                                            {{ form_widget(form.answers) }}
+                                        </div>
+
+                                        <div class="text-center">
+                                            <p class="hidden"><strong>{{ 'listing.last.block.text'|trans }}</strong></p>
+                                            <button type="submit" class="btn btn-red btn-medium form-btn search-btn-action">
+                                                <i class="fa fa-search"></i> {{ 'listing.experiment.details.search.button'|trans }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {{ form_widget(form_search._token) }}
+                        {{ form_end(form_search, {'render_rest': false}) }}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include '@CocoricoExperiment/Frontend/ListingSearch/js/_new_js_for_search.html.twig' with {
+        'base_title': base_title
+    } %}
+{% endblock %}

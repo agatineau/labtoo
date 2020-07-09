@@ -1,0 +1,7 @@
+{% if headerBlogText|length > 0 %}
+    <li>
+        <a href="{{headerBlogText.url}}" tabindex="7"  target="_blank">
+            {{ headerBlogText.description }}
+        </a>
+    </li>
+{% endif %}

@@ -1,0 +1,65 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set listing = booking.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+{% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+
+{% set user = listing.user %}
+{% set user_image = user.images %}
+{% set user_address = user.getAddresses %}
+{% set user_address = (user_address is empty) ? null : user_address[0] %}
+
+{% set amount = booking.amountDecimal | format_price(app.request.locale, 2, false) %}
+{% set amount_excl_vat = booking.amountExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set amount_total = booking.amountToPayByAskerDecimal | format_price(app.request.locale, 2, false) %}
+{# {% set amount_total_excl_vat = booking.amountTotalExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %} #}
+{% set amount_total_vat = booking.amountTotalVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set fee_as_asker = booking.amountFeeAsAskerDecimal | format_price(app.request.locale, 2, false) %}
+{% set fee_as_offerer = booking.AmountFeeAsOffererDecimal | format_price(app.request.locale, 2, false) %}
+
+{# this is for temporery change #}
+{# {% set amount_of_booking = (booking.amountToPayByAskerDecimal - booking.amountFeeAsAskerDecimal) | format_price(app.request.locale, 2, false) %} #}
+{% set fee_asAskerExclodVatAmount = booking.amountFeeAsAsker / (1 + vatRate) %}
+{% set fee_asAskerExclodVatAmount = fee_asAskerExclodVatAmount / 100 %}
+{% set amount_of_booking = booking.amountExcludingVATDecimal(vatRate)|format_price(app.request.locale, 0) %}
+{% set feeAsAskerExclodVatAmount = fee_asAskerExclodVatAmount|format_price(app.request.locale, 2, false) %}
+<div class="price-area">
+    <ul class="list-inline price-list">
+        <li>
+            <strong data-id="fee-asker">{{ 'booking.total_amount'|trans }} : </strong>
+            {{ amount_of_booking }}
+            <sup>
+                <small>{{ vatExcludeText(app.request.getLocale()) }}</small>
+            </sup> *
+            <button title="{{ 'booking.fees.help'|trans }}" data-placement="right"
+                    data-toggle="tooltip" class="tooltip-button" type="button"
+                    data-original-title="{{ 'booking.fees.help'|trans }}">?
+            </button>
+        </li>
+        <li>
+            <strong data-id="fee-asker">{{ 'booking.fees.amount:'|trans }}</strong>
+            {{ feeAsAskerExclodVatAmount }}
+            <sup>
+                <small>{{ vatExcludeText(app.request.getLocale()) }}</small>
+            </sup> *
+            <button title="{{ 'booking.fees.help'|trans }}" data-placement="right"
+                    data-toggle="tooltip" class="tooltip-button" type="button"
+                    data-original-title="{{ 'booking.fees.help'|trans }}">?
+            </button>
+        </li>
+    </ul>
+    <strong class="total">
+        {{ 'booking.amount.total:'|trans }} {{ amount_total }}
+        <small>
+            (
+            <strong>{{ 'booking.bill.title.vat'|trans }} : </strong>
+            <span data-id="total-amount-vat">{{ amount_total_vat }}</span>
+            )
+        </small>
+        <button title="{{ 'booking.amount.help'|trans }}" data-placement="right"
+                data-toggle="tooltip" class="tooltip-button" type="button"
+                data-original-title="{{ 'booking.amount.help'|trans }}">?
+        </button>
+    </strong>
+</div>

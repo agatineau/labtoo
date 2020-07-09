@@ -1,0 +1,12 @@
+services:
+    labtoo_mangopay.pay_in_bank_wire_request:
+        class: Labtoo\MangoPayBundle\Request\PayInBankWireRequest
+        parent: cocorico_mangopay.base_request
+
+    labtoo_mangopay.pay_in_card_request:
+        class: Labtoo\MangoPayBundle\Request\PayInCardRequest
+        parent: cocorico_mangopay.base_request
+
+    labtoo_mangopay.pay_out_bank_wire_request:
+        class: Labtoo\MangoPayBundle\Request\PayOutBankWireRequest
+        parent: cocorico_mangopay.base_request

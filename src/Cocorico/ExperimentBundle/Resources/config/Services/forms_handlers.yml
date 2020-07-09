@@ -1,0 +1,8 @@
+services:
+
+    cocorico_experiment.form.handler.listing_search:
+        class: Cocorico\ExperimentBundle\Form\Handler\Frontend\ListingSearchFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico_experiment.manager.listing_search"
+            - "@cocorico_experiment.model.listing_search_session"

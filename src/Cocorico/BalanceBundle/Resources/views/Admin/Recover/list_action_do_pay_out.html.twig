@@ -1,0 +1,12 @@
+{% if object.status == BalanceMovementConstants.STATUS_WAITING %}
+    {% set mangopay_dashboard_url = 'https://dashboard.mangopay.com' %}
+    {% if app.environment != 'prod' %}
+        {% set mangopay_dashboard_url = 'https://dashboard.sandbox.mangopay.com' %}
+    {% endif %}
+    {% set mangopay_dashboard_url = mangopay_dashboard_url ~ "/Operations/PayOut" %}
+    <a href="{{ mangopay_dashboard_url }}" target="_blank" class="btn btn-sm btn-default edit_link"
+       title="{{ 'action_do_bank_wire'|trans({}, 'SonataAdminBundle') }}">
+        <i class="glyphicon glyphicon-share"> </i>
+        {{ 'action_do_bank_wire'|trans({}, 'SonataAdminBundle') }}
+    </a>
+{% endif %}

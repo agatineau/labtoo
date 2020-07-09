@@ -1,0 +1,79 @@
+<script>
+    $(function(){
+
+        /* For home page search bar */
+        if($('.searchsticky#search_sticky #search-input').length > 0)
+        {
+            $(window).on('pageshow', function() {
+                $('#search-button').css('opacity', 1);
+                $('#search-input')
+                    .val('')
+                    .typeahead('destroy')
+                    .typeahead({
+                        hint: false,
+                        minLength: 2,
+                        highlight: true
+                    }, {
+                        source: function (query, processSync, processAsync) {
+                            $.getJSON(
+                                '/api/experiments/',
+                                { q: encodeURIComponent(query) },
+                                function (response) {
+                                    processAsync(response);
+                                }
+                            );
+                        },
+                        displayKey: 'title',
+                        limit: {{ cocorico_elasticsearch_limit_results }}
+                    })
+                    .on('typeahead:selected', function (e, experiment) {
+                        $('#search-button').css('opacity', 0);
+                        window.location = experiment['url'];
+                    })
+                    .on('keyup', function (e) {
+                        if (e.which === 13 && $('.tt-suggestion').length === 1) {
+                            window.location = $('.tt-suggestion').data('ttSelectableObject').url;
+                        }
+                    })
+                    .focus()
+                ;
+            });
+        }
+
+        /* For header search bar */
+        $(window).on('pageshow', function() {
+            $('#header-search-button').css('opacity', 1);
+            $('#header-search-input')
+                .val('')
+                .typeahead('destroy')
+                .typeahead({
+                    hint: false,
+                    minLength: 2,
+                    highlight: true
+                }, {
+                    source: function (query, processSync, processAsync) {
+                        $.getJSON(
+                            '/api/experiments/',
+                            { q: encodeURIComponent(query) },
+                            function (response) {
+                                processAsync(response);
+                            }
+                        );
+                    },
+                    displayKey: 'title',
+                    limit: {{ cocorico_elasticsearch_limit_results }}
+                })
+                .on('typeahead:selected', function (e, experiment) {
+                    $('#header-search-button').css('opacity', 0);
+                    window.location = experiment['url'];
+                })
+                .on('keyup', function (e) {
+                    if (e.which === 13 && $('.tt-suggestion').length === 1) {
+                        window.location = $('.tt-suggestion').data('ttSelectableObject').url;
+                    }
+                })
+                .focus()
+            ;
+        });
+    });
+</script>

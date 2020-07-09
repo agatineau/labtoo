@@ -1,0 +1,145 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{% block listing_category_widget %}
+    {{ block('_listing_listingListingCategories_widget') }}
+{% endblock %}
+
+{% block _answer_collection %}
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+{% endblock %}
+
+{% block listing_answer_collection_widget %}
+    {{ block('_answer_collection') }}
+{% endblock %}
+
+{% block listing_search_answer_collection_widget %}
+    {{ block('_answer_collection') }}
+{% endblock %}
+
+{% block listing_search_sub_answer_collection_widget %}
+    {{ block('_answer_collection') }}
+{% endblock %}
+
+{% block experiment_widget %}
+    {% if form|length %}
+        <div class="form-inner form-element">
+            <h2><strong class="step-number"></strong> / {{ 'listing.new.second.step'|trans }}</h2>
+            <div class="form-cols">
+                {% for row in form|batch((form|length / 3)|round(0, 'ceil')) %}
+                    <div class="form-col">
+                        <ol class="options">
+                            {% for child in row %}
+                                <li class="option">
+                                    <div class="option-head">
+                                        <figure class="option-head-image">
+                                            <img src="{{ asset('images/cuvette-small.png') }}" alt=""/>
+                                            <img src="{{ asset('images/cuvette-small-hover.png') }}" alt=""
+                                                 class="active"/>
+                                        </figure>
+                                        <h5 class="option-title">{{ child.vars.attr['title'] }}</h5>
+                                    </div>
+                                    <div class="option-body">
+                                        <p class="eq-height">{{ child.vars.attr['description']|nl2br }}</p>
+                                        <div class="radio option-radio">
+                                            {{ form_widget(child) }}
+                                            <label class="form-label"
+                                                   for="{{ child.vars.id }}">{{ 'listing.select.experience.text'|trans }}</label>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block listing_answer_widget %}
+    <div class="step listing-answer">
+        <h6><span class="question-number"></span> / {{ form_label(form.value) }}</h6>
+        <div class="form-row">
+            {{ form_widget(form.question) }}
+            {{ form_errors(form.value) }}
+            {{ form_widget(form.value) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block listing_search_answer_widget %}
+    <div class="step listing-search-answer">
+        <h6><span class="question-number"></span> / {{ form_label(form.value) }}</h6>
+        <div class="form-row">
+            {{ form_widget(form.question) }}
+            {{ form_errors(form.value) }}
+            {{ form_widget(form.value) }}
+            {{ form_widget(form.answers) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block listing_search_sub_answer_widget %}
+    <div class="listing-search-answer{% if form.value.vars.errors is empty and form.vars.data.value is empty %} hidden{% endif %}"
+            {% if form.vars.data.parentChoiceId %} data-value="{{ form.vars.data.parentChoiceId }}"{% endif %}>
+        <h6><span class="question-number"></span> / {{ form_label(form.value) }}</h6>
+        <div class="form-row">
+            {{ form_widget(form.question) }}
+            {{ form_errors(form.value) }}
+            {{ form_widget(form.value) }}
+            {{ form_widget(form.answers) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block question_range_widget %}
+    <input class="step-field"
+           type="number"
+           min="{{ form.vars.attr.min }}"
+           max="{{ form.vars.attr.max }}"
+           id="{{ form.vars.id }}"
+           name="{{ form.vars.full_name }}"
+           value="{{ form.vars.data }}"/>
+{% endblock %}
+
+{% block question_text_widget %}
+    <div class="textarea-holder">
+        {{ form_widget(form, {
+            'attr': {
+                'class': 'step-field'
+            }
+        }) }}
+    </div>
+{% endblock %}
+
+{% block question_choice_widget %}
+    {% if multiple %}
+        {% for choice in choices %}
+            <input class="step-field"
+                   type="checkbox"
+                   id="{{ form.vars.id }}_{{ loop.index0 }}"
+                   name="{{ form.vars.full_name }}"
+                   value="{{ choice.value }}" {% if choice.value in form.vars.data %} checked{% endif %} />
+            <label for="{{ form.vars.id }}_{{ loop.index0 }}">{{ choice.label }}</label>
+            <br>
+        {% endfor %}
+    {% else %}
+        <select class="step-field"
+                id="{{ form.vars.id }}"
+                name="{{ form.vars.full_name }}">
+            {% if placeholder is defined %}
+                <option value="">{{ placeholder }}</option>
+            {% endif %}
+            {% for choice in choices %}
+                <option value="{{ choice.value }}" {% if choice.value == form.vars.data %} selected{% endif %}>
+                    {{ choice.label }}
+                </option>
+            {% endfor %}
+        </select>
+        {#{% for value, prohibitiveChoice in form.vars.attr.prohibitiveChoices %}
+            <div class="prohibitive-error" data-value="{{ value }}">{{ prohibitiveChoice }}</div>
+        {% endfor %}#}
+    {% endif %}
+{% endblock %}
