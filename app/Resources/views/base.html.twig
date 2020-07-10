@@ -9,9 +9,6 @@
     <meta name="description" content="{%- block meta_description -%}{{ cocorico_short_description }}{%- endblock -%}">
 
     {%- block open_graph_data -%}
-        <meta property="og:title" content="{{ app.request.requestUri|slice(4)|replace({'/': '' > ", '-': " ", '_': " "})|ucwords  }}"/>
-        <meta property="og:description" content="{{ cocorico_short_description }}"/>
-        <meta property="og:image" content="{{ asset('favicon.ico') }}"/>
     {%- endblock -%}
 
     <meta charset="utf-8">

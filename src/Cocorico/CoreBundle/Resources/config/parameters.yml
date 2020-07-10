@@ -1,10 +1,10 @@
 parameters:
     #### Environment independant parameters. Same values in dev, staging, prod environments  ####
     #Site general infos
-    cocorico.site_name: LABTOO
-    cocorico.phone: +33 (0)9 86 26 28 84
+    cocorico.site_name: Labtoo
+    cocorico.phone: +33 (0)1 55 57 94 45
     cocorico.address: 18, rue Saint-Saens 75015 Paris
-    cocorico.short_description: 'Cocorico is collaborative consumption platform'
+    cocorico.short_description: 'Outsource your R&D projects with Labtoo'
     cocorico.contact_mail: contact@labtoo.com
     #To obfuscate see http://wbwip.com/wbw/emailencoder.html
     cocorico.contact_mail_obfuscated: "&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#108;&#097;&#098;&#116;&#111;&#111;&#046;&#099;&#111;&#109;"

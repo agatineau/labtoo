@@ -8,7 +8,15 @@
     {%- block meta_description -%}
         {{ page.metaDescription }}
     {%- endblock -%}
+
+    {%- block open_graph_data -%}
+        <meta property="og:title" content="{{ page.metaTitle }}"/>
+        <meta property="og:description" content="{{ page.metaDescription }}"/>
+        <meta property="og:image" content="{{ asset('uploads/pictures/Labtoo_logo.png') }}"/>
+    {%- endblock -%}    
+
 {% endif %}
+
 
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}

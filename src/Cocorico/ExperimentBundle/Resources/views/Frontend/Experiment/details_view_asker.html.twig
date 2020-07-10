@@ -11,6 +11,12 @@
     {{ (experiment.description|strip_private_info|truncate(160))|raw }}
 {%- endblock -%}
 
+{%- block open_graph_data -%}
+    <meta property="og:title" content="{{ (experiment.title|strip_private_info ~ ' - ' ~ experiment.category)|raw }}"/>
+    <meta property="og:description" content="{{ (experiment.description|strip_private_info|truncate(160))|raw }}"/>
+    <meta property="og:image" content="{{ asset('uploads/pictures/Labtoo_logo.png') }}"/>
+{%- endblock -%}
+
 {% block stylesheets %}
     {{ parent() }}
 
@@ -39,16 +45,29 @@
                             </a>
                             <p class="breadcrumb-links">
                                 {# Main category link #}
-                                <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}">
-                                    {{ experiment.category.parent }}
-                                </a>
-                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
-                                {# Sub category link #}
-                                <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}">
-                                    {{ experiment.category }}
-                                </a>
-                                <img src="{{ asset('images/arrow-dropdown.svg') }}" />
-                                <span>{{ experiment.title|strip_private_info }}</span>
+                                <span itemscope itemtype="http://schema.org/BreadcrumList">
+                                
+                                    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                        <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}" itemprop="item">
+                                            <span itemprop="name">{{ experiment.category.parent }}</span>
+                                        </a>
+                                        <meta itemprop="position" content="1">
+                                        <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                    </span>
+                                    {# Sub category link #}
+                                    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                        <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}" itemprop="item">
+                                            <span itemprop="name">{{ experiment.category }}</span>
+                                        </a>
+                                        <meta itemprop="position" content="2">
+                                        <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                    </span>
+                                    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                        <span itemprop="name" data-id="title">{{ experiment.title|strip_private_info }}</span>
+                                        <meta itemprop="position" content="3">
+                                    </span>
+                                </span>
+
                             </p>
                         </div>
                         {% block breadcrumbs %}{% endblock %}
@@ -57,7 +76,7 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 dashboard-search">
+                    <div class="col-xs-12 dashboard-search" itemscope itemtype="https://schema.org/Service">
                         {{ form_start(form_search, {'attr':{'class': 'listing-section'}}) }}
                         <input type="hidden" name="listing[listingCategory]" value="{{ experiment.category.id }}">
                         <input type="hidden" name="listing[experiment]" value="{{ experiment.id }}">

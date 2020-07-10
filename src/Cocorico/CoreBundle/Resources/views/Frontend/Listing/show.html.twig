@@ -16,15 +16,16 @@
 {%- endblock -%}
 
 {%- block meta_description -%}
-    {{ 'listing.show.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_description|truncate(200, true) }}
+    {{ 'listing.show.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_description|truncate(160, true) }}
 {%- endblock -%}
 
 {%- block open_graph_data -%}
     <meta property="og:title" content="{{ listing_translation.title }}"/>
     <meta property="og:description" content="{{ listing_description|truncate(200, true) }}"/>
     {% if listing.images|length %}
-        <meta property="og:image"
-              content="{{ asset(listing.experiment.image | imagine_filter('experiment_large')) }}"/>
+        <meta property="og:image" content="{{ asset(listing.experiment.image | imagine_filter('experiment_large')) }}"/>
+        {% else %}
+        <meta property="og:image" content="{{ asset('uploads/pictures/Labtoo_logo.png') }}"/>
     {% endif %}
 {%- endblock -%}
 
@@ -59,68 +60,71 @@
         {% block main %}
             {# {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }} #}
 
-            <div class="intro intro-xsmall" style="background-image: url({{asset('images/intro-bg.jpg')}});">
-                <div class="intro-caption">
-                    <div class="container">
-                        <h1><small>{{ listing.experiment.title }}</small></h1>
-                        <p>
-                            {{ listing.listingListingCategories[0].category.parent.translations[app.request.locale].name }}
-                            > {{ listing.listingListingCategories[0].category.translations[app.request.locale].name }}
+            <div class="intro-caption">
+                <div class="container">
+                    <div class="col-md-12 p-0">
+                    {% if app.session.get('listing_search_session') is defined and app.session.get('listing_search_session') %}
+                        <a href="{{ path('cocorico_listing_search_new',{'mode':'edit'}) }}">
+                            <div class="section-back">
+                                <p class="icon-back">
+                                    <span class="arrow-left-link"></span>
+                                </p>
+                                <h1 class="main-title">
+                                    {{ listing.experiment.title }}
+                                </h1>
+                            </div>                        
+                        </a>
+                    {% else %}
+                        <a href="{{ path('cocorico_listing_search_new') }}">
+                            <div class="section-back">
+                                <p class="icon-back">
+                                    <span class="arrow-left-link"></span>
+                                </p>
+                                <h1 class="main-title">
+                                    {{ listing.experiment.title ~ " - " ~ listing_user.name }}
+                                </h1>
+                            </div> 
+                        </a>
+                    {% endif %}
+                        <p class="breadcrumb-links">
+                            {# Main category link #}
+                            <span itemscope itemtype="http://schema.org/BreadcrumList">
+                            
+                                <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}" itemprop="item">
+                                        <span itemprop="name">{{ listing.listingListingCategories[0].category.parent.translations[app.request.locale].name }}</span>
+                                    </a>
+                                    <meta itemprop="position" content="1">
+                                    <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                </span>
+                                {# Sub category link #}
+                                <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a href="{{ path('cocorico_listing_search_category', {'category': experiment.category.getSlug()}) }}" itemprop="item">
+                                        <span itemprop="name">{{ listing.listingListingCategories[0].category.translations[app.request.locale].name }}</span>
+                                    </a>
+                                    <meta itemprop="position" content="2">
+                                    <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                </span>
+                                <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span itemprop="name" data-id="title">{{ listing.experiment.title }}</span>
+                                    <meta itemprop="position" content="3">
+                                </span>
+                            </span>
+
                         </p>
-                        {% if app.session.get('listing_search_session') is defined and app.session.get('listing_search_session') %}
-                            <a href="{{ path('cocorico_listing_search_new',{'mode':'edit'}) }}" class="btn btn-red">{{ 'listing.detail.edit_search.link.text'|trans }}</a>>
-                        {% else %}
-                            <a href="{{ path('cocorico_listing_search_new') }}" class="btn btn-red">{{ 'listing.detail.search.link.text'|trans }}</a>
-                        {% endif %}
-                    </div><!-- /.container -->
-                </div><!-- /.intro-caption -->
-            </div><!-- /.intro intro-xsmall -->
+                    </div>
+                    {% block breadcrumbs %}{% endblock %}
+                </div>
+            </div>
 
             <div class="container">
-                <div class="row">
-
-                    <!-- breadcrumbs -->
-                    {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
-                        request: app.request
-                    })) }}
-                </div>
-                    <div class="twocolumns row alt" itemscope itemtype="http://schema.org/Product">
-                        <!-- contain sidebar of the page -->
-                        <aside id="sidebar" class="col-xs-12 col-md-4 col-lg-3 pull-right">
-                            <div class="holder">
-                                {% if listing_search_session.valid(listing) %}
-                                    {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', { 'listing': listing })) }}
-                                {% else %}
-                                    <section class="reservation">
-                                        <div class="add-info">
-                                            <strong>{{ 'listing.booking.search_info'|trans({}, 'cocorico_booking') }}</strong>
-                                        </div>
-                                        
-                                        <div class="reservation-form">
-                                            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
-                                                    class="contact-opener btn btn-default no-margin btn-blue" data-toggle="modal"
-                                                    data-target="#modal">
-                                                    {{ 'listing.show.user.contact'|trans }}
-                                                </a>
-                                            {%- else -%}
-                                                <a class="contact-opener btn btn-default no-margin btn-blue"
-                                                    href=" {{ path('cocorico_user_login') }}">
-                                                    {{ 'listing.show.user.contact'|trans }}
-                                                </a>
-                                            {%- endif -%}                            
-                                        </div>
-                                    </section>
-                                {% endif %}
-                            </div>
-                        </aside>
-
-                        <!-- contain the main content of the page -->
-                        <div id="content" class="listing-area col-xs-12 col-md-8 col-lg-9">
-                            <div class="content-holder">
+                    <div class="row" itemscope itemtype="http://schema.org/Product">
+                        <div id="content" class="col-xs-12 dashboard-search">
+                            <div class="view-details-experiment">
                                 <!-- listing-container -->
-                                <div class="listing-container">
-                                    <div class="profile">
+                                <div class="section-one">
+                                    <div class="img-section">
+                                        <!-- Profile picture & name -->
                                         <div class="profile-aside eq-height">
                                             <div class="gallery-small slideshow">
                                                 <div class="slideset" style="height:96px;">
@@ -147,32 +151,12 @@
                                                     <span></span>
                                                 </a>
                                             </div>
+                                            <h2 style="color:#F1574E; font-size: 21px;">{{ listing_user.name }}</h2>
+                                        </div>
+                                    
+                                        </div>
 
-                                            <h4>{{ listing_user.name }}</h4>
-
-                                            {% if listing.averageRating %}
-                                                {{ listing.averageRating | cocorico_star_rating }}
-                                            {% endif %}
-
-                                            <a href="#blog" class="waypoint">{{ reviews|length }}</span> {{ 'listing.show.comments'|trans }}</a>
-
-
-                                            {#{%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                                {# contact button and form #}
-                                              {#}  {{ render(controller('CocoricoMessageBundle:Dashboard/Message:newThread',
-                                                { 'listingId': listing.id } )) }}
-                                                {# end of contact button and form #}
-                                            {#{%- else -%}
-                                                <a class="contact-opener btn btn-blue"
-                                                   href=" {{ path('cocorico_user_login') }}">
-                                                    {{ 'listing.show.user.contact'|trans }}
-                                                </a>
-                                            {%- endif -%}#}
-
-                                            {# <a href="#" class="btn btn-blue">Me contacter</a> #}
-                                        </div><!-- /.profile-aside -->
-
-                                        <div class="profile-content eq-height">
+                                        <div class="description-section">
 
                                             <h2>{{ 'listing.offerer.experience.text'|trans }} :</h2>
                                             <p>{{ listing_translation.informativeDescription|nl2br }}</p>
@@ -224,61 +208,64 @@
                                             {% if url is not defined or url == null %}
                                                 {% set url = app.request.uri %}
                                             {% endif %}
-                                            <!-- social-networks -->
-                                            <div class="socials-default profile-socials">
-                                                <ul>
-                                                    <li>
-                                                        <a href="http://www.facebook.com/sharer/sharer.php?{{ {'u': url,'title': listing_translation.title }|url_encode }}" class="blue">
-                                                            <i class="icon-facebook"></i>
-                                                            <span class="hidden">facebook</span>
-                                                        </a>
-                                                    </li>
 
-                                                    <li>
-                                                        <a href="http://twitter.com/intent/tweet?{{ {'status': url }|url_encode }}" class="light-blue">
-                                                            <i class="icon-twitter"></i>
-                                                            <span class="hidden">twitter</span>
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
-                                            </div><!-- /.socials -->
                                         </div><!-- /.profile-content -->
 
-                                    </div><!-- /.profile -->
+                                        <div id="sidebar" class="material-section">
+                                            <div class="holder">
+                                                {% if listing_search_session.valid(listing) %}
+                                                    {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', { 'listing': listing })) }}
+                                                {% else %}
+                                                    <section class="reservation">
+                                                        <div class="add-info">
+                                                            <strong>{{ 'listing.booking.search_info'|trans({}, 'cocorico_booking') }}</strong>
+                                                        </div>
+                                                        
+                                                        <div class="reservation-form">
+                                                            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
+                                                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
+                                                                    class="contact-opener btn btn-default no-margin btn-blue" data-toggle="modal"
+                                                                    data-target="#modal">
+                                                                    {{ 'listing.show.user.contact'|trans }}
+                                                                </a>
+                                                            {%- else -%}
+                                                                <a class="contact-opener btn btn-default no-margin btn-blue"
+                                                                    href=" {{ path('cocorico_user_login') }}">
+                                                                    {{ 'listing.show.user.contact'|trans }}
+                                                                </a>
+                                                            {%- endif -%}                            
+                                                        </div>
+                                                    </section>
+                                                {% endif %}
+                                            </div>
+                                        </div>
 
-                                    <div class="box-simple">
-                                        <h2>{{ 'listing.user.description.text'|trans }} :</h2>
-                                        <p>{{ (listing_user.translations[app.request.locale].description is defined) ? listing_user.translations[app.request.locale].description : '-' }}</p>
+                                    </div><!-- /.profile -->
+                                </div>
+                                <div class="section-two">
+                                    <div class="deliverables-section">
                                         <h2>{{ 'listing.admin.experience.text'|trans }}</h2>
                                         <p>{{ listing_translation.description|nl2br }}</p>
-                                    </div><!-- /.box-simple -->
+                                    </div>
+                                    <div class="deliverables-section">
+                                        <h2>{{ 'listing.user.description.text'|trans }} :</h2>
+                                        <p>{{ (listing_user.translations[app.request.locale].description is defined) ? listing_user.translations[app.request.locale].description : '-' }}</p>
+                                    </div>
+                                </div><!-- /.listing-details -->
 
-                                    <div class="box-simple box-simple-alt">
+
+                                <div class="section-three">
+                                    <div class="answers-section">
                                         <h2>{{ 'listing.show.map'|trans }} :</h2>
 
                                         <div class="maparea">
                                             <div class="map-holder">
                                                 <div class="map-canvas" id="map-listing" data-zoom="14"
-                                                     data-overlays="inc/markers2.json"></div>
+                                                        data-overlays="inc/markers2.json"></div>
                                             </div>
                                         </div>
-                                    </div><!-- /.box-simple -->
-
-                                    <!-- blog -->
-                                    {% if reviews|length > 0 %}
-                                        <div class="blog" id="blog">
-                                            <div class="head">
-                                                <h3>{{ reviews|length }}</span> {{ 'listing.show.comments'|trans }}</h3>
-                                            </div>
-
-                                            <div class="posts-holder">
-                                                {% include 'CocoricoCoreBundle:Frontend/Listing:_rating_comments.html.twig' with {'reviews': reviews} only %}
-                                                <!-- post -->
-
-                                            </div>
-                                        </div>
-                                    {% endif %}
+                                    </div>
+                                </div><!-- /.map-box -->
                                 </div>
                             </div>
                         </div>
