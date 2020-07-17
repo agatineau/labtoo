@@ -4102,7 +4102,6 @@ a:hover {
     float: left;
     width: 184px;
     padding: 16px 9px 7px;
-    background-color: #d9dfe4;
     text-align: center;
 }
 
@@ -4911,6 +4910,9 @@ a:hover {
         padding-right: 0;
     }
 }
+
+
+
 
 /* ------------------------------------------------------------ *\
 	Box Info
@@ -9063,6 +9065,17 @@ input[type=number] {
         left: auto;
         right: 0;
         height: 100%;
+        width: 100%;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .maparea .map-holder {
+        height: 450px;
+    }
+
+    .maparea .map-canvas {
         width: 100%;
     }
 }

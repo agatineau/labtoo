@@ -65,6 +65,8 @@ h1.page-title {
         margin: 0 auto;
     }
 
+
+
 /*  Suppression de tous les "text-transform: uppercase;" */
 
     .infoarea .infoarea-title
@@ -83,3 +85,27 @@ h1.page-title {
     .btn-blue
     .box-btn 
     .btn-ico
+
+
+
+    /*profile pic in expert page - removal of background */
+
+    .profile-aside {
+        float: left;
+        width: 184px;
+        padding: 16px 9px 7px;
+        text-align: center;
+    }
+
+
+
+
+@media (min-width: 1200px) {
+    .maparea .map-holder {
+        height: 450px;
+    }
+
+    .maparea .map-canvas {
+        width: 100%;
+    }
+}

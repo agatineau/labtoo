@@ -60,7 +60,7 @@
         {% block main %}
             {# {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }} #}
 
-            <div class="intro-caption">
+            <div class="intro intro-medium search-header search-header-section intro-caption">
                 <div class="container">
                     <div class="col-md-12 p-0">
                     {% if app.session.get('listing_search_session') is defined and app.session.get('listing_search_session') %}
@@ -86,7 +86,7 @@
                             </div> 
                         </a>
                     {% endif %}
-                        <p class="breadcrumb-links">
+                        <p class="breadcrumb-links" style="text-align: left;">
                             {# Main category link #}
                             <span itemscope itemtype="http://schema.org/BreadcrumList">
                             
@@ -259,8 +259,8 @@
                                         <h2>{{ 'listing.show.map'|trans }} :</h2>
 
                                         <div class="maparea">
-                                            <div class="map-holder">
-                                                <div class="map-canvas" id="map-listing" data-zoom="14"
+                                            <div class=" map-holder">
+                                                <div class="map-canvas listing-show" id="map-listing" data-zoom="14"
                                                         data-overlays="inc/markers2.json"></div>
                                             </div>
                                         </div>
