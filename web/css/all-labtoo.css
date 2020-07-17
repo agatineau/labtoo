@@ -88,7 +88,7 @@ h1.page-title {
 
 
 
-    /*profile pic in expert page - removal of background */
+    /* profile pic in expert page - removal of background */
 
     .profile-aside {
         float: left;
@@ -97,7 +97,10 @@ h1.page-title {
         text-align: center;
     }
 
-
+    /* suppression du radius */
+    .gallery-small .slide img {
+        width: 96px;
+    }
 
 
 @media (min-width: 1200px) {
