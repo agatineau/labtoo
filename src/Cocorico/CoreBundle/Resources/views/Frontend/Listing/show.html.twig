@@ -106,8 +106,15 @@
                                     <img src="{{ asset('images/arrow-dropdown.svg') }}" />
                                 </span>
                                 <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                    <span itemprop="name" data-id="title">{{ listing.experiment.title }}</span>
+                                    <a href="{{ path('cocorico_listing_search_experiment', { 'category': listing_search_session.listingCategory.getSlug(), 'experiment': listing_search_session.experiment.getSlug() }) }}" itemprop="item">
+                                        <span itemprop="name" data-id="title">{{ listing.experiment.title }}</span>
+                                    </a>    
                                     <meta itemprop="position" content="3">
+                                    <img src="{{ asset('images/arrow-dropdown.svg') }}" />
+                                </span>
+                                <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span itemprop="name" data-id="title">{{ listing_user.name }}</span>
+                                    <meta itemprop="position" content="4">
                                 </span>
                             </span>
 
