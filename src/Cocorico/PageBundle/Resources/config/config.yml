@@ -6,6 +6,7 @@ ivory_ck_editor:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters:
                 instance: ckeditor
+            allowedContent: 'p h2 h3 h4 h5 hr(*)'
 
 fm_elfinder:
     instances:
