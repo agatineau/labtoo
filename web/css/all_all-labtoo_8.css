@@ -81,3 +81,377 @@ h1.page-title {
 .btn-ico {
     text-transform: none;
 }
+
+/* common footer */
+
+.page-footer {
+    margin: 30px 50px;
+}
+
+h4.page-footer {
+    color: #59595b; 
+    font-family: Lato; 
+    font-size: 17px; 
+    text-align: center; 
+    line-height: 25px; 
+    margin: 7px 0px 20px; 
+    font-weight: 400;
+}
+
+/* Blog */
+
+a.blog-link {
+    color: #59595b ;
+    text-decoration: none;
+}
+
+.blog-date {
+    color: #0E1E28; 
+    font-family: Lato; 
+    text-align:right ;
+    font-size: 14px; 
+    line-height: 25px; 
+    margin-right:20px;
+}
+
+.blog-layout {
+    float:left;
+    width: 100%; 
+    padding: 25px; 
+    margin: 0 -10px 10px -10px; 
+    border: none; 
+    border-radius: 0; 
+    background-color: #fff; 
+    font-size: 16px; 
+    text-align: justify;
+}
+
+.blog-header {
+    margin-top: 30px;
+}
+
+.blog-paragraph {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.blog-hightlight {
+    width: 100%;
+    text-align: center; 
+    font-style: italic; 
+    margin: 18px; 
+    font-family: Lato; 
+    font-size: 18px;
+}
+
+.blog-section {
+    width: 100%;
+    float: left; 
+    padding: 10px 50px; 
+    margin: 0;
+        
+}
+
+h2.blog-section {
+    color: #4bbccc ; 
+    font-family: Lato; 
+    font-size: 24px; 
+    line-height: 25px; 
+    text-align: left; 
+    padding : 10px 0;
+    margin: 10px 10px 50px 0px; 
+    font-weight: 400; 
+}
+
+.blog-section-highlight {
+    width: 100%; 
+    float: left; 
+    padding: 10px 50px; 
+    margin: 0;
+    background-color: #EFF4F8;
+}
+
+h2.blog-section-highlight {
+    color: #F1574E ; 
+    font-family: Lato; 
+    font-size: 24px; 
+    line-height: 25px; 
+    text-align: left; 
+    padding : 10px 0;
+    margin: 10px 10px 50px 0px; 
+    font-weight: 400;
+}
+
+
+.blog-socials {
+    padding: 20px 50px; 
+    text-align:center;
+}
+
+.blog-prev {
+    float: left; 
+    text-align:left; 
+    margin:0px;
+}
+
+.blog-next {
+    float: right; 
+    text-align:right; 
+    margin: 0;
+    padding-right: 10px;
+}
+
+.blog-nav {
+    width:100%; 
+    margin-bottom: 20px;
+}
+
+a.blog-nav {
+    padding: 10px 20px; 
+    text-transform: unset;
+}
+
+/* Scientific Content */
+
+.scientific-layout {
+    float:left;
+    width: 100%; 
+    padding: 25px; 
+    margin: 30px -10px 10px -10px; 
+    border: none; 
+    border-radius: 0; 
+    background-color: #fff; 
+    font-size: 16px; 
+    text-align: justify;
+}
+
+h2.scientific-subtitle {
+    color: #4BBCCC; 
+    font-family: Lato; 
+    font-size: 24px; 
+    line-height: 25px;
+    margin: 20px 10px 20px 0px; 
+    padding:0;
+    font-weight: 400;
+}
+
+.scientific-head {
+    display: flex; 
+    color: #0E1E28; 
+    font-family: Lato; 
+    font-size: 17px; 
+    line-height: 25px;
+}
+
+.scientific-head-text {
+    width: 100%;
+}
+
+.scientific-paragraph-spacer {
+    margin: 20px 10px 20px 0px;
+}
+
+.scientific-highlight {
+    border: 3px; 
+    border-style: solid; 
+    border-color: #EFF4F8; 
+    font-family: Lato; 
+    font-size: 17px; 
+    color: #0E1E28 ; 
+    text-align: center ; 
+    padding: 18px 10% 12px 10%; 
+    background-color: #fff; 
+    margin: 15px 0 15px 0;
+}
+
+
+hr.scientific-separator {
+    border: 0; 
+    margin-right: 45%; 
+    margin-left: 45%; 
+    height: 1px; 
+    background: #0E1E28;
+}
+
+/* catégories */
+
+.scientific-categories {
+    padding: 20px 50px; 
+    margin: 30px 0px 30px; 
+    background-color: #EFF4F8;
+}
+
+h3.scientific-categories {
+    color: #59595b; 
+    font-family: Lato; 
+    font-size: 24px; 
+    text-align: left; 
+    line-height: 25px; 
+    margin: 0px 0px 20px; 
+    font-weight: 400;
+}
+
+.scientific-subcategory {
+    justify-content: center; 
+    align-items: center;
+}
+
+img.scientific-category-img {
+    max-height: 160px; 
+    padding: 20px 0px; 
+    display: inline-block; 
+    vertical-align: middle;
+}
+.scientific-subcategory-img {
+    float: left;
+    margin-right: 10px;
+}
+.scientific-subcategory-content {
+    min-height: 160px;
+}
+
+a.scientific-subcategory {
+    color: #0E1E28;
+}
+
+.scientific-subcategory-text {
+    min-height: 150px; 
+    padding: 10px;
+}
+
+
+h2.scientific-subcategory-blue {
+    font-family: Lato; 
+    font-size: 24px; 
+    text-align: left; 
+    line-height: 25px; 
+    margin: 10px 0px; 
+    font-weight: 400;
+    color: #4BBCCC; 
+}
+
+h2.scientific-subcategory-red {
+    font-family: Lato; 
+    font-size: 24px; 
+    text-align: left; 
+    line-height: 25px; 
+    margin: 10px 0px; 
+
+    font-weight: 400;
+    color: #F1574E; 
+}
+
+.scientific-subcategory-paragraph { 
+    min-height: 88px; 
+}
+
+.scientific-category-btn {
+    text-align:right; 
+    margin:0px;
+}
+
+a.scientific-category-btn {
+    padding: 10px 20px; 
+    text-transform: unset;
+}
+
+/* listings top 3 */
+
+.scientific-listings {
+    padding: 20px 50px; 
+    margin: 10px 0px; 
+    max-height: auto;
+}
+
+h3.scientific-listings {
+    color: #4BBCCC; 
+    font-family: Lato; 
+    font-size: 24px; 
+    line-height: 25px; 
+    margin: 7px 0px 20px; 
+    font-weight: 400;
+    padding : 0px;
+}
+
+.scientific-listing-section {
+    display:flex; 
+    padding: 25px 30px 0px 30px; 
+    min-height:200px; 
+}
+
+a.scientific-listing {
+    margin: 0px 20px 30px 0px; 
+    padding : 0px ;
+    min-width: 213px; 
+    max-width: 213px; 
+    width:33.33vw;
+}
+
+a.scientific-listing-last {
+    flex-direction: row-reverse;
+}
+
+.scientific-listing-title {
+    color: #FFF; 
+    font-family: Lato; 
+    font-size: 14px; 
+    font-weight: bold; 
+    line-height: 17px; 
+    height: 53px; 
+    text-align: center; 
+    background-color: #4BBCCC; 
+    padding: 10px 10px; 
+    margin: 0px;
+}
+
+
+/* content */
+.scientific-section-blue {
+    padding: 20px 50px; 
+    margin: 10px 0px;
+}
+
+h3.scientific-section-blue {
+    color: #4BBCCC; 
+    font-family: Lato; 
+    font-size: 24px; 
+    line-height: 25px; 
+    margin: 0px 0px 10px; 
+    font-weight: 400;
+    padding:0;
+}
+
+h4.scientific-section {
+    color: #59595b; 
+    font-family: Lato; 
+    font-size: 18px; 
+    line-height: 25px; 
+    margin: 20px 10px 20px 0px; 
+    font-weight: 400;
+}
+
+a.scientific-section {
+    color:#F1574E;
+    text-decoration: underline;
+}
+
+.scientific-section-paragraph {
+    width: 100%; 
+    margin-bottom: 30px;
+}
+
+.scientific-section-red {
+    padding: 20px 50px;
+    margin: 30px 0px 10px;
+    background-color: #EFF4F8;
+}
+
+h3.scientific-section-red {
+    color: #F1574E; 
+    font-family: Lato; 
+    font-size: 24px; 
+    line-height: 25px; 
+    margin: 0px 0px 10px; 
+    font-weight: 400;
+    padding:0;
+}
