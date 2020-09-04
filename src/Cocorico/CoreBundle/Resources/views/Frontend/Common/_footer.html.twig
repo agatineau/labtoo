@@ -6,37 +6,6 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="pull-right socials-link-section">
-                            <ul class="list-links hidden">
-                                <li>
-                                    <div>
-                                        <span>
-                                            <i class="sprite-ico-card"></i>
-                                        </span>
-
-                                        {{ 'footer.payment-secure.title'|trans }}
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div>
-                                        <span>
-                                            <i class="sprite-ico-list"></i>
-                                        </span>
-
-                                        {{ 'footer.assistance.title'|trans }}
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div>
-                                        <span>
-                                            <i class="sprite-ico-umbrella"></i>
-                                        </span>
-
-                                        {{ 'footer.secure-results.title'|trans }}
-                                    </div>
-                                </li>
-                            </ul><!-- /.list-links -->
 
                             <h6 class="socials-link-title">{# Nous suivre sur <br />les réseaux sociaux #}
                                 {{ 'footer.socials.title'|trans|raw }}
@@ -122,28 +91,6 @@
                                 </li>
                             </ul>
 
-                            <ul class="list-unstyled pull-left legal-notices-section hidden">
-                                <li>
-                                    <h6 class="m-0">
-                                        {{ 'footer.legal_notices.title'|trans }}
-                                    </h6>
-                                </li>
-                                <li>
-                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}">{{ 'footer.legal_notices.link'|trans }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('cocorico_home') }}" class="footer_site_name">{{ cocorico_site_name }}</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.cocolabs.io" target="_blank">
-                                        <img src="{{ asset('images/marketplace_solution.png') }}" style="height: 17px;" alt="marketplace solution" title="marketplace solution" >
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>&copy; {{ "now"|date("Y") }} {{ 'footer.all_right_reserved'|trans }}</a>
-                                </li>
-                            </ul>
-
                         </nav>
                     </div>
                 </div>
@@ -160,9 +107,8 @@
             <div class="row">
                 <div class="col-xs-12">
                     <p>&copy; {{ "now"|date("Y") }} {{ 'footer.all_right_reserved'|trans }}
-                        <a href="{{ path('cocorico_home') }}" class="footer_site_name">{{ cocorico_site_name }}</a>
                         <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}">{{ 'footer.legal_notices.link'|trans }}</a>
-                        <a href="http://www.cocolabs.io" target="_blank"> <img src="{{ asset('images/marketplace_solution.png') }}" style="height: 17px;" alt="marketplace solution" title="marketplace solution" ></a>
+                        <a href="http://www.cocolabs.io" target="_blank"> Credits
                     </p>
                 </div>
             </div>
