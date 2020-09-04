@@ -380,11 +380,12 @@ h3.scientific-listings {
 }
 
 a.scientific-listing {
-    margin: 0px 20px 30px 0px; 
-    padding : 0px ;
-    min-width: 213px; 
-    max-width: 213px; 
-    width:33.33vw;
+    color: #fff;
+    width: 33.33vw;
+}
+
+img.scientific-listing {
+    width:215px;
 }
 
 a.scientific-listing-last {
@@ -396,12 +397,12 @@ a.scientific-listing-last {
     font-family: Lato; 
     font-size: 14px; 
     font-weight: bold; 
-    line-height: 17px; 
-    height: 53px; 
+    line-height: 19px; 
+    height: 220px; 
+    width: 213px;
     text-align: center; 
     background-color: #4BBCCC; 
-    padding: 10px 10px; 
-    margin: 0px;
+    margin: 0 6px;
 }
 
 
