@@ -607,7 +607,17 @@ li.time-fields {
 }
 
 .form-contact h1 {
-    margin: 0 0 30px 0;
+    text-align: right;
+}
+
+.form-header {
+    background-color: #4bbccc;
+    width: 100%;
+    min-height: calc(100vh - 310px);
+    padding: 70px 50px;
+    background-image: url(https://www.labtoo.com/uploads/pictures/contact/contact-background.png); 
+    background-position: bottom right; 
+    background-repeat: no-repeat;
 }
 
 .form-contact form {
@@ -616,7 +626,7 @@ li.time-fields {
 }
 
 .form-contact .field-row {
-    margin: 0 0 18px;
+    margin: 0 0 8px;
 }
 
 .form-contact .field-row:before,

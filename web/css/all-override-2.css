@@ -8527,8 +8527,6 @@ input[type=number] {
 
 /* Form Control */
 .form-control {
-    height: 46px;
-    border-radius: 0 !important;
     box-shadow: none;
 }
 

@@ -23,19 +23,24 @@
                         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
 
                         <div id="form-contact" class="form-contact validate-form">
-                            <h1>{{ 'contact.new.form.title'|trans({},'cocorico_contact') }}</h1>
+                            <div class="col-xs-12 col-sm-5">
+                                <div class="form-header">
+                                    <h1>{{ 'contact.new.form.title'|trans({},'cocorico_contact') }}</h1>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-7">
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
 
-                            {{ form_start(form) }}
+                                <div class="field-row">
+                                    <button type="submit" class="btn btn-primary right">
+                                        {{ 'contact.form.submit.button'|trans({},'cocorico_contact') }}
+                                    </button>
+                                </div>
 
-                            {{ form_widget(form) }}
-
-                            <div class="field-row">
-                                <button type="submit" class="btn btn-primary right">
-                                    {{ 'contact.form.submit.button'|trans({},'cocorico_contact') }}
-                                </button>
+                                {{ form_end(form) }}
                             </div>
 
-                            {{ form_end(form) }}
                         </div>
                     </div>
                 </div>
