@@ -8,6 +8,12 @@
     {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
 {%- endblock -%}
 
+{%- block open_graph_data -%}
+    <meta property="og:title" content="{{ 'home.meta_title'|trans({}, 'cocorico_meta') }}"/>
+    <meta property="og:description" content="{{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}"/>
+    <meta property="og:image" content="{{ asset('uploads/pictures/Labtoo_logo.png') }}"/>
+{%- endblock -%}    
+
 {% block theme %}home-page{% endblock %}
 
 {% block layout %}
@@ -22,188 +28,180 @@
         {% endblock %}
 
         {% block main %}
-            <div class="intro" style="background-image: url({{asset('/uploads/pictures/home/intro-bg.jpg')}});">
-                <div class="intro-caption">
-                    <div class="container">
-                        <h1>
-                            {{ 'home.title.main'|trans }}
-                            <small>{{ 'home.title.sub'|trans }}</small>
-                        </h1>
-                        {# <div class="searchsticky" id="search_sticky"> #}
-                            {% include '@CocoricoExperiment/Frontend/Home/form_search.html.twig' %}
 
-                        <a id="search-button" href="{{ path('cocorico_listing_search_new') }}" class="btn btn-red hidden">{{ 'form.search.button.text'|trans }}</a>
-                        {# </div> #}
-                    </div><!-- /.container -->
-                </div><!-- /.intro-caption -->
-            </div><!-- /.intro -->
-            <div class="infoarea container">
-            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
-                <h2 class="infoarea-title">{{ 'home.infoarea.main.title'|trans }}</h2><!-- /.infoarea-title -->
-
-                <h3 class="infoarea-subtitle">{{ 'home.infoarea.sub.title'|trans }}</h3><!-- /.infoarea-subtitle -->
-
-                <div class="row">
-                    <!-- info-box -->
-                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
-                        <img src="{{asset('/uploads/pictures/home/infoarea-ico-1.png')}}" alt="icon description" class="icon">
-
-                        <div class="textbox">
-                            <h4>
-                                {{ 'home.subinfo.title1'|trans|raw }}
-                            </h4>
-
-                            <p>{{ 'home.subinfo.desc1'|trans|raw }}</p>
-                        </div>
+            <!-- Section 1 -->
+            <div class="container home-section1" id="{{ 'home.section1.id'|trans }}">
+                <div class="home-section1-content">
+                    <div class="home-main-title">
+                         {{ 'home.maintitle'|trans }}
                     </div>
-
-                    <!-- info-box -->
-                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
-                        <img src="{{asset('/uploads/pictures/home/infoarea-ico-2.png')}}" alt="icon description" class="icon">
-
-                        <div class="textbox">
-                            <h4>
-                                {{ 'home.subinfo.title2'|trans|raw }}
-                            </h4>
-
-                            <p>{{ 'home.subinfo.desc2'|trans|raw }}</p>
-                        </div>
+                    <h1 class="home-h1-subtilte">
+                        {{ 'home.h1'|trans }}
+                    </h1>
+                </div>
+                <!-- call for action -->
+                <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-6 ">
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'home.button1.slug'|trans }) }}" class="home-section1-buttons">
+                            <div class="home-section1-button">
+                                {{ 'home.section1.button1.text'|trans }}
+                            </div>
+                        </a>
                     </div>
-
-                    <!-- info-box -->
-                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
-                        <img src="{{asset('/uploads/pictures/home/infoarea-ico-3.png')}}" alt="icon description" class="icon">
-
-                        <div class="textbox">
-                            <h4>
-                                {{ 'home.subinfo.title3'|trans|raw }}
-                            </h4>
-
-                            <p>{{ 'home.subinfo.desc3'|trans|raw }}</p>
-                        </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'home.button2.slug'|trans }) }}" class="home-section1-buttons">
+                            <div class="home-section1-button">
+                                {{ 'home.section1.button2.text'|trans }}
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <section class="section" style="background-image: url({{asset('/uploads/pictures/home/section-bg-1.jpg')}});">
-                <div class="container">
-                    <header class="section-head">
-                        <h2 class="section-title">{{ 'infoarea.section.title'|trans }}</h2><!-- /.section-title -->
+            <!-- Section 2 -->
+            <div class="container home-section2" id="{{ 'home.section2.id'|trans }}">
+                <!-- image visible all devices -->
+                <div class="col-xs-12 col-sm-5">
+                    <img src="{{asset('/uploads/pictures/home/section2.png')}}" alt="{{ 'home.section2.img.alt'|trans }}" class="home-section2-img">
+                </div>
+                <!-- text -->
+                <div class="col-xs-12 col-sm-7 home-section2-content">
+                    {{ 'home.section2.text'|trans }}
+                </div>
+            </div>
 
-                        <h3 class="section-subtitle">{{ 'infoarea.section.sub.title'|trans }}</h3><!-- /.section-subtitle -->
-                    </header><!-- /.section-head -->
+            <!-- Section 3 -->
+            <div class="container home-section3" id="{{ 'home.section3.id'|trans }}">
+                <!-- text -->
+                <div class="col-xs-12 col-sm-7 home-section3-content">
+                    {{ 'home.section3.text'|trans }}
+                </div>
+                <!-- image visible all devices -->
+                <div class="col-xs-12 col-sm-5">
+                    <img src="{{asset('/uploads/pictures/home/section3.png')}}" alt="{{ 'home.section3.img.alt'|trans }}" class="home-section3-img">
+                </div>
+            </div>
 
-                    <div class="section-body">
-                        <div class="boxes-holder row">
-                            <div class="box col-md-6 col-sm-6">
-                                <div class="box-inner">
-                                    <div class="box-image">
-                                        <img src="{{asset('/uploads/pictures/home/section3.1.png')}}" alt="home section 3 picto 1" />
-                                    </div><!-- /.box-image -->
 
-                                    <div class="box-content">
-                                        <h4 class="box-title">{{ 'infoarea.section.title1'|trans }}</h4><!-- /.box-title -->
+            <!-- Section 4 -->
+            <div class="container home-section4" id="{{ 'home.section4.id'|trans }}">
+                <!-- title -->
+                <h2 class="home-section4-title">
+                    {{ 'home.section4.title'|trans }}
+                </h2>
+                <!-- body -->
+                <div class="home-section4-body">
+                    {{ 'home.section4.body'|trans }}
+                </div>
+                <!-- 3 buttons + hover en negatif -->
+                <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-4">
+                        <a href="#{{ 'home.section5.id'|trans }}" class="home-section4-button">
+                            <div class="home-section4-buttons home-section4-button1">
+                                {{ 'home.section4.button1.text'|trans }}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'home.section4.button2.slug'|trans }) }}" class="home-section4-button">
+                            <div class="home-section4-buttons home-section4-button2">
+                                {{ 'home.section4.button2.text'|trans }}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <a href="#{{ 'home.section8.id'|trans }}" class="home-section4-button">
+                            <div class="home-section4-buttons home-section4-button3">
+                                {{ 'home.section4.button3.text'|trans }}
+                            </div>
+                        </a>
+                    </div>
 
-                                        <p>{{ 'infoarea.section.desc1'|trans }}</p>
-                                    </div><!-- /.box-content -->
+                </div>
+            </div>
 
-                                    <a href="{{ path('cocorico_listing_new') }}" class="btn btn-blue box-btn btn-ico">
-                                        {{ 'home.infoarea.section.new.listing.text'|trans }}
+            <!-- search bar -->
+            <!--
 
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                    </a>
-                                </div><!-- /.box-inner -->
-                            </div><!-- /.box -->
+            -->
 
-                            <div class="box col-md-6 col-sm-6">
-                                <div class="box-inner">
-                                    <div class="box-image">
-                                        <img src="{{asset('//uploads/pictures/home/section3.2.png')}}" alt="home section 3 picto 2" />
-                                    </div><!-- /.box-image -->
+            <!-- Section 5 -->
+            <div class="container home-section5" id="{{ 'home.section5.id'|trans }}">
+                <!-- title -->
+                <h2 class="home-section5-title">
+                    {{ 'home.section5.title'|trans }}
+                </h2>
+                <!-- body -->
+                <div class="home-section5-body">
+                    {{ 'home.section5.body'|trans }}
+                </div>
+                <!-- liste 4 points -->
+                <div class="home-section5-details">
+                    <span class="home-section5-bullet">&#10122;</span>
+                    <br>
+                    {{ 'home.section5.item1'|trans }}
+                    <br>
+                    <span class="home-section5-bullet">&#10123;</span>
+                    <br>
+                    {{ 'home.section5.item2'|trans }}
+                    <br>
+                    <span class="home-section5-bullet">&#10124;</span>
+                    <br>
+                    {{ 'home.section5.item3'|trans }}
+                    <br>
+                    <span class="home-section5-bullet">&#10125;</span>
+                    <br>
+                    {{ 'home.section5.item4'|trans }}
+                    <br>
+                </div>
+            </div>
 
-                                    <div class="box-content">
-                                        <h4 class="box-title">{{ 'infoarea.section.title2'|trans }}</h4><!-- /.box-title -->
+            <!-- Section 6 -->
+            <div class="container home-section6" id="{{ 'home.section6.id'|trans }}">
+                <!-- title -->
+                <h2 class="home-section6-title">
+                    {{ 'home.section6.title'|trans }}
+                </h2>
+                <!-- body -->
+                <div class="home-section6-body">
+                    {{ 'home.section6.body'|trans }}
+                </div>
 
-                                        <p>{{ 'infoarea.section.desc2'|trans }}</p>
-                                    </div><!-- /.box-content -->
+            </div>
 
-                                    <a href="{{ path('cocorico_listing_search_new') }}" class="btn btn-red box-btn btn-ico">
-                                        {{ 'home.infoarea.section.search.text'|trans }}
+            <!-- Section 7 -->
+            <div class="container home-section7" id="{{ 'home.section7.id'|trans }}">
+                <!-- title -->
+                <h2 class="home-section7-title">
+                    {{ 'home.section7.title'|trans }}
+                </h2>
+                <!-- body -->
+                <div class="home-section7-body">
+                    {{ 'home.section7.body'|trans }}
+                </div>
+                <div class="home-section7-link">
+                    <a href="{{ path('cocorico_page_show', { 'slug': 'home.section7.button.slug'|trans }) }}" class="home-section7">
+                        {{ 'home.section7.button'|trans }}
+                    </a>
+                </div>
+            </div>
 
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                    </a>
-                                </div><!-- /.box-inner -->
-                            </div><!-- /.box -->
-                        </div><!-- /.boxes-holder -->
-                    </div><!-- /.section-body -->
-                </div><!-- /.container -->
-            </section><!-- /.section -->
-
-            <section class="section section-dark">
-                <div class="container">
-                    <header class="section-head">
-                        <h2 class="section-title">{{ 'home.testimonial.main.title'|trans }}</h2><!-- /.section-title -->
-
-                        <h3 class="section-subtitle">{{ 'home.testimonial.sub.title'|trans }}</h3><!-- /.section-subtitle -->
-                    </header><!-- /.section-head -->
-
-                    <div class="section-body">
-                        <div class="slider">
-                            <div class="slider-clip">
-                                <div class="slides">
-                                    <div class="slide">
-                                        <div class="testimonial slide-testimonial">
-                                            <div class="testimonial-image">
-                                                <img src="{{asset('/uploads/pictures/home/testimonial-1.png')}}" alt="{{ 'home.testimonial.title1'|trans }}" />
-                                            </div><!-- /.testimonial-image -->
-
-                                            <div class="testimonial-content">
-                                                <h4 class="testimonial-title">
-                                                    {{ 'home.testimonial.title1'|trans }}
-                                                </h4><!-- /.testimonial-title -->
-
-                                                <p>{{ 'home.testimonial.desc1'|trans }}</p>
-                                            </div><!-- /.testimonial-content -->
-                                        </div><!-- /.testimonial -->
-                                    </div><!-- /.slide -->
-
-                                    <div class="slide">
-                                        <div class="testimonial slide-testimonial">
-                                            <div class="testimonial-image">
-                                                <img src="{{asset('/uploads/pictures/home/testimonial-2.png')}}" alt="{{ 'home.testimonial.title2'|trans }}" />
-                                            </div><!-- /.testimonial-image -->
-
-                                            <div class="testimonial-content">
-                                                <h4 class="testimonial-title">
-                                                    {{ 'home.testimonial.title2'|trans }}
-                                                </h4><!-- /.testimonial-title -->
-
-                                                <p>{{ 'home.testimonial.desc2'|trans }}</p>
-                                            </div><!-- /.testimonial-content -->
-                                        </div><!-- /.testimonial -->
-                                    </div><!-- /.slide -->
-
-                                    <div class="slide">
-                                        <div class="testimonial slide-testimonial">
-                                            <div class="testimonial-image">
-                                                <img src="{{asset('/uploads/pictures/home/testimonial-3.png')}}" alt="{{ 'home.testimonial.title3'|trans }}" />
-                                            </div><!-- /.testimonial-image -->
-
-                                            <div class="testimonial-content">
-                                                <h4 class="testimonial-title">
-                                                    {{ 'home.testimonial.title3'|trans }}
-                                                </h4><!-- /.testimonial-title -->
-
-                                                <p>{{ 'home.testimonial.desc3'|trans }}</p>
-                                            </div><!-- /.testimonial-content -->
-                                        </div><!-- /.testimonial -->
-                                    </div><!-- /.slide -->
-                                </div><!-- /.slides -->
-                            </div><!-- /.slider-clip -->
-                        </div><!-- /.slider -->
-                    </div><!-- /.section-body -->
-                </div><!-- /.container -->
-            </section><!-- /.section section-dark -->
+            <!-- Section 8 -->
+            <div class="container home-section8" id="{{ 'home.section8.id'|trans }}">
+                <!-- title -->
+                <h2 class="home-section8-title">
+                    {{ 'home.section8.title'|trans }}
+                </h2>
+                <!-- body -->
+                <div class="home-section8-body">
+                    {{ 'home.section8.body'|trans }}
+                </div>
+                <div class="home-section8-button">
+                    <a href="{{ path('cocorico_user_login') }}" class="btn btn-home btn-red">
+                    {{ 'home.section8.button'|trans }}
+                    </a>
+                </div>
+            </div>
 
         {% endblock %}
 

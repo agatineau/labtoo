@@ -478,3 +478,275 @@ a:hover.contact {
 	padding: 3px 12px !important;
 	line-height: 24px !important;
 }
+
+/* NEW HOME */
+/* section 1 */
+.home-section1 {
+    min-height: calc(100vh - 130px);
+}
+
+@media (min-width: 768px) {
+    .home-section1{
+        position: relative;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-image: url(https://www.labtoo.com/uploads/pictures/home/section1.png);
+    }
+}
+
+.home-section1-content {
+    position: relative;
+    padding: 255px 30px 76px 80px;
+
+}
+
+
+.home-main-title {
+    font-size: 32px; 
+    font-weight : 800;
+    color: #0E1E28 ; 
+}
+
+h1.home-h1-subtilte {
+    font-size: 24px; 
+    font-weight: 100;
+    color: #0E1E28;
+}
+
+
+a.home-section1-buttons {
+    color: #fff ;
+    font-size: 18px ;
+	line-height: 24px ;
+}
+
+@media (min-width: 768px) {
+    a:hover.home-section1-buttons {
+        color:#F1574E;
+    }
+}
+
+.home-section1-button {
+    background-color: #4bbccc;
+    text-align : center;
+    padding: 20px;
+    margin: 10px 20%;
+}
+
+
+/* section 2 */
+.home-section2 {
+    min-height: calc(100vh - 400px);
+    padding : 50px 50px 25px;
+}
+
+.home-section2-img {
+    text-align :center;
+        padding: 20px;     
+}
+
+img.home-section2-img {
+    padding: 0px;  
+}
+.home-section2-content {
+    font-size: 24px !important;
+    padding: 20px;   
+}
+
+/* section 3 */
+.home-section3 {
+    min-height: calc(100vh - 400px);
+    padding : 25px 50px 50px;
+
+}
+.home-section3-content {
+    font-size: 24px !important;
+    text-align : right;
+    padding: 20px;   
+}
+.home-section3-img {
+    text-align :center;
+    padding: 20px;   
+}
+
+img.home-section3-img {
+    padding: 0px;   
+}
+
+/* section 4 */
+.home-section4 {
+    min-height: calc(100vh - 400px);
+    padding : 50px;
+}
+h2.home-section4-title {
+    text-align : center;
+    color: #0E1E28;
+    font-size: 28px !important;
+    font-weight:200;
+    padding : 0px 50px 30px;
+
+}
+.home-section4-body {
+
+    color: #0E1E28;
+    font-size: 17px !important;
+    padding : 0 0 50px;
+}
+
+.home-section4-buttons {
+    text-align:center;
+    font-size: 17px !important;
+    padding: 80px 4%;
+    color: #fff;
+    margin: 5px;
+    min-height:225px;
+}
+
+
+@media (min-width: 768px) {
+    :hover.home-section4-buttons {
+        background:#ffffff4f;
+        color:#F1574E;
+        margin: 5px;
+        min-height:225px;
+    }
+}
+
+a.home-section4-button {
+    color: #fff;
+
+}
+a:hover.home-section4-button {
+    color:#F1574E;
+}
+
+.home-section4-button1 {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url(https://www.labtoo.com/uploads/pictures/home/testimonial-1.jpg);
+}
+
+.home-section4-button2 {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url(https://www.labtoo.com/uploads/pictures/home/testimonial-1.jpg);
+}
+
+.home-section4-button3 {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url(https://www.labtoo.com/uploads/pictures/home/testimonial-1.jpg);
+}
+
+
+/* section 5 */
+.home-section5 {
+    min-height: calc(100vh - 400px);
+    padding : 50px;
+}
+h2.home-section5-title {
+    text-align : center;
+    color: #0E1E28;
+    font-size: 28px !important;
+    font-weight:200;
+    padding : 0px 50px 30px;
+
+}
+.home-section5-body {
+    color: #0E1E28;
+    font-size: 17px !important;
+    padding : 0 0 50px;
+
+}
+.home-section5-details {
+    text-align:center;
+    font-size: 18px !important;
+    line-height:1.8;
+    color: #F1574E;
+    padding: 10px 80px;
+}
+
+.home-section5-bullet {
+    font-size:26px;
+}
+
+/* section 6 */
+.home-section6 {
+    min-height: calc(100vh - 400px);
+    padding : 50px;
+    background:#c6ccd25c;
+}
+h2.home-section6-title {
+    text-align : center;
+    color: #0E1E28;
+    font-size: 28px !important;
+    font-weight:200;
+    padding : 0px 50px 30px;
+}
+.home-section6-body {
+    color: #0E1E28;
+    font-size: 17px !important;
+    padding : 0 0 50px;
+}
+
+/* section 7 */
+.home-section7 {
+    min-height: calc(100vh - 400px);
+    padding : 50px;
+}
+h2.home-section7-title {
+    text-align : center;
+    color: #0E1E28;
+    font-size: 28px !important;
+    font-weight:200;
+    padding : 0px 50px 30px;
+}
+.home-section7-body {
+    color: #0E1E28;
+    font-size: 17px !important;
+    padding : 0 0 50px;
+}
+a.home-section7 {
+    text-decoration: underline;
+    background:  unset;
+    font-size: 17px !important;
+    color: #F1574E;
+}
+
+a:hover.home-section7 {
+    text-decoration: underline;
+    background:  unset;
+    font-size: 17px !important;
+    color: #c53f4e;
+}
+.home-section7-link {
+    text-align: right;
+}
+
+/* section 8 */
+.home-section8 {
+    min-height: calc(100vh - 400px);
+    padding : 50px;
+}
+h2.home-section8-title {
+    text-align : center;
+    color: #0E1E28;
+    font-size: 28px !important;
+    font-weight:200;
+    padding : 0px 50px 30px;
+}
+.home-section8-body {
+    color: #0E1E28;
+    font-size: 17px !important;
+    padding : 0 0 50px;
+}
+.home-section8-button {
+    text-align: center;
+}
