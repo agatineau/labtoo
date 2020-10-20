@@ -489,7 +489,7 @@ a:hover.contact {
     .home-section1{
         position: relative;
         background-size: cover;
-        background-position: center center;
+        background-position: bottom right;
         background-repeat: no-repeat;
         background-image: url(https://www.labtoo.com/uploads/pictures/home/section1.png);
     }
@@ -547,7 +547,9 @@ a.home-section1-buttons {
 }
 
 img.home-section2-img {
-    padding: 0px;  
+    padding: 0px;
+    width:180px;
+    height:180px;
 }
 .home-section2-content {
     font-size: 24px !important;
@@ -571,7 +573,9 @@ img.home-section2-img {
 }
 
 img.home-section3-img {
-    padding: 0px;   
+    padding: 0px;
+    width:180px;
+    height:180px;
 }
 
 /* section 4 */
@@ -626,7 +630,7 @@ a:hover.home-section4-button {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url(https://www.labtoo.com/uploads/pictures/home/testimonial-1.jpg);
+    background-image: url(https://www.labtoo.com/uploads/pictures/home/section4-1.jpg);
 }
 
 .home-section4-button2 {
@@ -634,7 +638,7 @@ a:hover.home-section4-button {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url(https://www.labtoo.com/uploads/pictures/home/testimonial-1.jpg);
+    background-image: url(https://www.labtoo.com/uploads/pictures/home/section4-2.jpg);
 }
 
 .home-section4-button3 {
@@ -642,7 +646,24 @@ a:hover.home-section4-button {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url(https://www.labtoo.com/uploads/pictures/home/testimonial-1.jpg);
+    background-image: url(https://www.labtoo.com/uploads/pictures/home/section4-3.jpg);
+}
+
+a.home-section4 {
+    text-decoration: underline;
+    background:  unset;
+    font-size: 17px !important;
+    color: #F1574E;
+}
+
+a:hover.home-section4 {
+    text-decoration: underline;
+    background:  unset;
+    font-size: 17px !important;
+    color: #c53f4e;
+}
+.home-section4-link {
+    text-align: right;
 }
 
 

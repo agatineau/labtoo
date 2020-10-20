@@ -96,7 +96,7 @@
                 <!-- 3 buttons + hover en negatif -->
                 <div class="col-xs-12">
                     <div class="col-xs-12 col-sm-4">
-                        <a href="#{{ 'home.section5.id'|trans }}" class="home-section4-button">
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'home.section4.button1.slug'|trans }) }}" class="home-section4-button">
                             <div class="home-section4-buttons home-section4-button1">
                                 {{ 'home.section4.button1.text'|trans }}
                             </div>
@@ -110,13 +110,17 @@
                         </a>
                     </div>
                     <div class="col-xs-12 col-sm-4">
-                        <a href="#{{ 'home.section8.id'|trans }}" class="home-section4-button">
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'home.section4.button3.slug'|trans }) }}" class="home-section4-button">
                             <div class="home-section4-buttons home-section4-button3">
                                 {{ 'home.section4.button3.text'|trans }}
                             </div>
                         </a>
                     </div>
-
+                </div>
+                <div class="home-section4-link">
+                    <a href="{{ path('cocorico_listing_search_new') }}" class="home-section4">
+                        {{ 'home.section4.button'|trans }}
+                    </a>
                 </div>
             </div>
 
